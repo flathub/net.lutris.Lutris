@@ -2,6 +2,30 @@
 
 [Lutris](https://lutris.net) is an Open Source gaming platform for Linux. It installs and launches games so you can start playing without the hassle of setting up your games. This repository allows installing Lutris through [Flatpak](https://flatpak.org).
 
+___________________________________________
+
+## How install Lutris Beta
+1. Install Flathub Beta
+   1. Open the application called 'Terminal'
+   2. In this application run the command:
+```
+flatpak remote-add flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo && flatpak update --appstream
+```
+2. Install Lutris Beta
+   1. Open the application called 'Terminal'
+   2. In this application run the command:
+```
+flatpak install --user flathub-beta net.lutris.Lutris//Beta
+```
+
+## How run Lutris Beta
+   1. Open the application called 'Terminal'
+   2. In this application run the command:
+```
+flatpak run net.lutris.Lutris//Beta
+```
+___________________________________________
+
 ## Build
 
 To compile Lutris as a Flatpak, you'll need both [Flatpak](https://flatpak.org/) and [Flatpak Builder](http://docs.flatpak.org/en/latest/flatpak-builder.html) installed. Once you manage that, do the following...
