@@ -8,7 +8,7 @@ To compile Lutris as a Flatpak, you'll need both [Flatpak](https://flatpak.org/)
 
 0. Clone this repository...
   ```
-  git clone --recursive https://github.com/RobLoach/net.lutris.Lutris.git
+  git clone --recursive https://github.com/flathub/net.lutris.Lutris.git
   cd net.lutris.Lutris
   ```
 
