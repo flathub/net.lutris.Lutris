@@ -7,21 +7,21 @@ ___________________________________________
 ## How install Lutris Beta
 1. Install Flathub Beta
 
-Enter this command in a terminal window
+**Command:**
 ```
 flatpak remote-add --user flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
 flatpak update --appstream
 ```
 2. Install Lutris Beta
 
-Enter this command in a terminal window
+**Command:**
 ```
 flatpak install --user flathub-beta net.lutris.Lutris//beta
 ```
 
 ## How run Lutris Beta
 
-Enter this command in a terminal window
+**Command:**
 ```
 flatpak run net.lutris.Lutris//beta
 ```
