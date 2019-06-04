@@ -20,7 +20,7 @@ A clear and concise description of the problem.
 What you expected to happen.
 
 **Actual behavior**
-What is actually happening.
+What actually happens.
 
 **Flatpak info**
 `flatpak --version`
