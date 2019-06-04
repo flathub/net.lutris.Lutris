@@ -9,6 +9,8 @@ assignees: ''
 
 **Describe the problem**
 
+**Is it reproducible with native Lutris?**
+
 **Steps to reproduce**
 1. 
 2. 
