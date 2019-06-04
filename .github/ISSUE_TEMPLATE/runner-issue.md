@@ -8,18 +8,19 @@ assignees: ''
 ---
 
 **Describe the problem**
+A clear and concise description of the problem.
 
 **Is it reproducible with native Lutris?**
 
 **Steps to reproduce**
-1. 
-2. 
+1.
+2.
 
 **Expected behavior**
-A clear and concise description of what you expected to happen.
+What you expected to happen.
 
 **Actual behavior**
-A clear and concise description of what is actually happening.
+What is actually happening.
 
 **Flatpak info**
 `flatpak --version`
