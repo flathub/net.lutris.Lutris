@@ -9,20 +9,20 @@ ___________________________________________
    1. Open the application called 'Terminal'
    2. In this application run the command:
 ```
-flatpak remote-add flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo && flatpak update --appstream
+flatpak remote-add --user flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo && flatpak update --appstream
 ```
 2. Install Lutris Beta
    1. Open the application called 'Terminal'
    2. In this application run the command:
 ```
-flatpak install --user flathub-beta net.lutris.Lutris//Beta
+flatpak install --user flathub-beta net.lutris.Lutris//beta
 ```
 
 ## How run Lutris Beta
    1. Open the application called 'Terminal'
    2. In this application run the command:
 ```
-flatpak run net.lutris.Lutris//Beta
+flatpak run net.lutris.Lutris//beta
 ```
 ___________________________________________
 
