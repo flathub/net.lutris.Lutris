@@ -456,6 +456,19 @@ modules:
     config-opts: *faudio_config_opts
     sources: *faudio_sources
 
+
+  - name: libbsd
+    sources: &libbsd_sources
+      - type: archive
+        url: "https://libbsd.freedesktop.org/releases/libbsd-0.9.1.tar.xz"
+        sha256: 56d835742327d69faccd16955a60b6dcf30684a8da518c4eca0ac713b9e0a7a4
+
+  - name: libbsd-32bit
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    sources: *libbsd_sources
+
   # Standalone utilities
 
   - name: hwdata
