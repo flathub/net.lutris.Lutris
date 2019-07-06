@@ -58,12 +58,22 @@ add-extensions:
     add-ld-path: lib
     merge-dirs: bin
 
+sdk-extensions:
+  - org.freedesktop.Sdk.Compat.i386
+  - org.freedesktop.Sdk.Extension.toolchain-i386
+
+x-compat-i386-opts: &compat_i386_opts
+  prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
+  ldflags: -L/app/lib32
+  append-path: /usr/lib/sdk/toolchain-i386/bin
+  env:
+    CC: i686-unknown-linux-gnu-gcc
+    CXX: i686-unknown-linux-gnu-g++
+  libdir: /app/lib32
+
 cleanup:
   - "*.a"
   - "*.la"
-  - /include
-  - /lib/pkgconfig
-  - /share/pkgconfig
   - /share/man
   - /share/help
 cleanup-commands:
@@ -242,6 +252,250 @@ modules:
             url: "https://github.com/python-pillow/Pillow/archive/6.0.0.tar.gz"
             sha256: f0babf5d7072ea9923a3950cd7ea41b0008429b16584de7d95cc5550a2806cda
 
+  # Multiarch runtime
+
+  - name: vkd3d
+    sources: &vkd3d_sources
+      - type: archive
+        url: "https://dl.winehq.org/vkd3d/source/vkd3d-1.1.tar.xz"
+        sha256: 495adc61cc80c65d54b2f5b52092ea05d3797cc2c17a610f0fc98457d2f56ab6
+    modules:
+
+      - name: SPIRV-Headers
+        buildsystem: cmake-ninja
+        sources:
+          - type: git
+            url: "https://github.com/KhronosGroup/SPIRV-Headers.git"
+            commit: 8bea0a266ac9b718aa0818d9e3a47c0b77c2cb23
+
+  - name: vkd3d-32bit
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    sources: *vkd3d_sources
+
+
+  - name: openldap
+    config-opts: &openldap_config_opts
+      - --disable-static
+      - --disable-slapd
+      - --disable-slurpd
+      - --disable-bdb
+      - --disable-hdb
+    cleanup: &openldap_cleanup
+      - /bin
+    sources: &openldap_sources
+      - type: archive
+        url: "https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.47.tgz"
+        sha256: f54c5877865233d9ada77c60c0f69b3e0bfd8b1b55889504c650047cc305520b
+
+  - name: openldap-32bit
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    config-opts: *openldap_config_opts
+    cleanup: *openldap_cleanup
+    sources: *openldap_sources
+
+
+  - name: glu
+    config-opts: &glu_config_opts
+      - --disable-static
+    sources: &glu_sources
+      - type: archive
+        url: "https://mesa.freedesktop.org/archive/glu/glu-9.0.0.tar.bz2"
+        sha256: 1f7ad0d379a722fcbd303aa5650c6d7d5544fde83196b42a73d1193568a4df12
+
+  - name: glu-32bit
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    config-opts: *glu_config_opts
+    sources: *glu_sources
+
+
+  - name: eudev
+    cleanup: &eudev_cleanup
+      - /bin
+      - /sbin
+      - /lib*/udev
+    post-install:
+      - udevadm hwdb --update
+    sources: &eudev_sources
+      - type: archive
+        url: "https://github.com/gentoo/eudev/archive/v3.2.7.tar.gz"
+        sha256: ce2fda4dea129bbcf824c947aab23504bcd26911481b47dbaf10646f723083a4
+
+  - name: eudev-32bit
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    cleanup: *eudev_cleanup
+    sources: *eudev_sources
+
+
+  - name: OpenCL
+    buildsystem: simple
+    build-commands:
+      - cp -av CL $FLATPAK_DEST/include/
+    sources:
+      - type: git
+        url: "https://github.com/KhronosGroup/OpenCL-Headers.git"
+        commit: c5a4bbeabb10d8ed3d1c651b93aa31737bc473dd
+
+
+  - name: libpcap
+    config-opts: &libpcap_config_opts
+      - --enable-ipv6
+    sources: &libcap_sources
+      - type: archive
+        url: "https://www.tcpdump.org/release/libpcap-1.9.0.tar.gz"
+        sha256: 2edb88808e5913fdaa8e9c1fcaf272e19b2485338742b5074b9fe44d68f37019
+
+  - name: libpcap-32bit
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    config-opts: *libpcap_config_opts
+    sources: *libcap_sources
+
+
+  - name: v4l2-utils
+    config-opts: &v4l2_config_opts
+      - --disable-v4l-utils
+      - --disable-qv4l2
+      - --disable-qvidcap
+    sources: &v4l2_sources
+      - type: archive
+        url: "https://linuxtv.org/downloads/v4l-utils/v4l-utils-1.16.6.tar.bz2"
+        sha256: f9dac1878e3d5636eab7f56bb209fdfc66b94ee8a2aae54dcb4282fe63a678ae
+
+  - name: v4l2-utils-32bit
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    config-opts: *v4l2_config_opts
+    sources: *v4l2_sources
+
+
+  - name: libgphoto2
+    sources: &libgphoto2_sources
+      - type: archive
+        url: "https://github.com/gphoto/libgphoto2/archive/libgphoto2-2_5_23-release.tar.gz"
+        sha256: 8de52fd997aceda895abad5d8d95a888bce24a1c739079cff64dae1da7039dde
+      - type: script
+        dest-filename: autogen.sh
+        commands:
+          - autoreconf -ifv
+
+  - name: libgphoto2-32bit
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    sources: *libgphoto2_sources
+
+
+  - name: libcapi20
+    sources: &libcapi20_sources
+      - type: archive
+        url: "http://deb.debian.org/debian/pool/main/libc/libcapi20-3/libcapi20-3_3.27.orig.tar.bz2"
+        md5: 439620a9221c0222c35fb3e7a3973700
+
+  - name: libcapi20-32bit
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    sources: *libcapi20_sources
+
+
+  - name: gsm
+    build-options:
+      make-install-args:
+        - GSM_INSTALL_LIB=/app/lib
+    make-install-args: &gsm_make_install_args
+      - INSTALL_ROOT=/app
+      - GSM_INSTALL_INC=/app/include
+    no-autogen: true
+    cleanup: &gsm_cleanup
+      - /bin
+    sources: &gsm_sources
+      - type: archive
+        url: "http://www.quut.com/gsm/gsm-1.0.18.tar.gz"
+        sha256: 04f68087c3348bf156b78d59f4d8aff545da7f6e14f33be8f47d33f4efae2a10
+      - type: patch
+        path: patches/gsm-makefile.patch
+
+  - name: gsm-32bit
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+      make-install-args:
+        - GSM_INSTALL_LIB=/app/lib32
+    make-install-args: *gsm_make_install_args
+    no-autogen: true
+    cleanup: *gsm_cleanup
+    sources: *gsm_sources
+
+
+  - name: FAudio
+    buildsystem: cmake-ninja
+    config-opts: &faudio_config_opts
+      - -DFFMPEG=ON
+    sources: &faudio_sources
+      - type: archive
+        url: "https://github.com/FNA-XNA/FAudio/archive/19.06.07.tar.gz"
+        sha256: 3a062ac74e787d2c50a5d178e9021ca4b2d4dddbbea6d36b82c767eb7f957128
+      - type: patch
+        path: patches/faudio-sdl2-use-pkg-config.patch
+
+  - name: FAudio-32bit
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    buildsystem: cmake-ninja
+    config-opts: *faudio_config_opts
+    sources: *faudio_sources
+
+
+  - name: libbsd
+    sources: &libbsd_sources
+      - type: archive
+        url: "https://libbsd.freedesktop.org/releases/libbsd-0.9.1.tar.xz"
+        sha256: 56d835742327d69faccd16955a60b6dcf30684a8da518c4eca0ac713b9e0a7a4
+
+  - name: libbsd-32bit
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    sources: *libbsd_sources
+
+
+  - name: sndio11
+    config-opts: &sndio_config_opts
+      - --with-libbsd
+    cleanup: &sndio_cleanup
+      - /bin
+    sources: &sndio11_sources
+      - type: archive
+        url: "http://archive.ubuntu.com/ubuntu/pool/universe/s/sndio/sndio_1.1.0.orig.tar.gz"
+        sha256: fcd7f845ff70f38c2898d737450b8aa3e1bb0afb9d147e8429ef22c0b2c2db57
+      - type: shell
+        commands:
+          - |
+            for i in libsndio aucat midicat; do
+              sed 's/cp /cp -f /g' -i $i/Makefile.in
+            done
+
+  - name: sndio11-32bit
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    config-opts: *sndio_config_opts
+    cleanup: *sndio_cleanup
+    sources: *sndio11_sources
+
+  # Standalone utilities
+
   - name: hwdata
     config-opts:
       - --datarootdir=/app/share
@@ -280,13 +534,6 @@ modules:
           - type: archive
             url: "https://github.com//libusb/libusb/releases/download/v1.0.22/libusb-1.0.22.tar.bz2"
             sha256: 75aeb9d59a4fdb800d329a545c2e6799f732362193b465ea198f2aa275518157
-        modules:
-
-          - name: eudev
-            sources:
-              - type: archive
-                url: "https://github.com/gentoo/eudev/archive/v3.2.7.tar.gz"
-                sha256: ce2fda4dea129bbcf824c947aab23504bcd26911481b47dbaf10646f723083a4
 
   - name: xrandr
     sources:
@@ -313,7 +560,6 @@ modules:
       - /lib/mesa-demos
     modules:
       - shared-modules/glew/glew.json
-      - shared-modules/glu/glu-9.0.0.json
 
   - name: p7zip
     no-autogen: true
@@ -386,15 +632,6 @@ modules:
       - type: archive
         url: "http://deb.debian.org/debian/pool/main/f/fluid-soundfont/fluid-soundfont_3.1.orig.tar.gz"
         md5: 189bbdf70221018cbda536984b105dfa
-
-  # Prebuilt Retroarch needs libv4l2
-  - name: v4l-utils
-    config-opts:
-      - --disable-v4l-utils
-    sources:
-      - type: archive
-        url: "https://linuxtv.org/downloads/v4l-utils/v4l-utils-1.16.6.tar.bz2"
-        sha256: f9dac1878e3d5636eab7f56bb209fdfc66b94ee8a2aae54dcb4282fe63a678ae
 
   # Required by some proprietary game launchers
   - shared-modules/gtk2/gtk2.json
