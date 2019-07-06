@@ -252,7 +252,7 @@ modules:
             url: "https://github.com/python-pillow/Pillow/archive/6.0.0.tar.gz"
             sha256: f0babf5d7072ea9923a3950cd7ea41b0008429b16584de7d95cc5550a2806cda
 
-  # Multiarch runtime
+  # Multilib runtime for wine
 
   - name: vkd3d
     sources: &vkd3d_sources
@@ -611,6 +611,8 @@ modules:
       - type: archive
         url: "https://www.cabextract.org.uk/cabextract-1.9.1.tar.gz"
         sha256: afc253673c8ef316b4d5c29cc4aa8445844bee14afffbe092ee9469405851ca7
+
+  # Required by some 8/16-bit emulators
 
   - name: fluidsynth
     buildsystem: cmake-ninja
