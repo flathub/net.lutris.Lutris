@@ -4,57 +4,36 @@
 
 ___________________________________________
 
-## How install Lutris Beta
-1. Install Flathub Beta
+## Installation
+1. Add Flathub Beta remote
+   ```
+   flatpak remote-add --user flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
+   flatpak update --appstream
+   ```
+2. Install Lutris
+   ```
+   flatpak install --user flathub-beta net.lutris.Lutris//beta
+   ```
 
-**Command:**
-```
-flatpak remote-add --user flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
-flatpak update --appstream
-```
-2. Install Lutris Beta
-
-**Command:**
-```
-flatpak install --user flathub-beta net.lutris.Lutris//beta
-```
-
-## How run Lutris Beta
-
-**Command:**
+## Running
+Launch Lutris from your desktop menu, or via command line:
 ```
 flatpak run net.lutris.Lutris//beta
 ```
 ___________________________________________
 
-## Build
+## Building
 
 To compile Lutris as a Flatpak, you'll need both [Flatpak](https://flatpak.org/) and [Flatpak Builder](http://docs.flatpak.org/en/latest/flatpak-builder.html) installed. Once you manage that, do the following...
 
-0. Clone this repository...
-  ```
-  git clone --recursive https://github.com/flathub/net.lutris.Lutris.git
-  cd net.lutris.Lutris
-  ```
-
-1. Add the platform dependencies...
-  ```
-  flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-  flatpak install --user flathub org.freedesktop//18.08
-  flatpak install --user flathub org.freedesktop.Platform//18.08
-  ```
-
-2. Compile and install the Flatpak...
-  ```
-  flatpak-builder --user --repo=lutris --force-clean build-dir net.lutris.Lutris.yml
-  flatpak remote-add --user lutris lutris --no-gpg-verify
-  flatpak install --user lutris net.lutris.Lutris
-  ```
-
-3. Run it...
-  ```
-  flatpak run net.lutris.Lutris
-  ```
+0. Clone this repository and `cd` into it
+1. Add flathub-beta remote (same as in "Installation" section)
+2. Compile and install the flatpak
+   ```
+   flatpak-builder --user  --repo=lutris --force-clean --install-deps-from=flathub-beta build-dir net.lutris.Lutris.yml
+   flatpak remote-add --user lutris lutris --no-gpg-verify
+   flatpak install --user lutris net.lutris.Lutris
+   ```
 
 ## Clean up
 
