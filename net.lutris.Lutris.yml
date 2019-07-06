@@ -427,8 +427,14 @@ modules:
 
   - name: gsm-32bit
     build-options:
+      arch:
+        x86_64: *compat_i386_opts
       make-install-args:
+        - CC=i686-unknown-linux-gnu-gcc
         - GSM_INSTALL_LIB=/app/lib32
+      make-args:
+        - CC=i686-unknown-linux-gnu-gcc
+      cflags: -O2 -g
     make-install-args: *gsm_make_install_args
     no-autogen: true
     cleanup: *gsm_cleanup
