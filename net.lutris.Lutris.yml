@@ -252,7 +252,7 @@ modules:
             url: "https://github.com/python-pillow/Pillow/archive/6.0.0.tar.gz"
             sha256: f0babf5d7072ea9923a3950cd7ea41b0008429b16584de7d95cc5550a2806cda
 
-  # Multiarch runtime
+  # Multilib runtime for wine
 
   - name: vkd3d
     sources: &vkd3d_sources
@@ -612,6 +612,8 @@ modules:
         url: "https://www.cabextract.org.uk/cabextract-1.9.1.tar.gz"
         sha256: afc253673c8ef316b4d5c29cc4aa8445844bee14afffbe092ee9469405851ca7
 
+  # Required by some 8/16-bit emulators
+
   - name: fluidsynth
     buildsystem: cmake-ninja
     config-opts:
@@ -633,8 +635,29 @@ modules:
         url: "http://deb.debian.org/debian/pool/main/f/fluid-soundfont/fluid-soundfont_3.1.orig.tar.gz"
         md5: 189bbdf70221018cbda536984b105dfa
 
-  # Required by some proprietary game launchers
+  # Required by electron and some proprietary game launchers
+
   - shared-modules/gtk2/gtk2.json
+
+  - shared-modules/dbus-glib/dbus-glib-0.110.json
+
+  - name: gconf
+    config-opts:
+      - --disable-static
+      - --disable-gtk-doc
+      - --disable-orbit
+      - --disable-introspection
+    cleanup:
+      - /bin
+      - /libexec
+      - /share
+      - /etc
+    sources:
+      - type: archive
+        url: "https://download.gnome.org/sources/GConf/3.2/GConf-3.2.6.tar.xz"
+        sha256: 1912b91803ab09a5eed34d364bf09fe3a2a9c96751fde03a4e0cfa51a04d784c
+
+  # Environment setup
 
   - name: lutris-app-environment
     buildsystem: simple
