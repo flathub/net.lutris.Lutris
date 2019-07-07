@@ -30,7 +30,7 @@ To compile Lutris as a Flatpak, you'll need both [Flatpak](https://flatpak.org/)
 1. Add flathub-beta remote (same as in "Installation" section)
 2. Compile the flatpak
    ```
-   flatpak-builder --user  --repo=lutris --force-clean --install-deps-from=flathub-beta build-dir net.lutris.Lutris.yml
+   flatpak-builder --repo=lutris --force-clean --install-deps-from=flathub-beta  --user build-dir net.lutris.Lutris.yml
    ```
 3. Add the local repo and install the flatpak
    ```
@@ -38,7 +38,7 @@ To compile Lutris as a Flatpak, you'll need both [Flatpak](https://flatpak.org/)
    flatpak install --user lutris net.lutris.Lutris
    ```
 
-## Clean up
+### Clean up
 
 ```
 flatpak uninstall --user net.lutris.Lutris
