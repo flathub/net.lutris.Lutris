@@ -266,7 +266,7 @@ modules:
         sources:
           - type: git
             url: "https://github.com/KhronosGroup/SPIRV-Headers.git"
-            commit: 8bea0a266ac9b718aa0818d9e3a47c0b77c2cb23
+            commit: c4f8f65792d4bf2657ca751904c511bbcf2ac77b
 
   - name: vkd3d-32bit
     build-options:
