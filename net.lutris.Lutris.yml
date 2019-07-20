@@ -250,7 +250,7 @@ modules:
         sources:
           - type: archive
             url: "https://github.com/python-pillow/Pillow/archive/6.1.0.tar.gz"
-            sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+            sha256: 9a3a613e7780362605b10765274389b3e9a6fe3201dd2bceeb422d45c5c9ba18
 
   # Multilib runtime for wine
 
