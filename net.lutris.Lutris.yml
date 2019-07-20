@@ -230,8 +230,8 @@ modules:
               - python3 setup.py install --prefix=/app --root=/
             sources:
               - type: archive
-                url: "https://github.com/certifi/python-certifi/archive/2019.03.09.tar.gz"
-                sha256: 181dac0a359ced7cea24b80cee7af25d13da21fc05e7005bd0609ef6fbb0bd6b
+                url: "https://github.com/certifi/python-certifi/archive/2019.06.16.tar.gz"
+                sha256: fcbaea367cf3a4e8df94271e13326e1482d492569081bb465862bcb1d2019839
 
           - name: python-idna
             buildsystem: simple
