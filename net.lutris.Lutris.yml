@@ -100,8 +100,8 @@ modules:
         buildsystem: meson
         sources:
           - type: archive
-            url: "https://download.gnome.org/sources/pygobject/3.32/pygobject-3.32.1.tar.xz"
-            sha256: 32c99def94b8dea5ce9e4bc99576ef87591ea779b4db77cfdca7af81b76d04d8
+            url: "https://download.gnome.org/sources/pygobject/3.32/pygobject-3.32.2.tar.xz"
+            sha256: c39ca2a28364b57fa00549c6e836346031e6b886c3ceabfd8ab4b4fed0a83611
         modules:
 
           - name: pycairo
@@ -147,8 +147,8 @@ modules:
           - name: enchant
             sources:
               - type: archive
-                url: "https://github.com/AbiWord/enchant/releases/download/v2.2.3/enchant-2.2.3.tar.gz"
-                sha256: abd8e915675cff54c0d4da5029d95c528362266557c61c7149d53fa069b8076d
+                url: "https://github.com/AbiWord/enchant/releases/download/v2.2.5/enchant-2.2.5.tar.gz"
+                sha256: ffce4ea00dbda1478d91c3e1538cadfe5761d9d6c0ceb27bc3dba51882fe1c47
 
           - name: libnotify
             sources:
@@ -175,8 +175,8 @@ modules:
         buildsystem: meson
         sources:
           - type: archive
-            url: "https://download.gnome.org/sources/gnome-desktop/3.32/gnome-desktop-3.32.1.tar.xz"
-            sha256: 6f764d468e2b09e2b5567208751a6e4d43595c8ab2a7c67e11d8772354441a10
+            url: "https://download.gnome.org/sources/gnome-desktop/3.32/gnome-desktop-3.32.2.tar.xz"
+            sha256: 099f71b29310c999c28f2bf272c846bbd7efc8c6c438b37d15f374230ce92d2e
 
       - name: python-evdev
         buildsystem: simple
@@ -184,8 +184,8 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://github.com/gvalkov/python-evdev/archive/v1.1.2.tar.gz"
-            sha256: 4403d4ee2d9682d17d292d5cfe0781d9ebfe119c7bb0f631fb59de3003bad49d
+            url: "https://github.com/gvalkov/python-evdev/archive/v1.2.0.tar.gz"
+            sha256: f788584510620251c6a6c68802935b71c4b474df99b87ee223e18b84dd1719a6
 
       - name: PyYAML
         buildsystem: simple
@@ -193,8 +193,8 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://github.com/yaml/pyyaml/archive/5.1.tar.gz"
-            sha256: 195e231e2daae6e2bbbb210bebf5048d7c1261c88925aa151080ca2a7705a788
+            url: "https://github.com/yaml/pyyaml/archive/5.1.1.tar.gz"
+            sha256: 887f888d397a31d5cf0894220a0efef8c33798f416034ba9891b6da3e2ab50d1
 
       - name: python-requests
         buildsystem: simple
@@ -202,8 +202,8 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://github.com/requests/requests/archive/v2.21.0.tar.gz"
-            sha256: 9f9a50b5f64f4569704b9c5e618b957109e3486256453c9016c6dbfa10570761
+            url: "https://github.com/requests/requests/archive/v2.22.0.tar.gz"
+            sha256: dcacea1b6a7bfd2cbb6c6a05743606b428f2739f37825e41fbf79af3cc2fd240
         modules:
 
           - name: python-urllib3
@@ -230,8 +230,8 @@ modules:
               - python3 setup.py install --prefix=/app --root=/
             sources:
               - type: archive
-                url: "https://github.com/certifi/python-certifi/archive/2019.03.09.tar.gz"
-                sha256: 181dac0a359ced7cea24b80cee7af25d13da21fc05e7005bd0609ef6fbb0bd6b
+                url: "https://github.com/certifi/python-certifi/archive/2019.06.16.tar.gz"
+                sha256: fcbaea367cf3a4e8df94271e13326e1482d492569081bb465862bcb1d2019839
 
           - name: python-idna
             buildsystem: simple
@@ -249,8 +249,8 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://github.com/python-pillow/Pillow/archive/6.0.0.tar.gz"
-            sha256: f0babf5d7072ea9923a3950cd7ea41b0008429b16584de7d95cc5550a2806cda
+            url: "https://github.com/python-pillow/Pillow/archive/6.1.0.tar.gz"
+            sha256: 9a3a613e7780362605b10765274389b3e9a6fe3201dd2bceeb422d45c5c9ba18
 
   # Multilib runtime for wine
 
@@ -266,7 +266,7 @@ modules:
         sources:
           - type: git
             url: "https://github.com/KhronosGroup/SPIRV-Headers.git"
-            commit: 8bea0a266ac9b718aa0818d9e3a47c0b77c2cb23
+            commit: c4f8f65792d4bf2657ca751904c511bbcf2ac77b
 
   - name: vkd3d-32bit
     build-options:
@@ -443,8 +443,8 @@ modules:
       - -DFFMPEG=ON
     sources: &faudio_sources
       - type: archive
-        url: "https://github.com/FNA-XNA/FAudio/archive/19.06.07.tar.gz"
-        sha256: 3a062ac74e787d2c50a5d178e9021ca4b2d4dddbbea6d36b82c767eb7f957128
+        url: "https://github.com/FNA-XNA/FAudio/archive/19.07.tar.gz"
+        sha256: b05ca9cbdaf943deadae124dcc437e1106d525ab7f54b62c74dcb2eaead21178
       - type: patch
         path: patches/faudio-sdl2-use-pkg-config.patch
 
@@ -501,8 +501,8 @@ modules:
       - --datarootdir=/app/share
     sources:
       - type: archive
-        url: "https://github.com/vcrhonek/hwdata/archive/v0.323.tar.gz"
-        sha256: ab0ad297e30a1fe9d96fe27ef982d6a9f4e04e7b9977225954d9f1890b05d651
+        url: "https://github.com/vcrhonek/hwdata/archive/v0.325.tar.gz"
+        sha256: a3dc6a08890320b5f36fc9dad1524fa2c0a308bdb581a4283e627549192a7da0
 
   - name: pciutils
     no-autogen: true
