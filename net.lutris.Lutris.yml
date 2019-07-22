@@ -264,9 +264,9 @@ modules:
       - name: SPIRV-Headers
         buildsystem: cmake-ninja
         sources:
-          - type: git
-            url: "https://github.com/KhronosGroup/SPIRV-Headers.git"
-            commit: c4f8f65792d4bf2657ca751904c511bbcf2ac77b
+          - type: archive
+            url: "https://github.com/KhronosGroup/SPIRV-Headers/archive/1.4.1.tar.gz"
+            sha256: a244f0629f75eb450e090cd773d30e22367cb231e964c7492588eb9000201fd1
 
   - name: vkd3d-32bit
     build-options:
