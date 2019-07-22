@@ -456,6 +456,7 @@ modules:
     config-opts: *faudio_config_opts
     sources: *faudio_sources
 
+  # Multilib dependencies for native games and runners
 
   - name: libbsd
     sources: &libbsd_sources
@@ -493,6 +494,27 @@ modules:
     config-opts: *sndio_config_opts
     cleanup: *sndio_cleanup
     sources: *sndio11_sources
+
+
+  - name: gamemode
+    buildsystem: meson
+    config-opts: &gamemode_config_opts
+      - -Dwith-systemd=false
+      - -Dwith-daemon=false
+      - -Dwith-examples=false
+      - -Dwith-util=false
+    sources: &gamemode_sources
+      - type: archive
+        url: "https://github.com/FeralInteractive/gamemode/releases/download/1.4/gamemode-1.4.tar.xz"
+        sha256: e83f07dc91bbd27d1faadd69f7fda899810001e2a256be8061e36dee0e858f4a
+
+  - name: gamemode-32bit
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    buildsystem: meson
+    config-opts: *gamemode_config_opts
+    sources: *gamemode_sources
 
   # Standalone utilities
 
