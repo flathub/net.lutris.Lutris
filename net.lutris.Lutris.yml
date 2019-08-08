@@ -443,8 +443,8 @@ modules:
       - -DFFMPEG=ON
     sources: &faudio_sources
       - type: archive
-        url: "https://github.com/FNA-XNA/FAudio/archive/19.07.tar.gz"
-        sha256: b05ca9cbdaf943deadae124dcc437e1106d525ab7f54b62c74dcb2eaead21178
+        url: "https://github.com/FNA-XNA/FAudio/archive/19.08.tar.gz"
+        sha256: 78f66af91ec45fe93c0aed9ad40f5ebb226f8ee1e12ec61ab9da6349dc9188a8
       - type: patch
         path: patches/faudio-sdl2-use-pkg-config.patch
 
