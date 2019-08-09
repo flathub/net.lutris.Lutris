@@ -212,8 +212,8 @@ modules:
               - python3 setup.py install --prefix=/app --root=/
             sources:
               - type: archive
-                url: "https://github.com/urllib3/urllib3/archive/1.24.3.tar.gz"
-                sha256: d1a74e3b7e7c518ec542658693f24c3b34597226a4ec9ef97aa4c23fbdf86630
+                url: "https://github.com/urllib3/urllib3/archive/1.25.3.tar.gz"
+                sha256: fd0376d5a0d8ac633693dcbefc8f4b7acecae81e5aee7c824682cd11b3edb635
 
           - name: python-chardet
             buildsystem: simple
@@ -286,8 +286,8 @@ modules:
       - /bin
     sources: &openldap_sources
       - type: archive
-        url: "https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.47.tgz"
-        sha256: f54c5877865233d9ada77c60c0f69b3e0bfd8b1b55889504c650047cc305520b
+        url: "https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.48.tgz"
+        sha256: d9523ffcab5cd14b709fcf3cb4d04e8bc76bb8970113255f372bc74954c6074d
 
   - name: openldap-32bit
     build-options:
@@ -303,8 +303,8 @@ modules:
       - --disable-static
     sources: &glu_sources
       - type: archive
-        url: "https://mesa.freedesktop.org/archive/glu/glu-9.0.0.tar.bz2"
-        sha256: 1f7ad0d379a722fcbd303aa5650c6d7d5544fde83196b42a73d1193568a4df12
+        url: "https://mesa.freedesktop.org/archive/glu/glu-9.0.1.tar.xz"
+        sha256: fb5a4c2dd6ba6d1c21ab7c05129b0769544e1d68e1e3b0ffecb18e73c93055bc
 
   - name: glu-32bit
     build-options:
@@ -323,8 +323,8 @@ modules:
       - udevadm hwdb --update
     sources: &eudev_sources
       - type: archive
-        url: "https://github.com/gentoo/eudev/archive/v3.2.7.tar.gz"
-        sha256: ce2fda4dea129bbcf824c947aab23504bcd26911481b47dbaf10646f723083a4
+        url: "https://github.com/gentoo/eudev/archive/v3.2.8.tar.gz"
+        sha256: 5648d44958c82ffdd1a247a7abd602a018de49a7cb0653bb74d93e2f1220aaa6
 
   - name: eudev-32bit
     build-options:
@@ -341,7 +341,7 @@ modules:
     sources:
       - type: git
         url: "https://github.com/KhronosGroup/OpenCL-Headers.git"
-        commit: c5a4bbeabb10d8ed3d1c651b93aa31737bc473dd
+        commit: 0d5f18c6e7196863bc1557a693f1509adfcee056
 
 
   - name: libpcap
@@ -443,10 +443,8 @@ modules:
       - -DFFMPEG=ON
     sources: &faudio_sources
       - type: archive
-        url: "https://github.com/FNA-XNA/FAudio/archive/19.07.tar.gz"
-        sha256: b05ca9cbdaf943deadae124dcc437e1106d525ab7f54b62c74dcb2eaead21178
-      - type: patch
-        path: patches/faudio-sdl2-use-pkg-config.patch
+        url: "https://github.com/FNA-XNA/FAudio/archive/19.08.tar.gz"
+        sha256: 78f66af91ec45fe93c0aed9ad40f5ebb226f8ee1e12ec61ab9da6349dc9188a8
 
   - name: FAudio-32bit
     build-options:
@@ -461,8 +459,8 @@ modules:
   - name: libbsd
     sources: &libbsd_sources
       - type: archive
-        url: "https://libbsd.freedesktop.org/releases/libbsd-0.9.1.tar.xz"
-        sha256: 56d835742327d69faccd16955a60b6dcf30684a8da518c4eca0ac713b9e0a7a4
+        url: "https://libbsd.freedesktop.org/releases/libbsd-0.10.0.tar.xz"
+        sha256: 34b8adc726883d0e85b3118fa13605e179a62b31ba51f676136ecb2d0bc1a887
 
   - name: libbsd-32bit
     build-options:
@@ -523,8 +521,8 @@ modules:
       - --datarootdir=/app/share
     sources:
       - type: archive
-        url: "https://github.com/vcrhonek/hwdata/archive/v0.325.tar.gz"
-        sha256: a3dc6a08890320b5f36fc9dad1524fa2c0a308bdb581a4283e627549192a7da0
+        url: "https://github.com/vcrhonek/hwdata/archive/v0.326.tar.gz"
+        sha256: d90de6eb0937ad4c667e5f0edcc4ab3d6d91d2d2dbc08f70b5b99be3800ed836
 
   - name: pciutils
     no-autogen: true
