@@ -553,13 +553,13 @@ modules:
         sources:
           - type: archive
             url: "https://github.com//libusb/libusb/releases/download/v1.0.23/libusb-1.0.23.tar.bz2"
-            sha256: 7b99edb7970a1365eaf5bcaf552144e4dfc3ccf510c4abc08569849929fb366e
+            sha256: db11c06e958a82dac52cf3c65cb4dd2c3f339c8a988665110e0d24d19312ad8d
 
   - name: xrandr
     sources:
       - type: archive
         url: "https://xorg.freedesktop.org/archive/individual/app/xrandr-1.5.1.tar.gz"
-        sha256: c1cfd4e1d4d708c031d60801e527abc9b6d34b85f2ffa2cadd21f75ff38151cd
+        sha256: 7b99edb7970a1365eaf5bcaf552144e4dfc3ccf510c4abc08569849929fb366e
 
   - name: mesa-demos
     config-opts:
