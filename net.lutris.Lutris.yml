@@ -367,8 +367,8 @@ modules:
       - --disable-qvidcap
     sources: &v4l2_sources
       - type: archive
-        url: "https://linuxtv.org/downloads/v4l-utils/v4l-utils-1.16.6.tar.bz2"
-        sha256: f9dac1878e3d5636eab7f56bb209fdfc66b94ee8a2aae54dcb4282fe63a678ae
+        url: "https://linuxtv.org/downloads/v4l-utils/v4l-utils-1.16.7.tar.bz2"
+        sha256: ee917a7e1af72c60c0532d9fdb9e48baf641d427aa7b009a9b2ca821f9e8e0d9
 
   - name: v4l2-utils-32bit
     build-options:
