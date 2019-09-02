@@ -1,7 +1,7 @@
 id: net.lutris.Lutris
-sdk: org.freedesktop.Sdk
-runtime: org.freedesktop.Platform
-runtime-version: "19.08beta"
+sdk: org.gnome.Sdk
+runtime: org.gnome.Platform
+runtime-version: master
 command: lutris
 rename-icon: lutris
 copy-icon: true
@@ -31,13 +31,13 @@ finish-args:
   - --filesystem=~/.var/app/com.valvesoftware.Steam:ro
   - --env=PATH=/app/bin:/app/runners/bin:/usr/bin
 add-extensions:
-  org.freedesktop.Platform.Compat.i386:
+  org.gnome.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: "19.08beta"
+    version: master
 
-  org.freedesktop.Platform.Compat.i386.Debug:
+  org.gnome.Platform.Compat.i386.Debug:
     directory: lib/debug/lib/i386-linux-gnu
-    version: "19.08beta"
+    version: master
     no-autodownload: true
 
   org.freedesktop.Platform.GL32:
@@ -59,7 +59,7 @@ add-extensions:
     merge-dirs: bin
 
 sdk-extensions:
-  - org.freedesktop.Sdk.Compat.i386
+  - org.gnome.Sdk.Compat.i386
   - org.freedesktop.Sdk.Extension.toolchain-i386
 
 x-compat-i386-opts: &compat_i386_opts
@@ -95,82 +95,6 @@ modules:
       - type: patch
         path: patches/lutris-appdata-tags-pr2134.patch
     modules:
-
-      - name: pygobject
-        buildsystem: meson
-        sources:
-          - type: archive
-            url: "https://download.gnome.org/sources/pygobject/3.32/pygobject-3.32.2.tar.xz"
-            sha256: c39ca2a28364b57fa00549c6e836346031e6b886c3ceabfd8ab4b4fed0a83611
-        modules:
-
-          - name: pycairo
-            buildsystem: meson
-            sources:
-              - type: archive
-                url: "https://github.com/pygobject/pycairo/archive/v1.18.1.tar.gz"
-                sha256: 9c282449741f82c016d5682e150d4a17785fad273600ce59535ca0e0339ba9cc
-
-      - name: webkitgtk
-        buildsystem: cmake-ninja
-        builddir: true
-        build-options:
-          cflags: "-g1"
-          cxxflags: "-g1"
-          arch:
-            i386:
-              ldflags: -Wl,--no-keep-memory
-              config-opts:
-                - -DCMAKE_SYSTEM_PROCESSOR=i586
-        config-opts:
-          - -DPORT=GTK
-          - -DCMAKE_BUILD_TYPE=Release
-          - -DENABLE_PLUGIN_PROCESS_GTK2=OFF
-          - -DENABLE_GTKDOC=OFF
-          - -DENABLE_MINIBROWSER=OFF
-          - -DUSE_WOFF2=OFF
-          - -DPYTHON_EXECUTABLE=/usr/bin/python3
-        sources:
-          - type: archive
-            url: "https://webkitgtk.org/releases/webkitgtk-2.24.1.tar.xz"
-            sha256: 53cb8eaad2ca4caaae663d68331b83fd27d5bd5f6c5388d6ea3c455e338f396d
-          - type: patch
-            path: patches/webkitgtk-2-24-1-revert-sse2.patch
-        modules:
-
-          - name: libsecret
-            sources:
-              - type: archive
-                url: "https://download.gnome.org/sources/libsecret/0.18/libsecret-0.18.8.tar.xz"
-                sha256: 3bfa889d260e0dbabcf5b9967f2aae12edcd2ddc9adc365de7a5cc840c311d15
-
-          - name: enchant
-            sources:
-              - type: archive
-                url: "https://github.com/AbiWord/enchant/releases/download/v2.2.5/enchant-2.2.5.tar.gz"
-                sha256: ffce4ea00dbda1478d91c3e1538cadfe5761d9d6c0ceb27bc3dba51882fe1c47
-
-          - name: libnotify
-            sources:
-              - type: archive
-                url: "https://download.gnome.org/sources/libnotify/0.7/libnotify-0.7.8.tar.xz"
-                sha256: 69209e0b663776a00c7b6c0e560302a8dbf66b2551d55616304f240bba66e18c
-            modules:
-
-              - name: gnome-common
-                sources:
-                  - type: archive
-                    url: "https://download.gnome.org/sources/gnome-common/3.18/gnome-common-3.18.0.tar.xz"
-                    sha256: 22569e370ae755e04527b76328befc4c73b62bfd4a572499fde116b8318af8cf
-
-          - name: openjpeg
-            buildsystem: cmake-ninja
-            builddir: true
-            sources:
-              - type: archive
-                url: "https://github.com/uclouvain/openjpeg/archive/v2.3.1.tar.gz"
-                sha256: 63f5a4713ecafc86de51bfad89cc07bb788e9bba24ebbf0c4ca637621aadb6a9
-
       - name: gnome-desktop
         buildsystem: meson
         sources:
