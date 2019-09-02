@@ -193,8 +193,8 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://github.com/yaml/pyyaml/archive/5.1.1.tar.gz"
-            sha256: 887f888d397a31d5cf0894220a0efef8c33798f416034ba9891b6da3e2ab50d1
+            url: "https://github.com/yaml/pyyaml/archive/5.1.2.tar.gz"
+            sha256: 15a12ea11f604ade62fba0894cae28fab074297e03febe7ad89d3e1c7c054c6b
 
       - name: python-requests
         buildsystem: simple
