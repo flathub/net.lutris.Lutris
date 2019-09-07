@@ -609,6 +609,8 @@ modules:
     build-commands:
       - mkdir -p /app/lib/i386-linux-gnu
       - mkdir -p /app/lib32/GL
+      - mkdir -p /app/share/vulkan/
+      - ln -sr /app/lib32/GL/vulkan/icd.d /app/share/vulkan/icd.d
       - install -Dm644 ld.so.conf -t /app/etc/
       - mkdir -p /app/runners
     sources:
