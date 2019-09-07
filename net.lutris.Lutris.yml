@@ -41,7 +41,8 @@ add-extensions:
     no-autodownload: true
 
   org.freedesktop.Platform.GL32:
-    directory: lib/i386-linux-gnu/GL
+    #FIXME set it back to lib/i386-linux-gnu/GL
+    directory: lib32/GL
     version: "1.4"
     versions: "19.08beta;1.4"
     subdirectories: true
@@ -607,6 +608,7 @@ modules:
     buildsystem: simple
     build-commands:
       - mkdir -p /app/lib/i386-linux-gnu
+      - mkdir -p /app/lib32/GL
       - install -Dm644 ld.so.conf -t /app/etc/
       - mkdir -p /app/runners
     sources:
