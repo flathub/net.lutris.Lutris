@@ -94,6 +94,8 @@ modules:
         path: patches/lutris-flatpak-support-pr2106.patch
       - type: patch
         path: patches/lutris-appdata-tags-pr2134.patch
+      - type: patch
+        path: patches/lutris-libgamemodeauto-path.patch
     modules:
       - name: gnome-desktop
         buildsystem: meson
