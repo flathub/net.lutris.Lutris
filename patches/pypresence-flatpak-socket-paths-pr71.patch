@@ -1,0 +1,26 @@
+From a397e6395ade0688c76c33fc27b31671d663db84 Mon Sep 17 00:00:00 2001
+From: gasinvein <gasinvein@gmail.com>
+Date: Fri, 17 May 2019 13:05:09 +0300
+Subject: [PATCH] Add flatpak'ed Discord socket path
+
+---
+ pypresence/baseclient.py | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/pypresence/baseclient.py b/pypresence/baseclient.py
+index de41e9d..7282a37 100644
+--- a/pypresence/baseclient.py
++++ b/pypresence/baseclient.py
+@@ -24,9 +24,12 @@ def __init__(self, client_id: str, **kwargs):
+         if sys.platform == 'linux' or sys.platform == 'darwin':
+             tempdir = (os.environ.get('XDG_RUNTIME_DIR') or tempfile.gettempdir())
+             snap_path = '{0}/snap.discord'.format(tempdir)
++            flatpak_path = '{0}/app/com.discordapp.Discord'.format(tempdir)
+             pipe_file = 'discord-ipc-{0}'.format(pipe)
+             if os.path.isdir(snap_path):
+                 self.ipc_path = '{0}/{1}'.format(snap_path, pipe_file)
++            elif os.path.isdir(flatpak_path):
++                self.ipc_path = '{0}/{1}'.format(flatpak_path, pipe_file)
+             else:
+                 self.ipc_path = '{0}/{1}'.format(tempdir, pipe_file)
+         elif sys.platform == 'win32':

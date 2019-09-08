@@ -26,6 +26,7 @@ finish-args:
   - --filesystem=xdg-music
   - --filesystem=xdg-videos
   - --filesystem=xdg-download
+  - --filesystem=xdg-run/app/com.discordapp.Discord:create
   - --persist=.wine
   - --filesystem=xdg-data/Steam:ro
   - --filesystem=~/.var/app/com.valvesoftware.Steam:ro
@@ -177,6 +178,17 @@ modules:
           - type: archive
             url: "https://github.com/python-pillow/Pillow/archive/6.1.0.tar.gz"
             sha256: 9a3a613e7780362605b10765274389b3e9a6fe3201dd2bceeb422d45c5c9ba18
+
+      - name: pypresence
+        buildsystem: simple
+        build-commands:
+          - python3 setup.py install --prefix=/app --root=/
+        sources:
+          - type: git
+            url: "https://github.com/qwertyquerty/pypresence.git"
+            commit: e021138179fe3355d81fce04873fae102afa2ee2
+          - type: patch
+            path: patches/pypresence-flatpak-socket-paths-pr71.patch
 
   # Multilib runtime for wine
 
