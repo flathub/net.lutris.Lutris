@@ -1,7 +1,18 @@
+From df9b49635a2b5dbb1e8afd2bc13840dc12033baa Mon Sep 17 00:00:00 2001
+From: Maximiliano Sandoval R <msandova@protonmail.com>
+Date: Sat, 7 Sep 2019 10:48:57 -0400
+Subject: [PATCH] Change to libgamemodeauto.so path
+
+- This fixes #2248, and possibly #1304
+---
+ lutris/game.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
 diff --git a/lutris/game.py b/lutris/game.py
+index b7625a2a..3409a2c1 100644
 --- a/lutris/game.py
 +++ b/lutris/game.py
-@@ -470,7 +470,7 @@
+@@ -470,7 +470,7 @@ def configure_game(self, prelaunched, error=None):
                      path
                      for path in [
                          env.get("LD_PRELOAD"),
