@@ -89,13 +89,9 @@ modules:
     sources:
       - type: git
         url: "https://github.com/lutris/lutris.git"
-        tag: v0.5.2.2
+        tag: v0.5.3
       - type: patch
-        path: patches/lutris-flatpak-support-pr2106.patch
-      - type: patch
-        path: patches/lutris-appdata-tags-pr2134.patch
-      - type: patch
-        path: patches/lutris-libgamemodeauto-path.patch
+        path: patches/lutris-libgamemodeauto-path-pr2319.patch
     modules:
       - name: gnome-desktop
         buildsystem: meson
