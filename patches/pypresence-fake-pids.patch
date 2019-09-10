@@ -1,0 +1,55 @@
+From 385eba330f8abf818abf8432c1af47a2790d2164 Mon Sep 17 00:00:00 2001
+From: gasinvein <gasinvein@gmail.com>
+Date: Tue, 10 Sep 2019 17:30:49 +0300
+Subject: [PATCH] Send fake PID if PID < 10
+
+---
+ pypresence/payloads.py | 4 ++--
+ pypresence/utils.py    | 9 +++++++++
+ 2 files changed, 11 insertions(+), 2 deletions(-)
+
+diff --git a/pypresence/payloads.py b/pypresence/payloads.py
+index 0ea9257..9092d7c 100644
+--- a/pypresence/payloads.py
++++ b/pypresence/payloads.py
+@@ -3,7 +3,7 @@ import os
+ import time
+ from typing import List, Union
+ 
+-from .utils import remove_none
++from .utils import remove_none, get_fake_pid
+ 
+ 
+ class Payload:
+@@ -72,7 +72,7 @@ class Payload:
+         payload = {
+             "cmd": "SET_ACTIVITY",
+             "args": {
+-                "pid": pid,
++                "pid": get_fake_pid(pid),
+                 "activity": act_details
+             },
+             "nonce": '{:.20f}'.format(cls.time())
+diff --git a/pypresence/utils.py b/pypresence/utils.py
+index 5390cb9..3a89902 100644
+--- a/pypresence/utils.py
++++ b/pypresence/utils.py
+@@ -19,6 +19,15 @@ def remove_none(d: dict):
+     return d
+ 
+ 
++def get_fake_pid(pid: int, force_fake: bool = False):
++    if not force_fake and pid >= 10:
++        return pid
++    #TODO: Get this at run time
++    max_pid = 32768
++    fake_pid = max_pid - pid
++    return fake_pid
++
++
+ # Don't call these. Ever.
+ def _load_payloads(filename):
+     with open(filename, 'r') as fp:
+-- 
+2.21.0
+

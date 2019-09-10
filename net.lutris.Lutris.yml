@@ -182,6 +182,8 @@ modules:
             commit: e021138179fe3355d81fce04873fae102afa2ee2
           - type: patch
             path: patches/pypresence-flatpak-socket-paths-pr71.patch
+          - type: patch
+            path: patches/pypresence-fake-pids.patch
 
   # Multilib runtime for wine
 
