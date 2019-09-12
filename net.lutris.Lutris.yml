@@ -1,7 +1,7 @@
 id: net.lutris.Lutris
 sdk: org.gnome.Sdk
 runtime: org.gnome.Platform
-runtime-version: 3.34
+runtime-version: 3.34beta
 command: lutris
 rename-icon: lutris
 copy-icon: true
@@ -30,17 +30,17 @@ finish-args:
 add-extensions:
   org.gnome.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: 3.34
+    version: 3.34beta
 
   org.gnome.Platform.Compat.i386.Debug:
     directory: lib/debug/lib/i386-linux-gnu
-    version: 3.34
+    version: 3.34beta
     no-autodownload: true
 
   org.freedesktop.Platform.GL32:
     directory: lib/i386-linux-gnu/GL
     version: "1.4"
-    versions: "19.08;1.4"
+    versions: "19.08beta;1.4"
     subdirectories: true
     no-autodownload: true
     autodelete: false
