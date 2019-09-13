@@ -90,7 +90,7 @@ modules:
       - type: patch
         path: patches/lutris-libgamemodeauto-path-pr2319.patch
       - type: patch
-        path: lutris-more-vulkan-icd-dirs-pr2338.patch
+        path: patches/lutris-more-vulkan-icd-dirs-pr2338.diff
     modules:
       - name: gnome-desktop
         buildsystem: meson
