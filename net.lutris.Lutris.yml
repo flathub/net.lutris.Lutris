@@ -45,14 +45,13 @@ add-extensions:
     no-autodownload: true
     autodelete: false
     add-ld-path: lib
-    merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors
+    merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d
     download-if: active-gl-driver
     enable-if: active-gl-driver
 
   net.lutris.Lutris.Runner:
     directory: runners
     subdirectories: true
-    add-ld-path: lib
     merge-dirs: bin
 
 sdk-extensions:
