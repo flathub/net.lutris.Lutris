@@ -52,7 +52,6 @@ add-extensions:
   net.lutris.Lutris.Runner:
     directory: runners
     subdirectories: true
-    add-ld-path: lib
     merge-dirs: bin
 
 sdk-extensions:
