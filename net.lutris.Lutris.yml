@@ -52,6 +52,7 @@ add-extensions:
   net.lutris.Lutris.Runner:
     directory: runners
     subdirectories: true
+    no-autodownload: true
     merge-dirs: bin
 
 sdk-extensions:
@@ -373,6 +374,80 @@ modules:
     buildsystem: cmake-ninja
     config-opts: *faudio_config_opts
     sources: *faudio_sources
+
+  # Wine In Not Emulator
+
+  - name: wine
+    build-options:
+      libdir: /app/lib
+      config-opts:
+        - --enable-win64
+    config-opts: &wine_common_opts
+      - --disable-win16
+      - --disable-tests
+      - --with-x
+      - --with-pulse
+      - --with-dbus
+      - --without-hal
+      - --without-oss
+    make-install-args: &wine_common_make_install_args
+      - LDCONFIG=/bin/true
+      - STRIP=/bin/true
+      - UPDATE_DESKTOP_DATABASE=/bin/true
+    post-install:
+      - |
+        case $FLATPAK_ARCH in
+          x86_64)
+            mv ${FLATPAK_DEST}/bin/wineserver{,64}
+          ;;
+          i386)
+            mv ${FLATPAK_DEST}/bin/wineserver{,32}
+          ;;
+        esac
+    sources: &wine_sources
+      - type: git
+        url: "https://github.com/lutris/wine.git"
+        branch: lutris-4.16
+        commit: d67da44865e4818e6e477a70e7e85dc05186bf96
+    cleanup: &wine_cleanup
+      - /bin/function_grep.pl
+      - /bin/widl
+      - /bin/winebuild
+      - /bin/winecpp
+      - /bin/winedump
+      - /bin/wineg++
+      - /bin/winegcc
+      - /bin/winemaker
+      - /bin/wmc
+      - /bin/wrc
+      - /lib*/wine/*.def
+
+  - name: wine-32bit
+    only-arches:
+      - x86_64
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    config-opts: *wine_common_opts
+    make-install-args: *wine_common_make_install_args
+    post-install:
+      - mv ${FLATPAK_DEST}/bin/wineserver{,32}
+    sources: *wine_sources
+    cleanup: *wine_cleanup
+
+
+  - name: wine-bundle-setup
+    buildsystem: simple
+    build-commands:
+      - |
+        case $FLATPAK_ARCH in
+          x86_64)
+            ln -s wineserver64 ${FLATPAK_DEST}/bin/wineserver
+          ;;
+          i386)
+            ln -s wineserver32 ${FLATPAK_DEST}/bin/wineserver
+          ;;
+        esac
 
   # Multilib dependencies for native games and runners
 
