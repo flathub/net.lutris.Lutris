@@ -442,7 +442,7 @@ modules:
     sources:
       - type: archive
         url: "https://github.com/vcrhonek/hwdata/archive/v0.328.tar.gz"
-        sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+        sha256: 15e167a5425a4cde8f4ff7337adb108af9c3105a955ec841c544399928fa650c
 
   - name: pciutils
     no-autogen: true
