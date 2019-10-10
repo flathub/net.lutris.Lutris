@@ -169,8 +169,8 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://github.com/python-pillow/Pillow/archive/6.1.0.tar.gz"
-            sha256: 9a3a613e7780362605b10765274389b3e9a6fe3201dd2bceeb422d45c5c9ba18
+            url: "https://github.com/python-pillow/Pillow/archive/6.2.0.tar.gz"
+            sha256: 5d8c0d6fc1e4b662f0e7c40ed83e06367a90e8b11b227d5141b51badae56248e
 
   # Multilib runtime for wine
 
