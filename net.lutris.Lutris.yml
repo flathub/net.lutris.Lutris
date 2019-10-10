@@ -95,8 +95,8 @@ modules:
         buildsystem: meson
         sources:
           - type: archive
-            url: "https://download.gnome.org/sources/gnome-desktop/3.34/gnome-desktop-3.34.0.tar.xz"
-            sha256: 8d331ee655c1d56b2b97562a07c7a7598ff6706a11ff1cdce97423ebc6b62426
+            url: "https://download.gnome.org/sources/gnome-desktop/3.34/gnome-desktop-3.34.1.tar.xz"
+            sha256: c1dbeb5666dad27166c769e48e2ab41dd5ed74718ea35eb57c8488790662dc5a
 
       - name: python-evdev
         buildsystem: simple
@@ -169,8 +169,8 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://github.com/python-pillow/Pillow/archive/6.1.0.tar.gz"
-            sha256: 9a3a613e7780362605b10765274389b3e9a6fe3201dd2bceeb422d45c5c9ba18
+            url: "https://github.com/python-pillow/Pillow/archive/6.2.0.tar.gz"
+            sha256: 5d8c0d6fc1e4b662f0e7c40ed83e06367a90e8b11b227d5141b51badae56248e
 
   # Multilib runtime for wine
 
@@ -441,8 +441,8 @@ modules:
       - --datarootdir=/app/share
     sources:
       - type: archive
-        url: "https://github.com/vcrhonek/hwdata/archive/v0.327.tar.gz"
-        sha256: db7ade4c751a470bb1a84166a63f933cb51e059f2e9a61caa41e84fa2076d45d
+        url: "https://github.com/vcrhonek/hwdata/archive/v0.328.tar.gz"
+        sha256: 15e167a5425a4cde8f4ff7337adb108af9c3105a955ec841c544399928fa650c
 
   - name: pciutils
     no-autogen: true
@@ -563,8 +563,8 @@ modules:
       - -DLIB_SUFFIX=
     sources:
       - type: archive
-        url: "https://github.com/FluidSynth/fluidsynth/archive/v2.0.6.tar.gz"
-        sha256: e97e63c1045e102465f1aa848f9d712c5528c58685b8d40062e4aaf6af7edb75
+        url: "https://github.com/FluidSynth/fluidsynth/archive/v2.0.7.tar.gz"
+        sha256: b68876d24c7fb34575ffa389bcfe8e61a24f1cf1da8ec6c3b2053efde98d0320
 
   - name: fluid-soundfont
     buildsystem: simple
