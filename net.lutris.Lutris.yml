@@ -132,8 +132,8 @@ modules:
               - python3 setup.py install --prefix=/app --root=/
             sources:
               - type: archive
-                url: "https://github.com/urllib3/urllib3/archive/1.25.5.tar.gz"
-                sha256: 293b19109464d9ff67cf1d241acf01c194ec092d55a117f8bd41024274c8522f
+                url: "https://github.com/urllib3/urllib3/archive/1.25.6.tar.gz"
+                sha256: 066fa334d4b446ea2b5edf2f8b392c65993de604e18d708b0aca9e34dd2e6836
 
           - name: python-chardet
             buildsystem: simple
@@ -169,8 +169,8 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://github.com/python-pillow/Pillow/archive/6.2.0.tar.gz"
-            sha256: 5d8c0d6fc1e4b662f0e7c40ed83e06367a90e8b11b227d5141b51badae56248e
+            url: "https://github.com/python-pillow/Pillow/archive/6.2.1.tar.gz"
+            sha256: 7bf2d6bdb68fa6ccec15c0fd9aa20fac9641cd20dc6079344f5a6534e13a70f9
 
   # Multilib runtime for wine
 
@@ -243,8 +243,8 @@ modules:
       - udevadm hwdb --update
     sources: &eudev_sources
       - type: archive
-        url: "https://github.com/gentoo/eudev/archive/v3.2.8.tar.gz"
-        sha256: 5648d44958c82ffdd1a247a7abd602a018de49a7cb0653bb74d93e2f1220aaa6
+        url: "https://github.com/gentoo/eudev/archive/v3.2.9.tar.gz"
+        sha256: 7d281276b480da3935d1acb239748c2c9db01a8043aad7e918ce57a223d8cd24
 
   - name: eudev-32bit
     build-options:
@@ -269,8 +269,8 @@ modules:
       - --enable-ipv6
     sources: &libcap_sources
       - type: archive
-        url: "https://www.tcpdump.org/release/libpcap-1.9.0.tar.gz"
-        sha256: 2edb88808e5913fdaa8e9c1fcaf272e19b2485338742b5074b9fe44d68f37019
+        url: "https://www.tcpdump.org/release/libpcap-1.9.1.tar.gz"
+        sha256: 635237637c5b619bcceba91900666b64d56ecb7be63f298f601ec786ce087094
 
   - name: libpcap-32bit
     build-options:
@@ -563,8 +563,8 @@ modules:
       - -DLIB_SUFFIX=
     sources:
       - type: archive
-        url: "https://github.com/FluidSynth/fluidsynth/archive/v2.0.7.tar.gz"
-        sha256: b68876d24c7fb34575ffa389bcfe8e61a24f1cf1da8ec6c3b2053efde98d0320
+        url: "https://github.com/FluidSynth/fluidsynth/archive/v2.0.8.tar.gz"
+        sha256: 0c37e72db31d1b35e587b94b7163d68444cffaa9e7fe8a293d79957620bff117
 
   - name: fluid-soundfont
     buildsystem: simple
