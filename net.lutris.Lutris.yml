@@ -363,8 +363,8 @@ modules:
       - -DFFMPEG=ON
     sources: &faudio_sources
       - type: archive
-        url: "https://github.com/FNA-XNA/FAudio/archive/19.10.tar.gz"
-        sha256: 98bc55b494ac5249a4eed13b77394fa30bd9dac0931d4364616d2e501d987457
+        url: "https://github.com/FNA-XNA/FAudio/archive/19.11.tar.gz"
+        sha256: 1bdc6e4e1765634f9293e0667454bafd31d2fe2b761f0b34e20438dd28803e08
 
   - name: FAudio-32bit
     build-options:
