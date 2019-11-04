@@ -407,8 +407,8 @@ modules:
     sources: &wine_sources
       - type: git
         url: "https://github.com/lutris/wine.git"
-        branch: lutris-nofshack-4.18
-        commit: 5744890c2c42700166db772d8bd17e8bbe8e8a0e
+        branch: lutris-nofshack-4.19
+        commit: d6604ea9f28b54fbf8d6c3722f118241a8313ede
     cleanup: &wine_cleanup
       - /bin/function_grep.pl
       - /bin/widl
