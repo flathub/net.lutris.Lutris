@@ -441,8 +441,8 @@ modules:
       - --datarootdir=/app/share
     sources:
       - type: archive
-        url: "https://github.com/vcrhonek/hwdata/archive/v0.328.tar.gz"
-        sha256: 15e167a5425a4cde8f4ff7337adb108af9c3105a955ec841c544399928fa650c
+        url: "https://github.com/vcrhonek/hwdata/archive/v0.329.tar.gz"
+        sha256: 629c85b6a2f6931a74ecad63b330a494f93cdb9811d10a37a39c5cba5578acac
 
   - name: pciutils
     no-autogen: true
