@@ -408,7 +408,7 @@ modules:
       - type: git
         url: "https://github.com/lutris/wine.git"
         branch: lutris-4.20
-        commit: 534b715f0a2053e4ec084da8d45520481d9cbb7e
+        commit: 08aea31cd787455221f038cd91fc509b167e0fa5
     cleanup: &wine_cleanup
       - /bin/function_grep.pl
       - /bin/widl
