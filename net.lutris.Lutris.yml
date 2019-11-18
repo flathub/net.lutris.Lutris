@@ -53,6 +53,8 @@ add-extensions:
     directory: runners
     subdirectories: true
     merge-dirs: bin
+    no-autodownload: true
+    autodelete: true
 
 sdk-extensions:
   - org.gnome.Sdk.Compat.i386
