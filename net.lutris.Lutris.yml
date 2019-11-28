@@ -88,8 +88,6 @@ modules:
       - type: git
         url: "https://github.com/lutris/lutris.git"
         tag: v0.5.4
-      - type: patch
-        path: patches/lutris-more-vulkan-icd-dirs-pr2338.diff
     modules:
       - name: gnome-desktop
         buildsystem: meson
