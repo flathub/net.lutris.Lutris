@@ -93,8 +93,8 @@ modules:
         buildsystem: meson
         sources:
           - type: archive
-            url: "https://download.gnome.org/sources/gnome-desktop/3.34/gnome-desktop-3.34.1.tar.xz"
-            sha256: c1dbeb5666dad27166c769e48e2ab41dd5ed74718ea35eb57c8488790662dc5a
+            url: "https://download.gnome.org/sources/gnome-desktop/3.34/gnome-desktop-3.34.2.tar.xz"
+            sha256: 4081ba619733da33ec6ba98cd52170ee99a90439709df4df333e5c9e631f28ed
 
       - name: python-evdev
         buildsystem: simple
