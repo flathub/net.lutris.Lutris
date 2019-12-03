@@ -130,8 +130,8 @@ modules:
               - python3 setup.py install --prefix=/app --root=/
             sources:
               - type: archive
-                url: "https://github.com/urllib3/urllib3/archive/1.25.6.tar.gz"
-                sha256: 066fa334d4b446ea2b5edf2f8b392c65993de604e18d708b0aca9e34dd2e6836
+                url: "https://github.com/urllib3/urllib3/archive/1.25.7.tar.gz"
+                sha256: 7d68d64c7374fd232b98a94b54915d964046d4a8eaac0a4f0404f7b3e84c04f0
 
           - name: python-chardet
             buildsystem: simple
