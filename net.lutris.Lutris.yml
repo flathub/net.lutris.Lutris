@@ -148,7 +148,7 @@ modules:
               - python3 setup.py install --prefix=/app --root=/
             sources:
               - type: archive
-                url: "https://github.com/certifi/python-certifi/archive/2019.09.28.tar.gz"
+                url: "https://github.com/certifi/python-certifi/archive/2019.11.28.tar.gz"
                 sha256: 5a6dd04a9bf487ad684ca9d7d21a09b0656eb98c2272906af92cdbdea4aab60f
 
           - name: python-idna
@@ -439,8 +439,8 @@ modules:
       - --datarootdir=/app/share
     sources:
       - type: archive
-        url: "https://github.com/vcrhonek/hwdata/archive/v0.329.tar.gz"
-        sha256: 629c85b6a2f6931a74ecad63b330a494f93cdb9811d10a37a39c5cba5578acac
+        url: "https://github.com/vcrhonek/hwdata/archive/v0.330.tar.gz"
+        sha256: c051ad9c7e52e3a5e8c52a811493e77d7455f054323472cc4440bbf8e17084db
 
   - name: pciutils
     no-autogen: true
