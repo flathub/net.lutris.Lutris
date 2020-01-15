@@ -93,8 +93,8 @@ modules:
         buildsystem: meson
         sources:
           - type: archive
-            url: "https://download.gnome.org/sources/gnome-desktop/3.34/gnome-desktop-3.34.2.tar.xz"
-            sha256: 4081ba619733da33ec6ba98cd52170ee99a90439709df4df333e5c9e631f28ed
+            url: "https://download.gnome.org/sources/gnome-desktop/3.34/gnome-desktop-3.34.3.tar.xz"
+            sha256: acc2efc847574fd21d8f200679f111c2b1eb5ae2c041e0034e7c18450a7d9c6d
 
       - name: python-evdev
         buildsystem: simple
@@ -102,8 +102,8 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://github.com/gvalkov/python-evdev/archive/v1.2.0.tar.gz"
-            sha256: f788584510620251c6a6c68802935b71c4b474df99b87ee223e18b84dd1719a6
+            url: "https://github.com/gvalkov/python-evdev/archive/v1.3.0.tar.gz"
+            sha256: 816367233ee23d86cef9b465bfdbaa778ab01e9a23d7604791acf7ff9434efe2
 
       - name: PyYAML
         buildsystem: simple
@@ -111,8 +111,8 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://github.com/yaml/pyyaml/archive/5.1.2.tar.gz"
-            sha256: 15a12ea11f604ade62fba0894cae28fab074297e03febe7ad89d3e1c7c054c6b
+            url: "https://github.com/yaml/pyyaml/archive/5.3.tar.gz"
+            sha256: c9418e892bbe2b3270a1daf684c2c4cca407b2577b5f2124d09c54d287b97890
 
       - name: python-requests
         buildsystem: simple
@@ -167,8 +167,8 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://github.com/python-pillow/Pillow/archive/6.2.1.tar.gz"
-            sha256: 7bf2d6bdb68fa6ccec15c0fd9aa20fac9641cd20dc6079344f5a6534e13a70f9
+            url: "https://github.com/python-pillow/Pillow/archive/7.0.0.tar.gz"
+            sha256: 925f52e26491063943c14edadc6d276e3a8427b11d6943113fd2ef24dcbeabca
 
   # Multilib runtime for wine
 
@@ -259,7 +259,7 @@ modules:
     sources:
       - type: git
         url: "https://github.com/KhronosGroup/OpenCL-Headers.git"
-        commit: 0d5f18c6e7196863bc1557a693f1509adfcee056
+        commit: de78569cf67fca1a33d9c10b676978916845d364
 
 
   - name: libpcap
@@ -361,8 +361,8 @@ modules:
       - -DFFMPEG=ON
     sources: &faudio_sources
       - type: archive
-        url: "https://github.com/FNA-XNA/FAudio/archive/19.12.tar.gz"
-        sha256: 35cc41e77aa0d48b08b42f1897442154b3f105d01f3aecd0690c37bc1b1bd4e0
+        url: "https://github.com/FNA-XNA/FAudio/archive/20.01.tar.gz"
+        sha256: c015f7d395cf24b9050135238de38683e5a90378215bc6d5bb89777a9623f0e6
 
   - name: FAudio-32bit
     build-options:
@@ -439,8 +439,8 @@ modules:
       - --datarootdir=/app/share
     sources:
       - type: archive
-        url: "https://github.com/vcrhonek/hwdata/archive/v0.330.tar.gz"
-        sha256: c051ad9c7e52e3a5e8c52a811493e77d7455f054323472cc4440bbf8e17084db
+        url: "https://github.com/vcrhonek/hwdata/archive/v0.331.tar.gz"
+        sha256: a016bf74fbb3f288ed57d309af97f7233b4920f9973961fb6eb46eb14f70ddfe
 
   - name: pciutils
     no-autogen: true
@@ -463,8 +463,8 @@ modules:
       - --sbindir=/app/bin
     sources:
       - type: archive
-        url: "https://mirrors.edge.kernel.org/pub/linux/utils/usb/usbutils/usbutils-007.tar.xz"
-        sha256: 7593a01724bbc0fd9fe48e62bc721ceb61c76654f1d7b231b3c65f6dfbbaefa4
+        url: "https://mirrors.edge.kernel.org/pub/linux/utils/usb/usbutils/usbutils-012.tar.xz"
+        sha256: 88634625f91840bc1993d2731cc081ee8d3b13d56069a95bdd6ac6ef0e063e46
     modules:
 
       - name: libusb
@@ -492,8 +492,8 @@ modules:
       - install -D src/xdemos/glxinfo -t /app/bin/
     sources:
       - type: archive
-        url: "https://mesa.freedesktop.org/archive/demos/8.3.0/mesa-demos-8.3.0.tar.bz2"
-        sha256: c173154bbd0d5fb53d732471984def42fb1b14ac85fcb834138fb9518b3e0bef
+        url: "https://mesa.freedesktop.org/archive/demos/mesa-demos-8.4.0.tar.bz2"
+        sha256: 01e99c94a0184e63e796728af89bfac559795fb2a0d6f506fa900455ca5fff7d
     cleanup:
       - /lib/mesa-demos
     modules:
@@ -541,8 +541,8 @@ modules:
   - name: psmisc
     sources:
       - type: archive
-        url: "https://downloads.sourceforge.net/psmisc/psmisc-23.2.tar.xz"
-        sha256: 4b7cbffdc9373474da49b85dc3457ae511c43dc7fa7d94513fe06f89dcb87880
+        url: "https://downloads.sourceforge.net/psmisc/psmisc-23.3.tar.xz"
+        sha256: 41750e1a5abf7ed2647b094f58127c73dbce6876f77ba4e0a7e0995ae5c7279a
 
   - name: cabextract
     sources:
