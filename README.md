@@ -10,13 +10,13 @@ ___________________________________________
    flatpak remote-add --user flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
    flatpak update --appstream
    ```
-2. Install Lutris
+2. Install Lutris Beta
    ```
    flatpak install --user flathub-beta net.lutris.Lutris//beta
    ```
 
 ## Running
-Launch Lutris from your desktop menu, or via command line:
+Launch Lutris Beta from your desktop menu, or via command line:
 ```
 flatpak run net.lutris.Lutris//beta
 ```
