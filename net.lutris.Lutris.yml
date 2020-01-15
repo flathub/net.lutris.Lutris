@@ -541,8 +541,8 @@ modules:
   - name: psmisc
     sources:
       - type: archive
-        url: "https://downloads.sourceforge.net/psmisc/psmisc-23.2.tar.xz"
-        sha256: 4b7cbffdc9373474da49b85dc3457ae511c43dc7fa7d94513fe06f89dcb87880
+        url: "https://downloads.sourceforge.net/psmisc/psmisc-23.3.tar.xz"
+        sha256: 41750e1a5abf7ed2647b094f58127c73dbce6876f77ba4e0a7e0995ae5c7279a
 
   - name: cabextract
     sources:
