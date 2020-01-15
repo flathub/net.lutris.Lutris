@@ -102,8 +102,8 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://github.com/gvalkov/python-evdev/archive/v1.2.0.tar.gz"
-            sha256: f788584510620251c6a6c68802935b71c4b474df99b87ee223e18b84dd1719a6
+            url: "https://github.com/gvalkov/python-evdev/archive/v1.3.0.tar.gz"
+            sha256: 816367233ee23d86cef9b465bfdbaa778ab01e9a23d7604791acf7ff9434efe2
 
       - name: PyYAML
         buildsystem: simple
