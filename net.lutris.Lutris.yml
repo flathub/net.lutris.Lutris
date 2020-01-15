@@ -111,8 +111,8 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://github.com/yaml/pyyaml/archive/5.1.2.tar.gz"
-            sha256: 15a12ea11f604ade62fba0894cae28fab074297e03febe7ad89d3e1c7c054c6b
+            url: "https://github.com/yaml/pyyaml/archive/5.3.tar.gz"
+            sha256: c9418e892bbe2b3270a1daf684c2c4cca407b2577b5f2124d09c54d287b97890
 
       - name: python-requests
         buildsystem: simple
