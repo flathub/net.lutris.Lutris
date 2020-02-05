@@ -421,8 +421,8 @@ modules:
       - -Dwith-util=false
     sources: &gamemode_sources
       - type: archive
-        url: "https://github.com/FeralInteractive/gamemode/releases/download/1.4/gamemode-1.4.tar.xz"
-        sha256: e83f07dc91bbd27d1faadd69f7fda899810001e2a256be8061e36dee0e858f4a
+        url: "https://github.com/FeralInteractive/gamemode/releases/download/1.5/gamemode-1.5.tar.xz"
+        sha256: 262389e0a625670c5f53f89d0c30a28cd5f9569a8e6b012dccf78b7fdcb98408
 
   - name: gamemode-32bit
     build-options:
