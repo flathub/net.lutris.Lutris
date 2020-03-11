@@ -262,7 +262,7 @@ modules:
     sources:
       - type: git
         url: "https://github.com/KhronosGroup/OpenCL-Headers.git"
-        commit: de78569cf67fca1a33d9c10b676978916845d364
+        commit: 96f5bde69064a7f94012b40fffd66ac5508977da
 
 
   - name: libpcap
