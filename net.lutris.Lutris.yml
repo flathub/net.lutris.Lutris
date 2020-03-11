@@ -302,8 +302,8 @@ modules:
   - name: libgphoto2
     sources: &libgphoto2_sources
       - type: archive
-        url: "https://github.com/gphoto/libgphoto2/archive/libgphoto2-2_5_23-release.tar.gz"
-        sha256: 8de52fd997aceda895abad5d8d95a888bce24a1c739079cff64dae1da7039dde
+        url: "https://github.com/gphoto/libgphoto2/archive/libgphoto2-2_5_24-release.tar.gz"
+        sha256: 271c82143ab0d57d0a36f6e03fe1fd0a99e6ad0209c96a340b4b566fd8cb4a3f
       - type: script
         dest-filename: autogen.sh
         commands:
