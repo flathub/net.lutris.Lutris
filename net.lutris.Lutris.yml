@@ -87,7 +87,9 @@ modules:
     sources:
       - type: git
         url: "https://github.com/lutris/lutris.git"
-        tag: v0.5.5
+        tag: v0.5.4
+      - type: patch
+        path: ./patches/lutris_pr_2558.patch
     modules:
       - name: gnome-desktop
         buildsystem: meson
