@@ -484,12 +484,7 @@ modules:
         url: "https://mirrors.edge.kernel.org/pub/linux/utils/usb/usbutils/usbutils-012.tar.xz"
         sha256: 88634625f91840bc1993d2731cc081ee8d3b13d56069a95bdd6ac6ef0e063e46
     modules:
-
-      - name: libusb
-        sources:
-          - type: archive
-            url: "https://github.com//libusb/libusb/releases/download/v1.0.23/libusb-1.0.23.tar.bz2"
-            sha256: db11c06e958a82dac52cf3c65cb4dd2c3f339c8a988665110e0d24d19312ad8d
+      - shared-modules/libusb/libusb.json
 
   - name: xrandr
     sources:
