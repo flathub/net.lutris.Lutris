@@ -87,14 +87,14 @@ modules:
     sources:
       - type: git
         url: "https://github.com/lutris/lutris.git"
-        tag: v0.5.6
+        tag: v0.5.7
     modules:
       - name: gnome-desktop
         buildsystem: meson
         sources:
           - type: archive
-            url: "https://download.gnome.org/sources/gnome-desktop/3.36/gnome-desktop-3.36.0.tar.xz"
-            sha256: 4b04c359ccddeffb15f2e148a7871c474f6cfed1e0da21de060a93f6b9ae5c15
+            url: "https://download.gnome.org/sources/gnome-desktop/3.36/gnome-desktop-3.36.3.1.tar.xz"
+            sha256: 4bed119fa25ea0ff7880928142365c3c8726585fc072bc147157e66b63e96b7e
 
       - name: python-evdev
         buildsystem: simple
@@ -379,8 +379,8 @@ modules:
       - -DFFMPEG=ON
     sources: &faudio_sources
       - type: archive
-        url: "https://github.com/FNA-XNA/FAudio/archive/20.04.tar.gz"
-        sha256: ff18365b401b66944159aac20065bcc343f20f8f19d2341e7718b2ae43f0dec8
+        url: "https://github.com/FNA-XNA/FAudio/archive/20.07.tar.gz"
+        sha256: 65f63726a06083871abd60e69d94f1df2d9f6f4dea8d4d627b0f5d87847deacc
 
   - name: FAudio-32bit
     build-options:
