@@ -1,7 +1,7 @@
 id: net.lutris.Lutris
 sdk: org.gnome.Sdk
 runtime: org.gnome.Platform
-runtime-version: "3.36"
+runtime-version: "3.38"
 command: lutris
 rename-icon: lutris
 copy-icon: true
@@ -30,17 +30,17 @@ finish-args:
 add-extensions:
   org.gnome.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: "3.36"
+    version: "3.38"
 
   org.gnome.Platform.Compat.i386.Debug:
     directory: lib/debug/lib/i386-linux-gnu
-    version: "3.36"
+    version: "3.38"
     no-autodownload: true
 
   org.freedesktop.Platform.GL32:
     directory: lib/i386-linux-gnu/GL
     version: "1.4"
-    versions: "19.08;1.4"
+    versions: "20.08;1.4"
     subdirectories: true
     no-autodownload: true
     autodelete: false
@@ -93,8 +93,8 @@ modules:
         buildsystem: meson
         sources:
           - type: archive
-            url: "https://download.gnome.org/sources/gnome-desktop/3.36/gnome-desktop-3.36.4.tar.xz"
-            sha256: 007bbd48c1ca2fcb184713c923174c1d4328c3e33a2271ca536bdd3b71229bc6
+            url: "https://download.gnome.org/sources/gnome-desktop/3.38/gnome-desktop-3.38.0.tar.xz"
+            sha256: 089dbbe3c66fe5575659a4a385d5d4bbd99cf637034df317f21cf586b5dd6b90
 
       - name: python-evdev
         buildsystem: simple
@@ -193,16 +193,16 @@ modules:
   - name: vkd3d
     sources: &vkd3d_sources
       - type: archive
-        url: "https://dl.winehq.org/vkd3d/source/vkd3d-1.1.tar.xz"
-        sha256: 495adc61cc80c65d54b2f5b52092ea05d3797cc2c17a610f0fc98457d2f56ab6
+        url: "https://dl.winehq.org/vkd3d/source/vkd3d-1.2.tar.xz"
+        sha256: b04b030fcbf0f2dacc933c76c74b449bffef1fc1a18d50254ef1ad3e380df96b
     modules:
 
       - name: SPIRV-Headers
         buildsystem: cmake-ninja
         sources:
           - type: archive
-            url: "https://github.com/KhronosGroup/SPIRV-Headers/archive/1.4.1.tar.gz"
-            sha256: a244f0629f75eb450e090cd773d30e22367cb231e964c7492588eb9000201fd1
+            url: "https://github.com/KhronosGroup/SPIRV-Headers/archive/1.5.3.tar.gz"
+            sha256: eece8a9e147d37997d425d5d2eeb2e757ad25adc30d6651467094f3b18609b5a
 
   - name: vkd3d-32bit
     build-options:
@@ -277,7 +277,7 @@ modules:
     sources:
       - type: git
         url: "https://github.com/KhronosGroup/OpenCL-Headers.git"
-        commit: 96f5bde69064a7f94012b40fffd66ac5508977da
+        commit: c5a4bbeabb10d8ed3d1c651b93aa31737bc473dd
 
 
   - name: libpcap
@@ -303,8 +303,8 @@ modules:
       - --disable-qvidcap
     sources: &v4l2_sources
       - type: archive
-        url: "https://linuxtv.org/downloads/v4l-utils/v4l-utils-1.18.0.tar.bz2"
-        sha256: 6cb60d822eeed20486a03cc23e0fc65956fbc1e85e0c1a7477f68bbd9802880d
+        url: "https://linuxtv.org/downloads/v4l-utils/v4l-utils-1.20.0.tar.bz2"
+        sha256: 956118713f7ccb405c55c7088a6a2490c32d54300dd9a30d8d5008c28d3726f7
 
   - name: v4l2-utils-32bit
     build-options:
@@ -379,8 +379,8 @@ modules:
       - -DFFMPEG=ON
     sources: &faudio_sources
       - type: archive
-        url: "https://github.com/FNA-XNA/FAudio/archive/20.07.tar.gz"
-        sha256: 65f63726a06083871abd60e69d94f1df2d9f6f4dea8d4d627b0f5d87847deacc
+        url: "https://github.com/FNA-XNA/FAudio/archive/20.09.tar.gz"
+        sha256: 375d12ba57f507b95e030926fd08308029b38af883d0524583a2d5d8fe65168b
 
   - name: FAudio-32bit
     build-options:
@@ -530,6 +530,8 @@ modules:
       - type: archive
         url: "https://downloads.sourceforge.net/p7zip/p7zip_16.02_src_all.tar.bz2"
         sha256: 5eb20ac0e2944f6cb9c2d51dd6c4518941c185347d4089ea89087ffdd6e2341f
+      - type: patch
+        path: patches/p7zip/gcc10.patch
       - type: shell
         only-arches:
           - "x86_64"
