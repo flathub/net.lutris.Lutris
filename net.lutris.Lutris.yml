@@ -210,6 +210,16 @@ modules:
         x86_64: *compat_i386_opts
     sources: *vkd3d_sources
 
+  - name: vulkan-tools
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DGLSLANG_INSTALL_DIR=/app
+      - -DVULKAN_HEADERS_INSTALL_DIR=/app
+      - -DCMAKE_BUILD_TYPE=Release
+    sources:
+      - type: archive
+        url: "https://github.com/KhronosGroup/Vulkan-Tools/archive/sdk-1.2.148.0.tar.gz"
+        sha256: 61335febdae8248ce7a1ef6d07f11ae7ff67649ffcefa9bd01135f8c95dce616
 
   - name: openldap
     config-opts: &openldap_config_opts
@@ -441,7 +451,7 @@ modules:
     sources: &gamemode_sources
       - type: archive
         url: "https://github.com/FeralInteractive/gamemode/releases/download/1.6/gamemode-1.6.tar.xz"
-        sha256: 4fec5a0900e8f559b37cf1711ca7dcea7e1cebfe1237ce314001f65c1e346a5d
+        sha256: ede17eb042c1c87f7b35bfe96a00560afaea086f685d25bb3964d794b0af9c80
 
   - name: gamemode-32bit
     build-options:
