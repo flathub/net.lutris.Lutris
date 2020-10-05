@@ -210,6 +210,16 @@ modules:
         x86_64: *compat_i386_opts
     sources: *vkd3d_sources
 
+  - name: vulkan-tools
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DGLSLANG_INSTALL_DIR=/app
+      - -DVULKAN_HEADERS_INSTALL_DIR=/app
+      - -DCMAKE_BUILD_TYPE=Release
+    sources:
+      - type: archive
+        url: "https://github.com/KhronosGroup/Vulkan-Tools/archive/sdk-1.2.148.0.tar.gz"
+        sha256: 61335febdae8248ce7a1ef6d07f11ae7ff67649ffcefa9bd01135f8c95dce616
 
   - name: openldap
     config-opts: &openldap_config_opts
