@@ -88,7 +88,7 @@ modules:
       - type: git
         url: "https://github.com/lutris/lutris.git"
   #      tag: v0.5.8
-        commit: "f249666b15f76cabb30fdc34deab22721bd9275d"
+        commit: "d1a7d770dc01f2f057cf59ed8722469455f43a85"
     modules:
       - name: gnome-desktop
         buildsystem: meson
