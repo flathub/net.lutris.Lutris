@@ -492,8 +492,8 @@ modules:
       - --sbindir=/app/bin
     sources:
       - type: archive
-        url: "https://mirrors.edge.kernel.org/pub/linux/utils/usb/usbutils/usbutils-012.tar.xz"
-        sha256: 88634625f91840bc1993d2731cc081ee8d3b13d56069a95bdd6ac6ef0e063e46
+        url: "https://mirrors.edge.kernel.org/pub/linux/utils/usb/usbutils/usbutils-013.tar.xz"
+        sha256: 9e23494fcc78b7a80ee29a07dd179c95ae2f71509c35728dbbabc2d1cca41338
     modules:
       - shared-modules/libusb/libusb.json
 
