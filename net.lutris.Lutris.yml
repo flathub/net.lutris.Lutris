@@ -202,8 +202,8 @@ modules:
         buildsystem: cmake-ninja
         sources:
           - type: archive
-            url: "https://github.com/KhronosGroup/SPIRV-Headers/archive/1.5.3.tar.gz"
-            sha256: eece8a9e147d37997d425d5d2eeb2e757ad25adc30d6651467094f3b18609b5a
+            url: "https://github.com/KhronosGroup/SPIRV-Headers/archive/1.5.4.tar.gz"
+            sha256: fc026b6566167f6db03dc48779f0f986f9ff8c93ed651a557f28cfbe2dff4ede
 
   - name: vkd3d-32bit
     build-options:
@@ -224,7 +224,6 @@ modules:
 
   - name: openldap
     config-opts: &openldap_config_opts
-      - --disable-static
       - --disable-slapd
       - --disable-slurpd
       - --disable-bdb
