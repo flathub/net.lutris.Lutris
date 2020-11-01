@@ -176,8 +176,8 @@ modules:
               - python3 setup.py install --prefix=/app --root=/
             sources:
               - type: archive
-                url: "https://github.com/kjd/idna/archive/v2.9.tar.gz"
-                sha256: 4dc748d864b205c193a90304a8ab125b897d45641a7bf26da563076e03c44d36
+                url: "https://github.com/kjd/idna/archive/v2.10.tar.gz"
+                sha256: c4b68473823affb02120ad1b199f1d8dd94f1ffa1595ff6fbeb70b1d5fa535bb
 
       - name: Pillow
         buildsystem: simple
