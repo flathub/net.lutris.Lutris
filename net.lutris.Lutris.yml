@@ -87,7 +87,8 @@ modules:
     sources:
       - type: git
         url: "https://github.com/lutris/lutris.git"
-        tag: v0.5.7.1
+  #      tag: v0.5.8
+        commit: "6babb914270598ad7b965193b694c7c01ca6ebbf"
     modules:
       - name: gnome-desktop
         buildsystem: meson
@@ -111,8 +112,8 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://github.com/nir0s/distro/archive/v1.4.0.tar.gz"
-            sha256: 47c5b3c88b898e4f4c8eb6849ee379ac89bde9a16cdf6f98e3ef85eb2284980d
+            url: "https://github.com/nir0s/distro/archive/v1.5.0.tar.gz"
+            sha256: 041f191644efd0c50b53af819c201a3ec27cca61781800aa31a7235699b4918f
 
       - name: python-dbus
         buildsystem: simple
@@ -129,8 +130,8 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://github.com/yaml/pyyaml/archive/5.3.tar.gz"
-            sha256: c9418e892bbe2b3270a1daf684c2c4cca407b2577b5f2124d09c54d287b97890
+            url: "https://github.com/yaml/pyyaml/archive/5.3.1.tar.gz"
+            sha256: 56b26f182e2418fab806322706f8a715e1fdcd2d84cb4daa65d236064417a4fe
 
       - name: python-requests
         buildsystem: simple
@@ -138,8 +139,8 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://github.com/requests/requests/archive/v2.23.0.tar.gz"
-            sha256: bf063ded6c5c3f238f89189a791df4a22270d1ccd88b1a21687ecb6a9c6b1335
+            url: "https://github.com/requests/requests/archive/v2.24.0.tar.gz"
+            sha256: 904e9a2bd22e98e444f5b23f80fa3fb8dda5d1e81d0f87d9ee56af2e15f73862
         modules:
 
           - name: python-urllib3
@@ -148,8 +149,8 @@ modules:
               - python3 setup.py install --prefix=/app --root=/
             sources:
               - type: archive
-                url: "https://github.com/urllib3/urllib3/archive/1.25.8.tar.gz"
-                sha256: 15fefe1fce1d5a0795a1ab3e635d9261d5e05e9b4c34153a310eb6087d4517ff
+                url: "https://github.com/urllib3/urllib3/archive/1.25.11.tar.gz"
+                sha256: 50aa25b421b603722dd3db73a5ff6e1871e4153d1dbdf8fd31b02682907da4b2
 
           - name: python-chardet
             buildsystem: simple
@@ -166,8 +167,8 @@ modules:
               - python3 setup.py install --prefix=/app --root=/
             sources:
               - type: archive
-                url: "https://github.com/certifi/python-certifi/archive/2019.11.28.tar.gz"
-                sha256: 5a6dd04a9bf487ad684ca9d7d21a09b0656eb98c2272906af92cdbdea4aab60f
+                url: "https://github.com/certifi/python-certifi/archive/2020.06.20.tar.gz"
+                sha256: 323a62f5ddfa1a4f093246b52f451aacb725b6cc8eefe647ad6f8bcbed3c9131
 
           - name: python-idna
             buildsystem: simple
@@ -175,8 +176,17 @@ modules:
               - python3 setup.py install --prefix=/app --root=/
             sources:
               - type: archive
-                url: "https://github.com/kjd/idna/archive/v2.9.tar.gz"
-                sha256: 4dc748d864b205c193a90304a8ab125b897d45641a7bf26da563076e03c44d36
+                url: "https://github.com/kjd/idna/archive/v2.10.tar.gz"
+                sha256: c4b68473823affb02120ad1b199f1d8dd94f1ffa1595ff6fbeb70b1d5fa535bb
+
+          - name: python-magic
+            buildsystem: simple
+            build-commands:
+              - python3 setup.py install --prefix=/app --root=/
+            sources:
+              - type: archive
+                url: "https://github.com/ahupp/python-magic/archive/0.4.18.tar.gz"
+                sha256: b787e8056c115f37e2af11e0b98dc67d5fc182ed5ed827a62f95e3a7f0ed4be4
 
       - name: Pillow
         buildsystem: simple
@@ -185,8 +195,8 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://github.com/python-pillow/Pillow/archive/7.0.0.tar.gz"
-            sha256: 925f52e26491063943c14edadc6d276e3a8427b11d6943113fd2ef24dcbeabca
+            url: "https://github.com/python-pillow/Pillow/archive/8.0.1.tar.gz"
+            sha256: 004c1fce0d3427fdba9cb67b445aa7f9926ec5c1ba58760942e8c0374239fec0
 
   # Multilib runtime for wine
 
@@ -201,8 +211,8 @@ modules:
         buildsystem: cmake-ninja
         sources:
           - type: archive
-            url: "https://github.com/KhronosGroup/SPIRV-Headers/archive/1.5.3.tar.gz"
-            sha256: eece8a9e147d37997d425d5d2eeb2e757ad25adc30d6651467094f3b18609b5a
+            url: "https://github.com/KhronosGroup/SPIRV-Headers/archive/1.5.4.tar.gz"
+            sha256: fc026b6566167f6db03dc48779f0f986f9ff8c93ed651a557f28cfbe2dff4ede
 
   - name: vkd3d-32bit
     build-options:
@@ -223,7 +233,6 @@ modules:
 
   - name: openldap
     config-opts: &openldap_config_opts
-      - --disable-static
       - --disable-slapd
       - --disable-slurpd
       - --disable-bdb
@@ -232,8 +241,8 @@ modules:
       - /bin
     sources: &openldap_sources
       - type: archive
-        url: "https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.49.tgz"
-        sha256: e3b117944b4180f23befe87d0dcf47f29de775befbc469dcf4ac3dab3311e56e
+        url: "https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.55.tgz"
+        sha256: 97357bd6ba8ff73d204c1f8208c5e6ab97d60c9e779f989057aa1229bbe98434
 
   - name: openldap-32bit
     build-options:
@@ -287,7 +296,7 @@ modules:
     sources:
       - type: git
         url: "https://github.com/KhronosGroup/OpenCL-Headers.git"
-        commit: c5a4bbeabb10d8ed3d1c651b93aa31737bc473dd
+        commit: 9fac4e9866a961f66bdd72fa2bff50145512f972
 
 
   - name: libpcap
@@ -327,8 +336,8 @@ modules:
   - name: libgphoto2
     sources: &libgphoto2_sources
       - type: archive
-        url: "https://github.com/gphoto/libgphoto2/archive/libgphoto2-2_5_24-release.tar.gz"
-        sha256: 271c82143ab0d57d0a36f6e03fe1fd0a99e6ad0209c96a340b4b566fd8cb4a3f
+        url: "https://github.com/gphoto/libgphoto2/archive/libgphoto2-2_5_26-release.tar.gz"
+        sha256: 023d6dfd281e8f461099acb882b386d21999977331bdf121e762989f9c7517a9
       - type: script
         dest-filename: autogen.sh
         commands:
@@ -389,8 +398,8 @@ modules:
       - -DFFMPEG=ON
     sources: &faudio_sources
       - type: archive
-        url: "https://github.com/FNA-XNA/FAudio/archive/20.09.tar.gz"
-        sha256: 375d12ba57f507b95e030926fd08308029b38af883d0524583a2d5d8fe65168b
+        url: "https://github.com/FNA-XNA/FAudio/archive/20.11.tar.gz"
+        sha256: 551f1573a98082973e8e2f0ef14be8f34299c9813d58387f9edd32142e6f913b
 
   - name: FAudio-32bit
     build-options:
@@ -468,8 +477,8 @@ modules:
       - --datarootdir=/app/share
     sources:
       - type: archive
-        url: "https://github.com/vcrhonek/hwdata/archive/v0.331.tar.gz"
-        sha256: a016bf74fbb3f288ed57d309af97f7233b4920f9973961fb6eb46eb14f70ddfe
+        url: "https://github.com/vcrhonek/hwdata/archive/v0.340.tar.gz"
+        sha256: e3a0ef18af6795a362345a2c2c7177be351cb27b4cc0ed9278b7409759258802
 
   - name: pciutils
     no-autogen: true
@@ -483,8 +492,8 @@ modules:
       - MANDIR=/app/share/man
     sources:
       - type: archive
-        url: "https://mirrors.edge.kernel.org/pub/software/utils/pciutils/pciutils-3.6.2.tar.gz"
-        sha256: d5f9254f27bbda8243b345633e980144e6bd2af9c786bb8a152b904530aef599
+        url: "https://mirrors.edge.kernel.org/pub/software/utils/pciutils/pciutils-3.7.0.tar.gz"
+        sha256: 2432e7a2e12000502d36cf769ab6e5a0cf4931e5050ccaf8b02984b2d3cb0948
 
   - name: usbutils
     config-opts:
@@ -492,8 +501,8 @@ modules:
       - --sbindir=/app/bin
     sources:
       - type: archive
-        url: "https://mirrors.edge.kernel.org/pub/linux/utils/usb/usbutils/usbutils-012.tar.xz"
-        sha256: 88634625f91840bc1993d2731cc081ee8d3b13d56069a95bdd6ac6ef0e063e46
+        url: "https://mirrors.edge.kernel.org/pub/linux/utils/usb/usbutils/usbutils-013.tar.xz"
+        sha256: 9e23494fcc78b7a80ee29a07dd179c95ae2f71509c35728dbbabc2d1cca41338
     modules:
       - shared-modules/libusb/libusb.json
 
@@ -587,8 +596,8 @@ modules:
       - -DLIB_SUFFIX=
     sources:
       - type: archive
-        url: "https://github.com/FluidSynth/fluidsynth/archive/v2.1.0.tar.gz"
-        sha256: 526addc6d8445035840d3af7282d3ba89567df209d28e183da04a1a877da2da3
+        url: "https://github.com/FluidSynth/fluidsynth/archive/v2.1.5.tar.gz"
+        sha256: b539b7c65a650b56f01cd60a4e83c6125c217c5a63c0c214ef6274894a677d00
 
   - name: fluid-soundfont
     buildsystem: simple
