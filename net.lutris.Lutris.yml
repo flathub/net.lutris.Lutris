@@ -219,8 +219,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=Release
     sources:
       - type: archive
-        url: "https://github.com/KhronosGroup/Vulkan-Tools/archive/sdk-1.2.154.0.tar.gz"
-        sha256: c7d66ec1f5fe5c0a13e487fe5c6eefd3a954522c0b05f06bd2ae41792aeea272
+        url: "https://github.com/KhronosGroup/Vulkan-Tools/archive/sdk-1.2.148.0.tar.gz"
+        sha256: 61335febdae8248ce7a1ef6d07f11ae7ff67649ffcefa9bd01135f8c95dce616
 
   - name: openldap
     config-opts: &openldap_config_opts
@@ -232,8 +232,8 @@ modules:
       - /bin
     sources: &openldap_sources
       - type: archive
-        url: "https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.49.tgz"
-        sha256: e3b117944b4180f23befe87d0dcf47f29de775befbc469dcf4ac3dab3311e56e
+        url: "https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.55.tgz"
+        sha256: 97357bd6ba8ff73d204c1f8208c5e6ab97d60c9e779f989057aa1229bbe98434
 
   - name: openldap-32bit
     build-options:
