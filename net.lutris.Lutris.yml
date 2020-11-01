@@ -189,6 +189,15 @@ modules:
             url: "https://github.com/python-pillow/Pillow/archive/8.0.1.tar.gz"
             sha256: 004c1fce0d3427fdba9cb67b445aa7f9926ec5c1ba58760942e8c0374239fec0
 
+          - name: python-magic
+            buildsystem: simple
+            build-commands:
+              - python3 setup.py install --prefix=/app --root=/
+            sources:
+              - type: archive
+                url: "https://github.com/ahupp/python-magic/archive/0.4.18.tar.gz"
+                sha256: b787e8056c115f37e2af11e0b98dc67d5fc182ed5ed827a62f95e3a7f0ed4be4
+
   # Multilib runtime for wine
 
   - name: vkd3d
