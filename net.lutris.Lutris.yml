@@ -139,8 +139,8 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://github.com/requests/requests/archive/v2.23.0.tar.gz"
-            sha256: bf063ded6c5c3f238f89189a791df4a22270d1ccd88b1a21687ecb6a9c6b1335
+            url: "https://github.com/requests/requests/archive/v2.24.0.tar.gz"
+            sha256: 904e9a2bd22e98e444f5b23f80fa3fb8dda5d1e81d0f87d9ee56af2e15f73862
         modules:
 
           - name: python-urllib3
