@@ -14,11 +14,13 @@ ___________________________________________
    ```sh
    flatpak install --user flathub-beta net.lutris.Lutris//beta
    ```
-3. Install GNOME Compat extension
+3. Install GNOME Compat and GL32 extensions
    ```sh
-   flatpak install --user flathub org.gnome.Platform.Compat.i386
+   flatpak install --user flathub org.gnome.Platform.Compat.i386 org.freedesktop.Platform.GL32.default org.freedesktop.Platform.GL.default
    ```
-   Make sure that you install the same branch as the one used by net.lutris.Lutris
+   Make sure that you install the same branches as the ones used by net.lutris.Lutris, usually the lastest ones.
+   
+   **DO NOT** confuse `org.gnome.Platform.Compat.i386` with `org.freedesktop.Platform.Compat.i386`.
 
 ## Running
 Launch Lutris Beta from your desktop menu, or via command line:
