@@ -88,6 +88,8 @@ modules:
       - type: archive
         url: "https://github.com/lutris/lutris/archive/0.5.8.tar.gz"
         sha256: 88551142654404e881b00b90fdaba3eefb9b7e97b27079aada086321abab86ee
+      - type: patch
+        path: patches/Lutris/metainfo-license.patch
     modules:
       - name: gnome-desktop
         buildsystem: meson
