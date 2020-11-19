@@ -5,6 +5,9 @@
 ___________________________________________
 
 ## Installation
+
+### Traditional method
+
 1. Add Flathub Beta remote
    ```sh
    flatpak remote-add --user flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
@@ -18,9 +21,19 @@ ___________________________________________
    ```sh
    flatpak install --user flathub org.gnome.Platform.Compat.i386 org.freedesktop.Platform.GL32.default org.freedesktop.Platform.GL.default
    ```
-   Make sure that you install the same branches as the ones used by net.lutris.Lutris, usually the lastest ones.
+   Make sure that you install the same branches as the ones used by net.lutris.Lutris, usually the latest ones.
+
+**DO NOT** confuse `org.gnome.Platform.Compat.i386` with `org.freedesktop.Platform.Compat.i386`.
+
+### Simpler way
+
+1. Install the reference directly
+
+   ```sh
+   flatpak install --user https://flathub.org/beta-repo/appstream/net.lutris.Lutris.flatpakref
+   ```
    
-   **DO NOT** confuse `org.gnome.Platform.Compat.i386` with `org.freedesktop.Platform.Compat.i386`.
+This probably won't fix the issue that dependencies might fail to be suggested when updating to a newer runtime.
 
 ## Running
 Launch Lutris Beta from your desktop menu, or via command line:
