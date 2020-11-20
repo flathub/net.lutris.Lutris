@@ -64,7 +64,6 @@ add-extensions:
     add-ld-path: lib
     merge-dirs: bin;share/vulkan/explicit_layer.d;share/vulkan/implicit_layer.d;
     no-autodownload: true
-    autodelete: true
 
 sdk-extensions:
   - org.gnome.Sdk.Compat.i386
