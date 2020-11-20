@@ -26,7 +26,7 @@ finish-args:
   - --persist=.wine
   - --filesystem=xdg-data/Steam:ro
   - --filesystem=~/.var/app/com.valvesoftware.Steam:ro
-  - --env=PATH=/app/bin:/app/runners/bin:/usr/bin
+  - --env=PATH=/app/bin:/app/runners/bin:/usr/bin:/app/utils/bin
 add-extensions:
   org.gnome.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
@@ -62,7 +62,7 @@ add-extensions:
     version: beta
     versions: stable;beta;test
     add-ld-path: lib
-    merge-dirs: share/vulkan/explicit_layer.d;share/vulkan/implicit_layer.d;
+    merge-dirs: bin;share/vulkan/explicit_layer.d;share/vulkan/implicit_layer.d;
     no-autodownload: true
     autodelete: true
 
