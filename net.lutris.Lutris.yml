@@ -95,10 +95,8 @@ modules:
       - desktop-file-edit --set-key=X-Flatpak-RenamedFrom --set-value="lutris.desktop;" /app/share/applications/${FLATPAK_ID}.desktop
     sources:
       - type: archive
-        url: "https://github.com/lutris/lutris/archive/0.5.8.tar.gz"
-        sha256: 88551142654404e881b00b90fdaba3eefb9b7e97b27079aada086321abab86ee
-      - type: patch
-        path: patches/Lutris/metainfo-license.patch
+        url: "https://github.com/lutris/lutris/archive/v0.5.8.1.tar.gz"
+        sha256: 9eba9ccc89069a1b23f1776c8533d6d0513c184f2f090428ec52bae63333138b
     modules:
       - name: gnome-desktop
         buildsystem: meson
