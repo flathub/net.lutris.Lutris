@@ -27,7 +27,6 @@ finish-args:
   - --filesystem=xdg-data/Steam:ro
   - --filesystem=~/.var/app/com.valvesoftware.Steam:ro
   - --env=PATH=/app/bin:/app/runners/bin:/usr/bin:/app/utils/bin
-  - --env=GDK_BACKEND=x11
 add-extensions:
   org.gnome.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
@@ -96,8 +95,8 @@ modules:
       - desktop-file-edit --set-key=X-Flatpak-RenamedFrom --set-value="lutris.desktop;" /app/share/applications/${FLATPAK_ID}.desktop
     sources:
       - type: archive
-        url: "https://github.com/lutris/lutris/archive/v0.5.8.1.tar.gz"
-        sha256: 9eba9ccc89069a1b23f1776c8533d6d0513c184f2f090428ec52bae63333138b
+        url: "https://github.com/lutris/lutris/archive/v0.5.8.2.tar.gz"
+        sha256: 6c2ac4810764fbae9fc6b4e68fb76c47371046ac4e5bdf9e7fcd9777d1b9d8c7
     modules:
       - name: gnome-desktop
         buildsystem: meson
@@ -196,6 +195,15 @@ modules:
               - type: archive
                 url: "https://github.com/ahupp/python-magic/archive/0.4.18.tar.gz"
                 sha256: b787e8056c115f37e2af11e0b98dc67d5fc182ed5ed827a62f95e3a7f0ed4be4
+
+          - name: python-lxml
+            buildsystem: simple
+            build-commands:
+              - python3 setup.py install --prefix=/app --root=/
+            sources:
+              - type: archive
+                url: "https://files.pythonhosted.org/packages/db/f7/43fecb94d66959c1e23aa53d6161231dca0e93ec500224cf31b3c4073e37/lxml-4.6.2.tar.gz"
+                sha256: cd11c7e8d21af997ee8079037fff88f16fda188a9776eb4b81c7e4c9c0a7d7fc
 
       - name: Pillow
         buildsystem: simple
