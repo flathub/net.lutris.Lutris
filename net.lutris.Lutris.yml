@@ -245,8 +245,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=Release
     sources:
       - type: archive
-        url: "https://github.com/KhronosGroup/Vulkan-Tools/archive/sdk-1.2.148.0.tar.gz"
-        sha256: 61335febdae8248ce7a1ef6d07f11ae7ff67649ffcefa9bd01135f8c95dce616
+        url: "https://github.com/KhronosGroup/Vulkan-Tools/archive/refs/tags/v1.2.173.tar.gz"
+        sha256: da5606f37e9fec87a1d578e044bd002aa8d637a82baad2ea80b939d3dc2edf21
 
   - name: openldap
     config-opts: &openldap_config_opts
