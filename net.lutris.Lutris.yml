@@ -1,7 +1,7 @@
 id: net.lutris.Lutris
 sdk: org.gnome.Sdk
 runtime: org.gnome.Platform
-runtime-version: "3.38"
+runtime-version: "40"
 command: lutris
 rename-icon: lutris
 copy-icon: true
@@ -30,11 +30,11 @@ finish-args:
 add-extensions:
   org.gnome.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: "3.38"
+    version: "40"
 
   org.gnome.Platform.Compat.i386.Debug:
     directory: lib/debug/lib/i386-linux-gnu
-    version: "3.38"
+    version: "40"
     no-autodownload: true
 
   org.freedesktop.Platform.GL32:
@@ -102,8 +102,8 @@ modules:
         buildsystem: meson
         sources:
           - type: archive
-            url: "https://download.gnome.org/sources/gnome-desktop/3.38/gnome-desktop-3.38.1.tar.xz"
-            sha256: 17903513fed60814e967512dd892751cb6a1d2716136232884bc65bd53cc3be0
+            url: "https://download.gnome.org/sources/gnome-desktop/40/gnome-desktop-40.0.tar.xz"
+            sha256: 20abfd3f831e4e8092b55839311661dc73b2bf13fc9bef71c4a5a4475da9ee04
 
       - name: python-evdev
         buildsystem: simple
@@ -245,8 +245,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=Release
     sources:
       - type: archive
-        url: "https://github.com/KhronosGroup/Vulkan-Tools/archive/sdk-1.2.148.0.tar.gz"
-        sha256: 61335febdae8248ce7a1ef6d07f11ae7ff67649ffcefa9bd01135f8c95dce616
+        url: "https://github.com/KhronosGroup/Vulkan-Tools/archive/refs/tags/v1.2.162.tar.gz"
+        sha256: 98a3a00471da65df833b4ffeb1ab29ec1d169d5feab54270cf4cd8f50f82e682
 
   - name: openldap
     config-opts: &openldap_config_opts
