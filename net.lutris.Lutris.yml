@@ -26,7 +26,7 @@ finish-args:
   - --persist=.wine
   - --filesystem=xdg-data/Steam:ro
   - --filesystem=~/.var/app/com.valvesoftware.Steam:ro
-  - --env=PATH=/app/bin:/app/runners/bin:/usr/bin:/app/utils/bin
+  - --env=PATH=/app/bin:/app/runners/bin:/usr/bin:/app/utils/bin:/app/jre/bin
 add-extensions:
   org.gnome.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
@@ -68,6 +68,7 @@ add-extensions:
 sdk-extensions:
   - org.gnome.Sdk.Compat.i386
   - org.freedesktop.Sdk.Extension.toolchain-i386
+  - org.freedesktop.Sdk.Extension.openjdk8
 
 x-compat-i386-opts: &compat_i386_opts
   prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
@@ -664,6 +665,12 @@ modules:
       - type: archive
         url: "https://download.gnome.org/sources/GConf/3.2/GConf-3.2.6.tar.xz"
         sha256: 1912b91803ab09a5eed34d364bf09fe3a2a9c96751fde03a4e0cfa51a04d784c
+
+  # Java runtime for minecraft and minecraft launchers.
+  - name: openjdk
+    buildsystem: simple
+    build-commands:
+      - /usr/lib/sdk/openjdk8/install.sh
 
   # Environment setup
 
