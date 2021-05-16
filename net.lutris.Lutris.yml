@@ -464,7 +464,29 @@ modules:
     config-opts: *sndio_config_opts
     cleanup: *sndio_cleanup
     sources: *sndio11_sources
+    
+  - name: sndio15
+    config-opts: *sndio_config_opts
+    cleanup: *sndio_cleanup
+    sources: &sndio15_sources
+      - type: archive
+        url: "http://archive.ubuntu.com/ubuntu/pool/universe/s/sndio/sndio_1.5.0.orig.tar.gz"
+        sha256: 12c70044749ad9cb7eaeb26c936816aa6b314fe4be71ef479d12272e4c5ad253
+      - type: shell
+        commands:
+          - |
+            for i in libsndio aucat midicat; do
+              sed 's/cp /cp -f /g' -i $i/Makefile.in
+            done
 
+  - name: sndio15-32bit
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    config-opts: *sndio_config_opts
+    cleanup: *sndio_cleanup
+    sources: *sndio15_sources
+    
 
   - name: gamemode
     buildsystem: meson
