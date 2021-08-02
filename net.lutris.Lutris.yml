@@ -668,8 +668,8 @@ modules:
       - -DLIB_SUFFIX=
     sources:
       - type: archive
-        url: "https://github.com/FluidSynth/fluidsynth/archive/refs/tags/v2.2.2.tar.gz"
-        sha256: 695aedbfd53160fef7a9a1f66cd6d5cc8a5da0fd472eee458d82b848b6065f9a
+        url: "https://github.com/FluidSynth/fluidsynth/archive/v2.1.5.tar.gz"
+        sha256: b539b7c65a650b56f01cd60a4e83c6125c217c5a63c0c214ef6274894a677d00
 
   - name: fluid-soundfont
     buildsystem: simple
