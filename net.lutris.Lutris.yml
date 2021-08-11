@@ -728,3 +728,14 @@ modules:
           - ./Configure -des -Dprefix=/app
     post-install:
       - "find /app/lib/perl5 -type f -exec chmod u+w {} \\;"
+
+  - name: kitty
+    no-autogen: true
+    sources:
+      - type: git
+        url: "https://github.com/kovidgoyal/kitty"
+        tag: "v0.22.2"
+    no-make-install: true
+    post-install:
+      - "cp -r . $FLATPAK_DEST/lib/kitty"
+      - "ln -s /app/lib/kitty/kitty/launcher/kitty $FLATPAK_DEST/bin/kitty"
