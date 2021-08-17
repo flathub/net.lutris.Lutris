@@ -646,7 +646,7 @@ modules:
           type: anitya
           project-id: 2583
           stable-only: true
-          url-template: https://downloads.sourceforge.net/p7zip/p7zip_$version_src_all.tar.bz2
+          url-template: https://downloads.sourceforge.net/p7zip/p7zip_${version}_src_all.tar.bz2
       - type: patch
         path: patches/p7zip/gcc10.patch
       - type: shell
