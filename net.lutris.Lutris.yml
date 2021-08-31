@@ -17,6 +17,7 @@ finish-args:
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.gnome.Mutter.DisplayConfig
   - --filesystem=~/Games:create
+  - --filesystem=/sys/kernel/futex2:ro
   - --filesystem=xdg-desktop
   - --filesystem=xdg-documents
   - --filesystem=xdg-pictures
