@@ -426,8 +426,8 @@ modules:
       - -DFFMPEG=ON
     sources: &faudio_sources
       - type: archive
-        url: https://github.com/FNA-XNA/FAudio/archive/refs/tags/21.08.tar.gz
-        sha256: 42a3a295da44721c63f06fcbf5edf8077a42fdb78313b9e1c065afad12df8063
+        url: https://github.com/FNA-XNA/FAudio/archive/refs/tags/21.09.tar.gz
+        sha256: 8888f075594c9c0e9a83fda9b4556a5d290fa02ed0ba7cd35ecfeb7c4d7968ba
         x-checker-data:
           type: anitya
           project-id: 20663
@@ -639,8 +639,8 @@ modules:
       - DEST_MAN=/app/share/man
     sources:
       - type: archive
-        url: https://downloads.sourceforge.net/p7zip/p7zip_16.02_src_all.tar.bz2
-        sha256: 5eb20ac0e2944f6cb9c2d51dd6c4518941c185347d4089ea89087ffdd6e2341f
+        url: https://downloads.sourceforge.net/p7zip/p7zip_17.04_src_all.tar.bz2
+        sha256: 251a85b3bac687974f360d3796048c20ded3bf0bd69e0d1cfd1db23d013f89ed
         x-checker-data:
           type: anitya
           project-id: 2583
@@ -754,8 +754,8 @@ modules:
   - name: perl
     sources:
       - type: archive
-        url: https://www.cpan.org/src/5.0/perl-5.34.0.tar.gz
-        sha256: 551efc818b968b05216024fb0b727ef2ad4c100f8cb6b43fab615fa78ae5be9a
+        url: http://www.cpan.org/src/5.0/perl-5.35.3.tar.gz
+        sha256: d67b5bdda25b3518bf3da758c25870c8cd5592bf12150744a03aee5cd8178418
         x-checker-data:
           type: anitya
           project-id: 13599
