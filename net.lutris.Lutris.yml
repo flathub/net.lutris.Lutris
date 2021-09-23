@@ -1,7 +1,7 @@
 id: net.lutris.Lutris
 sdk: org.gnome.Sdk
 runtime: org.gnome.Platform
-runtime-version: '40'
+runtime-version: '41'
 command: lutris
 rename-icon: lutris
 copy-icon: true
@@ -30,11 +30,11 @@ finish-args:
 add-extensions:
   org.gnome.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: '40'
+    version: '41'
 
   org.gnome.Platform.Compat.i386.Debug:
     directory: lib/debug/lib/i386-linux-gnu
-    version: '40'
+    version: '41'
     no-autodownload: true
 
   org.freedesktop.Platform.GL32:
@@ -103,8 +103,8 @@ modules:
         buildsystem: meson
         sources:
           - type: archive
-            url: https://download.gnome.org/sources/gnome-desktop/40/gnome-desktop-40.3.tar.xz
-            sha256: 53d6469446d7a09b026936769e595352fdf3be5632f346bb01fe57c8b5162ceb
+            url: https://download.gnome.org/sources/gnome-desktop/41/gnome-desktop-41.0.tar.xz
+            sha256: 69cb1d3d9a10700eb66348ef1c0e66a855fc5a97ae62902df97a499da11562d2
 
       - name: python-evdev
         buildsystem: simple
