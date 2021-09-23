@@ -18,7 +18,7 @@ ___________________________________________
    ```sh
    flatpak install --user flathub org.gnome.Platform.Compat.i386 org.freedesktop.Platform.GL32.default org.freedesktop.Platform.GL.default
    ```
-   Make sure that you install the same branches as the ones used by net.lutris.Lutris, usually the lastest ones.
+   Make sure that you install the same branches as the ones used by net.lutris.Lutris, usually the latest ones.
    
    **DO NOT** confuse `org.gnome.Platform.Compat.i386` with `org.freedesktop.Platform.Compat.i386`.
 
