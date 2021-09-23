@@ -1,7 +1,7 @@
 id: net.lutris.Lutris
 sdk: org.gnome.Sdk
 runtime: org.gnome.Platform
-runtime-version: '40'
+runtime-version: '41'
 command: lutris
 rename-icon: lutris
 copy-icon: true
@@ -26,15 +26,15 @@ finish-args:
   - --persist=.wine
   - --filesystem=xdg-data/Steam:ro
   - --filesystem=~/.var/app/com.valvesoftware.Steam:ro
-  - --env=PATH=/app/bin:/app/runners/bin:/usr/bin:/app/utils/bin
+  - --env=PATH=/app/bin:/app/runners/bin:/usr/bin
 add-extensions:
   org.gnome.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: '40'
+    version: '41'
 
   org.gnome.Platform.Compat.i386.Debug:
     directory: lib/debug/lib/i386-linux-gnu
-    version: '40'
+    version: '41'
     no-autodownload: true
 
   org.freedesktop.Platform.GL32:
@@ -55,15 +55,6 @@ add-extensions:
     merge-dirs: bin
     no-autodownload: true
     autodelete: true
-
-  com.valvesoftware.Steam.Utility:
-    subdirectories: true
-    directory: utils
-    version: beta
-    versions: stable;beta;test
-    add-ld-path: lib
-    merge-dirs: bin;share/vulkan/explicit_layer.d;share/vulkan/implicit_layer.d;
-    no-autodownload: true
 
 sdk-extensions:
   - org.gnome.Sdk.Compat.i386
@@ -103,8 +94,8 @@ modules:
         buildsystem: meson
         sources:
           - type: archive
-            url: https://download.gnome.org/sources/gnome-desktop/40/gnome-desktop-40.3.tar.xz
-            sha256: 53d6469446d7a09b026936769e595352fdf3be5632f346bb01fe57c8b5162ceb
+            url: https://download.gnome.org/sources/gnome-desktop/41/gnome-desktop-41.0.tar.xz
+            sha256: 69cb1d3d9a10700eb66348ef1c0e66a855fc5a97ae62902df97a499da11562d2
 
       - name: python-evdev
         buildsystem: simple
@@ -639,15 +630,8 @@ modules:
       - DEST_MAN=/app/share/man
     sources:
       - type: archive
-        url: https://downloads.sourceforge.net/p7zip/p7zip_16.02_src_all.tar.bz2
-        sha256: 5eb20ac0e2944f6cb9c2d51dd6c4518941c185347d4089ea89087ffdd6e2341f
-        x-checker-data:
-          type: anitya
-          project-id: 2583
-          stable-only: true
-          url-template: https://downloads.sourceforge.net/p7zip/p7zip_${version}_src_all.tar.bz2
-      - type: patch
-        path: patches/p7zip/gcc10.patch
+        url: https://github.com/jinfeihan57/p7zip/archive/refs/tags/v17.04.tar.gz
+        sha256: ea029a2e21d2d6ad0a156f6679bd66836204aa78148a4c5e498fe682e77127ef
       - type: shell
         only-arches:
           - x86_64
@@ -744,9 +728,6 @@ modules:
       - mkdir -p /app/lib/i386-linux-gnu
       - install -Dm644 ld.so.conf -t /app/etc/
       - mkdir -p /app/runners
-      - mkdir -p /app/utils /app/share/ /app/share/vulkan
-      - ln -srv /app/{utils/,}share/vulkan/implicit_layer.d
-      - ln -srv /app/{utils/,}share/vulkan/explicit_layer.d
     sources:
       - type: file
         path: ld.so.conf
