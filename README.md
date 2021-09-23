@@ -55,7 +55,7 @@ To compile Lutris as a Flatpak, you'll need both [Flatpak](https://flatpak.org/)
 To enable MangoHud support simply install
 
 ```
-flatpak install flathub com.valvesoftware.Steam.Utility.MangoHud
+flatpak install flathub org.freedesktop.Platform.VulkanLayer.MangoHud
 ```
 
 ### Clean up
