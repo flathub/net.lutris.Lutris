@@ -737,11 +737,6 @@ modules:
       - type: archive
         url: https://www.cpan.org/src/5.0/perl-5.34.0.tar.gz
         sha256: 551efc818b968b05216024fb0b727ef2ad4c100f8cb6b43fab615fa78ae5be9a
-        x-checker-data:
-          type: anitya
-          project-id: 13599
-          stable-only: true
-          url-template: http://www.cpan.org/src/$major.0/perl-$version.tar.gz
       - type: script
         dest-filename: configure
         commands:
