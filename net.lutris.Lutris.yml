@@ -26,7 +26,7 @@ finish-args:
   - --persist=.wine
   - --filesystem=xdg-data/Steam:ro
   - --filesystem=~/.var/app/com.valvesoftware.Steam:ro
-  - --env=PATH=/app/bin:/app/runners/bin:/usr/bin
+  - --env=PATH=/app/bin:/app/runners/bin:/usr/bin:/usr/lib/extensions/vulkan/MangoHud/bin/
 add-extensions:
   org.gnome.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
