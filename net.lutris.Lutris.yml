@@ -1,7 +1,7 @@
 id: net.lutris.Lutris
 sdk: org.gnome.Sdk
 runtime: org.gnome.Platform
-runtime-version: "40"
+runtime-version: '41'
 command: lutris
 rename-icon: lutris
 copy-icon: true
@@ -26,21 +26,21 @@ finish-args:
   - --persist=.wine
   - --filesystem=xdg-data/Steam:ro
   - --filesystem=~/.var/app/com.valvesoftware.Steam:ro
-  - --env=PATH=/app/bin:/app/runners/bin:/usr/bin:/app/utils/bin
+  - --env=PATH=/app/bin:/app/runners/bin:/usr/bin:/usr/lib/extensions/vulkan/MangoHud/bin/
 add-extensions:
   org.gnome.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: "40"
+    version: '41'
 
   org.gnome.Platform.Compat.i386.Debug:
     directory: lib/debug/lib/i386-linux-gnu
-    version: "40"
+    version: '41'
     no-autodownload: true
 
   org.freedesktop.Platform.GL32:
     directory: lib/i386-linux-gnu/GL
-    version: "1.4"
-    versions: "20.08;1.4"
+    version: '1.4'
+    versions: 21.08;1.4
     subdirectories: true
     no-autodownload: true
     autodelete: false
@@ -56,15 +56,6 @@ add-extensions:
     no-autodownload: true
     autodelete: true
 
-  com.valvesoftware.Steam.Utility:
-    subdirectories: true
-    directory: utils
-    version: beta
-    versions: stable;beta;test
-    add-ld-path: lib
-    merge-dirs: bin;share/vulkan/explicit_layer.d;share/vulkan/implicit_layer.d;
-    no-autodownload: true
-
 sdk-extensions:
   - org.gnome.Sdk.Compat.i386
   - org.freedesktop.Sdk.Extension.toolchain-i386
@@ -79,8 +70,8 @@ x-compat-i386-opts: &compat_i386_opts
   libdir: /app/lib32
 
 cleanup:
-  - "*.a"
-  - "*.la"
+  - '*.a'
+  - '*.la'
   - /share/man
   - /share/help
 cleanup-commands:
@@ -92,7 +83,8 @@ modules:
     build-commands:
       - python3 setup.py install --prefix=/app --root=/
     post-install:
-      - desktop-file-edit --set-key=X-Flatpak-RenamedFrom --set-value="lutris.desktop;" /app/share/applications/${FLATPAK_ID}.desktop
+      - desktop-file-edit --set-key=X-Flatpak-RenamedFrom --set-value="lutris.desktop;"
+        /app/share/applications/${FLATPAK_ID}.desktop
     sources:
       - type: archive
         url: "https://github.com/lutris/lutris/archive/v0.5.9-beta1.tar.gz"
@@ -102,8 +94,8 @@ modules:
         buildsystem: meson
         sources:
           - type: archive
-            url: "https://download.gnome.org/sources/gnome-desktop/40/gnome-desktop-40.3.tar.xz"
-            sha256: 53d6469446d7a09b026936769e595352fdf3be5632f346bb01fe57c8b5162ceb
+            url: https://download.gnome.org/sources/gnome-desktop/41/gnome-desktop-41.0.tar.xz
+            sha256: 69cb1d3d9a10700eb66348ef1c0e66a855fc5a97ae62902df97a499da11562d2
 
       - name: python-evdev
         buildsystem: simple
@@ -111,7 +103,7 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://files.pythonhosted.org/packages/4d/ec/bb298d36ed67abd94293253e3e52bdf16732153b887bf08b8d6f269eacef/evdev-1.4.0.tar.gz"
+            url: https://files.pythonhosted.org/packages/4d/ec/bb298d36ed67abd94293253e3e52bdf16732153b887bf08b8d6f269eacef/evdev-1.4.0.tar.gz
             sha256: 8782740eb1a86b187334c07feb5127d3faa0b236e113206dfe3ae8f77fb1aaf1
 
       - name: python-distro
@@ -120,7 +112,7 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://github.com/python-distro/distro/releases/download/v1.6.0/distro-1.6.0.tar.gz"
+            url: https://github.com/python-distro/distro/releases/download/v1.6.0/distro-1.6.0.tar.gz
             sha256: ab965feb8cb02b3ccb7e403603fbd3e0283640d2b4f2d802f636e9eb5fbb4460
 
       - name: python-dbus
@@ -129,7 +121,7 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.18.tar.gz"
+            url: https://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.2.18.tar.gz
             sha256: 92bdd1e68b45596c833307a5ff4b217ee6929a1502f5341bae28fd120acf7260
 
       - name: PyYAML
@@ -138,7 +130,7 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://files.pythonhosted.org/packages/a0/a4/d63f2d7597e1a4b55aa3b4d6c5b029991d3b824b5bd331af8d4ab1ed687d/PyYAML-5.4.1.tar.gz"
+            url: https://files.pythonhosted.org/packages/a0/a4/d63f2d7597e1a4b55aa3b4d6c5b029991d3b824b5bd331af8d4ab1ed687d/PyYAML-5.4.1.tar.gz
             sha256: 607774cbba28732bfa802b54baa7484215f530991055bb562efbed5b2f20a45e
 
       - name: python-requests
@@ -147,7 +139,7 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://files.pythonhosted.org/packages/e7/01/3569e0b535fb2e4a6c384bdbed00c55b9d78b5084e0fb7f4d0bf523d7670/requests-2.26.0.tar.gz"
+            url: https://files.pythonhosted.org/packages/e7/01/3569e0b535fb2e4a6c384bdbed00c55b9d78b5084e0fb7f4d0bf523d7670/requests-2.26.0.tar.gz
             sha256: b8aa58f8cf793ffd8782d3d8cb19e66ef36f7aba4353eec859e74678b01b07a7
         modules:
 
@@ -157,7 +149,7 @@ modules:
               - python3 setup.py install --prefix=/app --root=/
             sources:
               - type: archive
-                url: "https://files.pythonhosted.org/packages/4f/5a/597ef5911cb8919efe4d86206aa8b2658616d676a7088f0825ca08bd7cb8/urllib3-1.26.6.tar.gz"
+                url: https://files.pythonhosted.org/packages/4f/5a/597ef5911cb8919efe4d86206aa8b2658616d676a7088f0825ca08bd7cb8/urllib3-1.26.6.tar.gz
                 sha256: f57b4c16c62fa2760b7e3d97c35b255512fb6b59a259730f36ba32ce9f8e342f
 
           - name: python-chardet
@@ -166,7 +158,7 @@ modules:
               - python3 setup.py install --prefix=/app --root=/
             sources:
               - type: archive
-                url: "https://files.pythonhosted.org/packages/ee/2d/9cdc2b527e127b4c9db64b86647d567985940ac3698eeabc7ffaccb4ea61/chardet-4.0.0.tar.gz"
+                url: https://files.pythonhosted.org/packages/ee/2d/9cdc2b527e127b4c9db64b86647d567985940ac3698eeabc7ffaccb4ea61/chardet-4.0.0.tar.gz
                 sha256: 0d6f53a15db4120f2b08c94f11e7d93d2c911ee118b6b30a04ec3ee8310179fa
 
           - name: python-certifi
@@ -175,7 +167,7 @@ modules:
               - python3 setup.py install --prefix=/app --root=/
             sources:
               - type: archive
-                url: "https://files.pythonhosted.org/packages/6d/78/f8db8d57f520a54f0b8a438319c342c61c22759d8f9a1cd2e2180b5e5ea9/certifi-2021.5.30.tar.gz"
+                url: https://files.pythonhosted.org/packages/6d/78/f8db8d57f520a54f0b8a438319c342c61c22759d8f9a1cd2e2180b5e5ea9/certifi-2021.5.30.tar.gz
                 sha256: 2bbf76fd432960138b3ef6dda3dde0544f27cbf8546c458e60baf371917ba9ee
 
           - name: python-idna
@@ -184,7 +176,7 @@ modules:
               - python3 setup.py install --prefix=/app --root=/
             sources:
               - type: archive
-                url: "https://files.pythonhosted.org/packages/cb/38/4c4d00ddfa48abe616d7e572e02a04273603db446975ab46bbcd36552005/idna-3.2.tar.gz"
+                url: https://files.pythonhosted.org/packages/cb/38/4c4d00ddfa48abe616d7e572e02a04273603db446975ab46bbcd36552005/idna-3.2.tar.gz
                 sha256: 467fbad99067910785144ce333826c71fb0e63a425657295239737f7ecd125f3
 
           - name: python-magic
@@ -193,7 +185,7 @@ modules:
               - python3 setup.py install --prefix=/app --root=/
             sources:
               - type: archive
-                url: "https://files.pythonhosted.org/packages/3a/70/76b185393fecf78f81c12f9dc7b1df814df785f6acb545fc92b016e75a7e/python-magic-0.4.24.tar.gz"
+                url: https://files.pythonhosted.org/packages/3a/70/76b185393fecf78f81c12f9dc7b1df814df785f6acb545fc92b016e75a7e/python-magic-0.4.24.tar.gz
                 sha256: de800df9fb50f8ec5974761054a708af6e4246b03b4bdaee993f948947b0ebcf
 
           - name: python-lxml
@@ -202,7 +194,7 @@ modules:
               - python3 setup.py install --prefix=/app --root=/
             sources:
               - type: archive
-                url: "https://files.pythonhosted.org/packages/e5/21/a2e4517e3d216f0051687eea3d3317557bde68736f038a3b105ac3809247/lxml-4.6.3.tar.gz"
+                url: https://files.pythonhosted.org/packages/e5/21/a2e4517e3d216f0051687eea3d3317557bde68736f038a3b105ac3809247/lxml-4.6.3.tar.gz
                 sha256: 39b78571b3b30645ac77b95f7c69d1bffc4cf8c3b157c435a34da72e78c82468
 
       - name: Pillow
@@ -212,7 +204,7 @@ modules:
           - python3 setup.py install --prefix=/app --root=/
         sources:
           - type: archive
-            url: "https://files.pythonhosted.org/packages/8f/7d/1e9c2d8989c209edfd10f878da1af956059a1caab498e5bc34fa11b83f71/Pillow-8.3.1.tar.gz"
+            url: https://files.pythonhosted.org/packages/8f/7d/1e9c2d8989c209edfd10f878da1af956059a1caab498e5bc34fa11b83f71/Pillow-8.3.1.tar.gz
             sha256: 2cac53839bfc5cece8fdbe7f084d5e3ee61e1303cccc86511d351adcb9e2c792
 
   # Multilib runtime for wine
@@ -220,15 +212,20 @@ modules:
   - name: vkd3d
     sources: &vkd3d_sources
       - type: archive
-        url: "https://dl.winehq.org/vkd3d/source/vkd3d-1.2.tar.xz"
+        url: https://dl.winehq.org/vkd3d/source/vkd3d-1.2.tar.xz
         sha256: b04b030fcbf0f2dacc933c76c74b449bffef1fc1a18d50254ef1ad3e380df96b
+        x-checker-data:
+          type: anitya
+          project-id: 230555
+          stable-only: true
+          url-template: https://dl.winehq.org/vkd3d/source/vkd3d-$version.tar.xz
     modules:
 
       - name: SPIRV-Headers
         buildsystem: cmake-ninja
         sources:
           - type: archive
-            url: "https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/1.5.4.raytracing.fixed.tar.gz"
+            url: https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/1.5.4.raytracing.fixed.tar.gz
             sha256: df2ad2520be4d95a479fa248921065885bbf435a658349a7fc164ad7b26b68c6
 
   - name: vkd3d-32bit
@@ -245,7 +242,7 @@ modules:
       - -DCMAKE_BUILD_TYPE=Release
     sources:
       - type: archive
-        url: "https://github.com/KhronosGroup/Vulkan-Tools/archive/refs/tags/v1.2.162.tar.gz"
+        url: https://github.com/KhronosGroup/Vulkan-Tools/archive/refs/tags/v1.2.162.tar.gz
         sha256: 98a3a00471da65df833b4ffeb1ab29ec1d169d5feab54270cf4cd8f50f82e682
 
   - name: openldap
@@ -258,7 +255,7 @@ modules:
       - /bin
     sources: &openldap_sources
       - type: archive
-        url: "https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.5.6.tgz"
+        url: https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.5.6.tgz
         sha256: 3f21423a9d3bd9774a4494e2d4fbc830ac68d63a87d4c2934eff800954cac11f
 
   - name: openldap-32bit
@@ -275,8 +272,13 @@ modules:
       - --disable-static
     sources: &glu_sources
       - type: archive
-        url: "https://mesa.freedesktop.org/archive/glu/glu-9.0.1.tar.xz"
-        sha256: fb5a4c2dd6ba6d1c21ab7c05129b0769544e1d68e1e3b0ffecb18e73c93055bc
+        url: https://mesa.freedesktop.org/archive/glu/glu-9.0.2.tar.xz
+        sha256: 6e7280ff585c6a1d9dfcdf2fca489251634b3377bfc33c29e4002466a38d02d4
+        x-checker-data:
+          type: anitya
+          project-id: 13518
+          stable-only: true
+          url-template: https://mesa.freedesktop.org/archive/glu/glu-$version.tar.xz
 
   - name: glu-32bit
     build-options:
@@ -295,7 +297,7 @@ modules:
       - udevadm hwdb --update
     sources: &eudev_sources
       - type: archive
-        url: "https://github.com/gentoo/eudev/archive/refs/tags/v3.2.10.tar.gz"
+        url: https://github.com/gentoo/eudev/archive/refs/tags/v3.2.10.tar.gz
         sha256: 6492629da4024d2d21bb1a79d724e013d4152956099a5c63b09c8ee4da7f9b2b
 
   - name: eudev-32bit
@@ -312,7 +314,7 @@ modules:
       - cp -av CL $FLATPAK_DEST/include/
     sources:
       - type: git
-        url: "https://github.com/KhronosGroup/OpenCL-Headers.git"
+        url: https://github.com/KhronosGroup/OpenCL-Headers.git
         commit: 9fac4e9866a961f66bdd72fa2bff50145512f972
 
 
@@ -321,7 +323,7 @@ modules:
       - --enable-ipv6
     sources: &libcap_sources
       - type: archive
-        url: "https://www.tcpdump.org/release/libpcap-1.10.1.tar.gz"
+        url: https://www.tcpdump.org/release/libpcap-1.10.1.tar.gz
         sha256: ed285f4accaf05344f90975757b3dbfe772ba41d1c401c2648b7fa45b711bdd4
 
   - name: libpcap-32bit
@@ -339,7 +341,7 @@ modules:
       - --disable-qvidcap
     sources: &v4l2_sources
       - type: archive
-        url: "https://linuxtv.org/downloads/v4l-utils/v4l-utils-1.20.0.tar.bz2"
+        url: https://linuxtv.org/downloads/v4l-utils/v4l-utils-1.20.0.tar.bz2
         sha256: 956118713f7ccb405c55c7088a6a2490c32d54300dd9a30d8d5008c28d3726f7
 
   - name: v4l2-utils-32bit
@@ -353,7 +355,7 @@ modules:
   - name: libgphoto2
     sources: &libgphoto2_sources
       - type: archive
-        url: "https://github.com/gphoto/libgphoto2/releases/download/v2.5.27/libgphoto2-2.5.27.tar.gz"
+        url: https://github.com/gphoto/libgphoto2/releases/download/v2.5.27/libgphoto2-2.5.27.tar.gz
         sha256: fd48f6f58259ba199e834010aca0af3672ca0223ed0a98ba89ec693a415f242a
       - type: script
         dest-filename: autogen.sh
@@ -370,7 +372,7 @@ modules:
   - name: libcapi20
     sources: &libcapi20_sources
       - type: archive
-        url: "http://deb.debian.org/debian/pool/main/libc/libcapi20-3/libcapi20-3_3.27.orig.tar.bz2"
+        url: http://deb.debian.org/debian/pool/main/libc/libcapi20-3/libcapi20-3_3.27.orig.tar.bz2
         md5: 439620a9221c0222c35fb3e7a3973700
 
   - name: libcapi20-32bit
@@ -392,7 +394,7 @@ modules:
       - /bin
     sources: &gsm_sources
       - type: archive
-        url: "http://www.quut.com/gsm/gsm-1.0.19.tar.gz"
+        url: http://www.quut.com/gsm/gsm-1.0.19.tar.gz
         sha256: 4903652f68a8c04d0041f0d19b1eb713ddcd2aa011c5e595b3b8bca2755270f6
       - type: patch
         path: patches/gsm-makefile.patch
@@ -415,8 +417,13 @@ modules:
       - -DFFMPEG=ON
     sources: &faudio_sources
       - type: archive
-        url: "https://github.com/FNA-XNA/FAudio/archive/refs/tags/21.08.tar.gz"
+        url: https://github.com/FNA-XNA/FAudio/archive/refs/tags/21.08.tar.gz
         sha256: 42a3a295da44721c63f06fcbf5edf8077a42fdb78313b9e1c065afad12df8063
+        x-checker-data:
+          type: anitya
+          project-id: 20663
+          stable-only: true
+          url-template: https://github.com/FNA-XNA/FAudio/archive/refs/tags/$version.tar.gz
 
   - name: FAudio-32bit
     build-options:
@@ -431,7 +438,7 @@ modules:
   - name: libbsd
     sources: &libbsd_sources
       - type: archive
-        url: "https://libbsd.freedesktop.org/releases/libbsd-0.10.0.tar.xz"
+        url: https://libbsd.freedesktop.org/releases/libbsd-0.10.0.tar.xz
         sha256: 34b8adc726883d0e85b3118fa13605e179a62b31ba51f676136ecb2d0bc1a887
 
   - name: libbsd-32bit
@@ -448,7 +455,7 @@ modules:
       - /bin
     sources: &sndio11_sources
       - type: archive
-        url: "http://archive.ubuntu.com/ubuntu/pool/universe/s/sndio/sndio_1.1.0.orig.tar.gz"
+        url: http://archive.ubuntu.com/ubuntu/pool/universe/s/sndio/sndio_1.1.0.orig.tar.gz
         sha256: fcd7f845ff70f38c2898d737450b8aa3e1bb0afb9d147e8429ef22c0b2c2db57
       - type: shell
         commands:
@@ -464,13 +471,12 @@ modules:
     config-opts: *sndio_config_opts
     cleanup: *sndio_cleanup
     sources: *sndio11_sources
-    
   - name: sndio15
     config-opts: *sndio_config_opts
     cleanup: *sndio_cleanup
     sources: &sndio15_sources
       - type: archive
-        url: "http://archive.ubuntu.com/ubuntu/pool/universe/s/sndio/sndio_1.5.0.orig.tar.gz"
+        url: http://archive.ubuntu.com/ubuntu/pool/universe/s/sndio/sndio_1.5.0.orig.tar.gz
         sha256: 12c70044749ad9cb7eaeb26c936816aa6b314fe4be71ef479d12272e4c5ad253
       - type: shell
         commands:
@@ -486,7 +492,6 @@ modules:
     config-opts: *sndio_config_opts
     cleanup: *sndio_cleanup
     sources: *sndio15_sources
-    
 
   - name: gamemode
     buildsystem: meson
@@ -498,8 +503,13 @@ modules:
       - -Dwith-sd-bus-provider=no-daemon
     sources: &gamemode_sources
       - type: archive
-        url: "https://github.com/FeralInteractive/gamemode/releases/download/1.6.1/gamemode-1.6.1.tar.xz"
+        url: https://github.com/FeralInteractive/gamemode/releases/download/1.6.1/gamemode-1.6.1.tar.xz
         sha256: 10c2a3f142eae472f5a09e42616e38c666c05b25ca3e61e562a543bb3fda66c5
+        x-checker-data:
+          type: anitya
+          project-id: 17410
+          stable-only: true
+          url-template: https://github.com/FeralInteractive/gamemode/releases/download/$version/gamemode-$version.tar.xz
 
   - name: gamemode-32bit
     build-options:
@@ -532,7 +542,7 @@ modules:
       - --disable-static
     sources: &libxmu_sources
       - type: archive
-        url: "https://xorg.freedesktop.org/releases/individual/lib/libXmu-1.1.3.tar.bz2"
+        url: https://xorg.freedesktop.org/releases/individual/lib/libXmu-1.1.3.tar.bz2
         sha512: 8c6cc65b22aa031ad870dd92736681a068a0878a425a53dbed909943da1136c4a24034d467cfd3785c3a8d78f66850b69f1ebe1eb24aaf9bc176b1d171a5c762
 
   - name: libxmu-32bit
@@ -549,7 +559,7 @@ modules:
       - --datarootdir=/app/share
     sources:
       - type: archive
-        url: "https://github.com/vcrhonek/hwdata/archive/refs/tags/v0.349.tar.gz"
+        url: https://github.com/vcrhonek/hwdata/archive/refs/tags/v0.349.tar.gz
         sha256: 2591ebf85b36e6d953360a003b2991fc0a0c2c35d3fdbd3133f435098b0af3da
 
   - name: pciutils
@@ -564,7 +574,7 @@ modules:
       - MANDIR=/app/share/man
     sources:
       - type: archive
-        url: "https://mirrors.edge.kernel.org/pub/software/utils/pciutils/pciutils-3.7.0.tar.gz"
+        url: https://mirrors.edge.kernel.org/pub/software/utils/pciutils/pciutils-3.7.0.tar.gz
         sha256: 2432e7a2e12000502d36cf769ab6e5a0cf4931e5050ccaf8b02984b2d3cb0948
 
   - name: usbutils
@@ -573,7 +583,7 @@ modules:
       - --sbindir=/app/bin
     sources:
       - type: archive
-        url: "https://mirrors.edge.kernel.org/pub/linux/utils/usb/usbutils/usbutils-013.tar.xz"
+        url: https://mirrors.edge.kernel.org/pub/linux/utils/usb/usbutils/usbutils-013.tar.xz
         sha256: 9e23494fcc78b7a80ee29a07dd179c95ae2f71509c35728dbbabc2d1cca41338
     modules:
       - shared-modules/libusb/libusb.json
@@ -581,7 +591,7 @@ modules:
   - name: xrandr
     sources:
       - type: archive
-        url: "https://xorg.freedesktop.org/archive/individual/app/xrandr-1.5.1.tar.gz"
+        url: https://xorg.freedesktop.org/archive/individual/app/xrandr-1.5.1.tar.gz
         sha256: 7b99edb7970a1365eaf5bcaf552144e4dfc3ccf510c4abc08569849929fb366e
 
   - name: mesa-demos
@@ -597,7 +607,7 @@ modules:
       - install -D src/xdemos/glxinfo -t /app/bin/
     sources:
       - type: archive
-        url: "https://mesa.freedesktop.org/archive/demos/mesa-demos-8.4.0.tar.bz2"
+        url: https://mesa.freedesktop.org/archive/demos/mesa-demos-8.4.0.tar.bz2
         sha256: 01e99c94a0184e63e796728af89bfac559795fb2a0d6f506fa900455ca5fff7d
     cleanup:
       - /lib/mesa-demos
@@ -620,18 +630,16 @@ modules:
       - DEST_MAN=/app/share/man
     sources:
       - type: archive
-        url: "https://downloads.sourceforge.net/p7zip/p7zip_16.02_src_all.tar.bz2"
-        sha256: 5eb20ac0e2944f6cb9c2d51dd6c4518941c185347d4089ea89087ffdd6e2341f
-      - type: patch
-        path: patches/p7zip/gcc10.patch
+        url: https://github.com/jinfeihan57/p7zip/archive/refs/tags/v17.04.tar.gz
+        sha256: ea029a2e21d2d6ad0a156f6679bd66836204aa78148a4c5e498fe682e77127ef
       - type: shell
         only-arches:
-          - "x86_64"
+          - x86_64
         commands:
           - ln -sf makefile.linux_amd64_asm makefile.machine
       - type: shell
         only-arches:
-          - "i386"
+          - i386
         commands:
           - ln -sf makefile.linux_x86_asm_gcc_4.X makefile.machine
     modules:
@@ -640,22 +648,32 @@ modules:
         buildsystem: cmake-ninja
         sources:
           - type: archive
-            url: "https://github.com/yasm/yasm/archive/v1.3.0.tar.gz"
+            url: https://github.com/yasm/yasm/archive/v1.3.0.tar.gz
             sha256: f708be0b7b8c59bc1dbe7134153cd2f31faeebaa8eec48676c10f972a1f13df3
+            x-checker-data:
+              type: anitya
+              project-id: 5286
+              stable-only: true
+              url-template: https://github.com/yasm/yasm/archive/v$version.tar.gz
         cleanup:
-          - "*"
+          - '*'
 
   - name: psmisc
     sources:
       - type: archive
-        url: "https://downloads.sourceforge.net/psmisc/psmisc-23.4.tar.xz"
+        url: https://downloads.sourceforge.net/psmisc/psmisc-23.4.tar.xz
         sha256: 7f0cceeace2050c525f3ebb35f3ba01d618b8d690620580bdb8cd8269a0c1679
 
   - name: cabextract
     sources:
       - type: archive
-        url: "https://www.cabextract.org.uk/cabextract-1.9.1.tar.gz"
+        url: https://www.cabextract.org.uk/cabextract-1.9.1.tar.gz
         sha256: afc253673c8ef316b4d5c29cc4aa8445844bee14afffbe092ee9469405851ca7
+        x-checker-data:
+          type: anitya
+          project-id: 245
+          stable-only: true
+          url-template: https://www.cabextract.org.uk/cabextract-$version.tar.gz
 
   # Required by some 8/16-bit emulators
 
@@ -668,7 +686,7 @@ modules:
       - -DLIB_SUFFIX=
     sources:
       - type: archive
-        url: "https://github.com/FluidSynth/fluidsynth/archive/v2.1.5.tar.gz"
+        url: https://github.com/FluidSynth/fluidsynth/archive/v2.1.5.tar.gz
         sha256: b539b7c65a650b56f01cd60a4e83c6125c217c5a63c0c214ef6274894a677d00
 
   - name: fluid-soundfont
@@ -677,7 +695,7 @@ modules:
       - install -Dm644 FluidR3_GS.sf2 -t /app/share/sounds/sf2/
     sources:
       - type: archive
-        url: "http://deb.debian.org/debian/pool/main/f/fluid-soundfont/fluid-soundfont_3.1.orig.tar.gz"
+        url: http://deb.debian.org/debian/pool/main/f/fluid-soundfont/fluid-soundfont_3.1.orig.tar.gz
         md5: 189bbdf70221018cbda536984b105dfa
 
   # Required by electron and some proprietary game launchers
@@ -699,7 +717,7 @@ modules:
       - /etc
     sources:
       - type: archive
-        url: "https://download.gnome.org/sources/GConf/3.2/GConf-3.2.6.tar.xz"
+        url: https://download.gnome.org/sources/GConf/3.2/GConf-3.2.6.tar.xz
         sha256: 1912b91803ab09a5eed34d364bf09fe3a2a9c96751fde03a4e0cfa51a04d784c
 
   # Environment setup
@@ -710,9 +728,29 @@ modules:
       - mkdir -p /app/lib/i386-linux-gnu
       - install -Dm644 ld.so.conf -t /app/etc/
       - mkdir -p /app/runners
-      - mkdir -p /app/utils /app/share/ /app/share/vulkan
-      - ln -srv /app/{utils/,}share/vulkan/implicit_layer.d
-      - ln -srv /app/{utils/,}share/vulkan/explicit_layer.d
     sources:
       - type: file
         path: ld.so.conf
+
+  - name: perl
+    sources:
+      - type: archive
+        url: https://www.cpan.org/src/5.0/perl-5.34.0.tar.gz
+        sha256: 551efc818b968b05216024fb0b727ef2ad4c100f8cb6b43fab615fa78ae5be9a
+      - type: script
+        dest-filename: configure
+        commands:
+          - ./Configure -des -Dprefix=/app
+    post-install:
+      - find /app/lib/perl5 -type f -exec chmod u+w {} \;
+
+  - name: kitty
+    no-autogen: true
+    sources:
+      - type: git
+        url: https://github.com/kovidgoyal/kitty
+        tag: v0.22.2
+    no-make-install: true
+    post-install:
+      - cp -r . $FLATPAK_DEST/lib/kitty
+      - ln -s /app/lib/kitty/kitty/launcher/kitty $FLATPAK_DEST/bin/kitty
