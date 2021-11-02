@@ -417,8 +417,8 @@ modules:
       - -DFFMPEG=ON
     sources: &faudio_sources
       - type: archive
-        url: https://github.com/FNA-XNA/FAudio/archive/refs/tags/21.08.tar.gz
-        sha256: 42a3a295da44721c63f06fcbf5edf8077a42fdb78313b9e1c065afad12df8063
+        url: https://github.com/FNA-XNA/FAudio/archive/refs/tags/21.11.tar.gz
+        sha256: 1389100ca132e06455ad7e4e765a045d9821c234f6e388bef6a0c8d610ce36d1
         x-checker-data:
           type: anitya
           project-id: 20663
