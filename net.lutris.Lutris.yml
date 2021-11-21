@@ -87,8 +87,8 @@ modules:
         /app/share/applications/${FLATPAK_ID}.desktop
     sources:
       - type: archive
-        url: https://github.com/lutris/lutris/archive/v0.5.8.4.tar.gz
-        sha256: 32f07d321e582fa9775239ace59e63e9ec8438106472288a95db8de8212f1441
+        url: https://github.com/lutris/lutris/archive/v0.5.9.1.tar.gz
+        sha256: c140ec6ac62b4f9eeaa7065229dfa1c4fb08194bc0fb118c831d894c43914f88
     modules:
       - name: gnome-desktop
         buildsystem: meson
