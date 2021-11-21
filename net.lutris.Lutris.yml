@@ -501,6 +501,8 @@ modules:
       - -Dwith-examples=false
       - -Dwith-util=false
       - -Dwith-sd-bus-provider=no-daemon
+    post-install:
+      - install -Dm0775 -t /app/bin ../data/gamemoderun
     sources: &gamemode_sources
       - type: archive
         url: https://github.com/FeralInteractive/gamemode/releases/download/1.6.1/gamemode-1.6.1.tar.xz
