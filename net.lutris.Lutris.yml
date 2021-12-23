@@ -678,11 +678,11 @@ modules:
           url-template: https://www.cabextract.org.uk/cabextract-$version.tar.gz
 
   - name: zenity
+    buildsystem: meson
     sources:
-      - type: git
-        url: https://github.com/ncruces/zenity
-        tag: v0.7.12
-        commit: fca9f5c3cebf4cffb03a16ff323538cc100a2a99
+      - type: archive
+        url: https://download.gnome.org/sources/zenity/3.41/zenity-3.41.0.tar.xz
+        sha256: 19b676c3510e22badfcc3204062d432ba537402f5e0ae26128c0d90c954037e1
 
   # Required by some 8/16-bit emulators
 
