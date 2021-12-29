@@ -14,9 +14,11 @@ finish-args:
   - --share=network
   - --allow=multiarch
   - --allow=devel
+  - --talk-name=org.freedesktop.Flatpak.*
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.gnome.Mutter.DisplayConfig
   - --filesystem=~/Games:create
+  - --filesystem=/tmp
   - --filesystem=xdg-desktop
   - --filesystem=xdg-documents
   - --filesystem=xdg-pictures
@@ -763,3 +765,21 @@ modules:
     post-install:
       - cp -r . $FLATPAK_DEST/lib/kitty
       - ln -s /app/lib/kitty/kitty/launcher/kitty $FLATPAK_DEST/bin/kitty
+  - name: fusermout
+    config-opts:
+      - MOUNT_FUSE_PATH=/app/bin
+    post-install:
+      - install fusermount-wrapper.sh /app/bin/fusermount
+    sources:
+      - type: archive
+        url: https://github.com/libfuse/libfuse/releases/download/fuse-2.9.9/fuse-2.9.9.tar.gz
+        sha256: d0e69d5d608cc22ff4843791ad097f554dd32540ddc9bed7638cc6fea7c1b4b5
+        x-checker-data:
+          type: anitya
+          project-id: 861
+          url-template: https://github.com/libfuse/libfuse/releases/download/fuse-$version/fuse-$version.tar.gz
+          versions: {<: '3'}
+      - type: patch
+        path: patches/fuse-2.9.2-namespace-conflict-fix.patch
+      - type: file
+        path: patches/fusermount-wrapper.sh
