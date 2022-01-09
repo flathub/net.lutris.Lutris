@@ -16,7 +16,7 @@ ___________________________________________
    ```
 3. Install GNOME Compat and GL32 extensions
    ```sh
-   flatpak install --user flathub org.gnome.Platform.Compat.i386 org.freedesktop.Platform.GL32.default org.freedesktop.Platform.GL.default
+   flatpak install --user flathub-beta org.gnome.Platform.Compat.i386 org.freedesktop.Platform.GL32.default org.freedesktop.Platform.GL.default
    ```
    Make sure that you install the same branches as the ones used by net.lutris.Lutris, usually the latest ones.
    
