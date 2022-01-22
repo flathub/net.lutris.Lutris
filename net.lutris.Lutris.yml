@@ -14,11 +14,10 @@ finish-args:
   - --share=network
   - --allow=multiarch
   - --allow=devel
-  - --talk-name=org.freedesktop.Flatpak.*
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.gnome.Mutter.DisplayConfig
+  - --system-talk-name=org.freedesktop.UDisks2
   - --filesystem=~/Games:create
-  - --filesystem=/tmp
   - --filesystem=xdg-desktop
   - --filesystem=xdg-documents
   - --filesystem=xdg-pictures
