@@ -64,6 +64,8 @@ To enable Gamescope, install
 ```
 flatpak install flathub com.valvesoftware.Steam.Utility.gamescope
 ```
+If Gamescope isn't working disable the Lutris Runtime since wouldn't run with it enabled.
+
 
 ### Clean up
 
