@@ -58,6 +58,15 @@ To enable MangoHud support simply install
 flatpak install flathub org.freedesktop.Platform.VulkanLayer.MangoHud
 ```
 
+### Gamescope
+
+To enable Gamescope, install
+```
+flatpak install flathub com.valvesoftware.Steam.Utility.gamescope
+```
+If Gamescope isn't working disable the Lutris Runtime since wouldn't run with it enabled.
+
+
 ### Clean up
 
 ```sh
@@ -85,3 +94,6 @@ ___________________________________________
    ``` sh
    flatpak override --user --filesystem=/path/to/your/Folder net.lutris.Lutris
    ```
+- Gamescope isn't working
+
+   Disable Lutris Runtime for now since gamescope wouldn't run with it enabled.
