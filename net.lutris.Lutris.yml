@@ -549,66 +549,11 @@ modules:
     modules:
       - shared-modules/glew/glew.json
 
-  - name: p7zip
-    no-autogen: true
-    make-args:
-      - all2
-      - OPTFLAGS=-O2 -g
-      - DEST_HOME=/app
-      - DEST_BIN=/app/bin
-      - DEST_SHARE=/app/lib/p7zip
-      - DEST_MAN=/app/share/man
-    make-install-args:
-      - DEST_HOME=/app
-      - DEST_BIN=/app/bin
-      - DEST_SHARE=/app/lib/p7zip
-      - DEST_MAN=/app/share/man
-    sources:
-      - type: archive
-        url: https://github.com/jinfeihan57/p7zip/archive/refs/tags/v17.04.tar.gz
-        sha256: ea029a2e21d2d6ad0a156f6679bd66836204aa78148a4c5e498fe682e77127ef
-      - type: shell
-        only-arches:
-          - x86_64
-        commands:
-          - ln -sf makefile.linux_amd64_asm makefile.machine
-      - type: shell
-        only-arches:
-          - i386
-        commands:
-          - ln -sf makefile.linux_x86_asm_gcc_4.X makefile.machine
-    modules:
-
-      - name: yasm
-        buildsystem: cmake-ninja
-        sources:
-          - type: archive
-            url: https://github.com/yasm/yasm/archive/v1.3.0.tar.gz
-            sha256: f708be0b7b8c59bc1dbe7134153cd2f31faeebaa8eec48676c10f972a1f13df3
-            x-checker-data:
-              type: anitya
-              project-id: 5286
-              stable-only: true
-              url-template: https://github.com/yasm/yasm/archive/v$version.tar.gz
-        cleanup:
-          - '*'
-
   - name: psmisc
     sources:
       - type: archive
         url: https://downloads.sourceforge.net/psmisc/psmisc-23.4.tar.xz
         sha256: 7f0cceeace2050c525f3ebb35f3ba01d618b8d690620580bdb8cd8269a0c1679
-
-  - name: cabextract
-    sources:
-      - type: archive
-        url: https://www.cabextract.org.uk/cabextract-1.9.1.tar.gz
-        sha256: afc253673c8ef316b4d5c29cc4aa8445844bee14afffbe092ee9469405851ca7
-        x-checker-data:
-          type: anitya
-          project-id: 245
-          stable-only: true
-          url-template: https://www.cabextract.org.uk/cabextract-$version.tar.gz
 
   - name: zenity
     buildsystem: meson
