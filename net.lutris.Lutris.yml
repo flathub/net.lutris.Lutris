@@ -5,6 +5,8 @@ runtime-version: '41'
 command: lutris
 rename-icon: lutris
 copy-icon: true
+base: org.winehq.Wine
+base-version: branch/stable-21.08
 finish-args:
   - --share=ipc
   - --socket=x11
@@ -55,13 +57,6 @@ add-extensions:
     version: stable
     versions: stable;beta;test
     add-ld-path: lib
-    merge-dirs: bin
-    no-autodownload: true
-    autodelete: true
-
-  net.lutris.Lutris.Runner:
-    directory: runners
-    subdirectories: true
     merge-dirs: bin
     no-autodownload: true
     autodelete: true
@@ -218,33 +213,6 @@ modules:
             url: https://files.pythonhosted.org/packages/8f/7d/1e9c2d8989c209edfd10f878da1af956059a1caab498e5bc34fa11b83f71/Pillow-8.3.1.tar.gz
             sha256: 2cac53839bfc5cece8fdbe7f084d5e3ee61e1303cccc86511d351adcb9e2c792
 
-  # Multilib runtime for wine
-
-  - name: vkd3d
-    sources: &vkd3d_sources
-      - type: archive
-        url: https://dl.winehq.org/vkd3d/source/vkd3d-1.2.tar.xz
-        sha256: b04b030fcbf0f2dacc933c76c74b449bffef1fc1a18d50254ef1ad3e380df96b
-        x-checker-data:
-          type: anitya
-          project-id: 230555
-          stable-only: true
-          url-template: https://dl.winehq.org/vkd3d/source/vkd3d-$version.tar.xz
-    modules:
-
-      - name: SPIRV-Headers
-        buildsystem: cmake-ninja
-        sources:
-          - type: archive
-            url: https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/1.5.4.raytracing.fixed.tar.gz
-            sha256: df2ad2520be4d95a479fa248921065885bbf435a658349a7fc164ad7b26b68c6
-
-  - name: vkd3d-32bit
-    build-options:
-      arch:
-        x86_64: *compat_i386_opts
-    sources: *vkd3d_sources
-
   - name: vulkan-tools
     buildsystem: cmake-ninja
     config-opts:
@@ -297,27 +265,6 @@ modules:
         x86_64: *compat_i386_opts
     config-opts: *glu_config_opts
     sources: *glu_sources
-
-
-  - name: eudev
-    cleanup: &eudev_cleanup
-      - /bin
-      - /sbin
-      - /lib*/udev
-    post-install:
-      - udevadm hwdb --update
-    sources: &eudev_sources
-      - type: archive
-        url: https://github.com/gentoo/eudev/archive/refs/tags/v3.2.10.tar.gz
-        sha256: 6492629da4024d2d21bb1a79d724e013d4152956099a5c63b09c8ee4da7f9b2b
-
-  - name: eudev-32bit
-    build-options:
-      arch:
-        x86_64: *compat_i386_opts
-    cleanup: *eudev_cleanup
-    sources: *eudev_sources
-
 
   - name: OpenCL
     buildsystem: simple
@@ -420,29 +367,6 @@ modules:
     no-autogen: true
     cleanup: *gsm_cleanup
     sources: *gsm_sources
-
-
-  - name: FAudio
-    buildsystem: cmake-ninja
-    config-opts: &faudio_config_opts
-      - -DFFMPEG=ON
-    sources: &faudio_sources
-      - type: archive
-        url: https://github.com/FNA-XNA/FAudio/archive/refs/tags/22.02.tar.gz
-        sha256: fc6248fd471c59dc9dc1de706a186064511de666c78a7358861d275c084df9ed
-        x-checker-data:
-          type: anitya
-          project-id: 20663
-          stable-only: true
-          url-template: https://github.com/FNA-XNA/FAudio/archive/refs/tags/$version.tar.gz
-
-  - name: FAudio-32bit
-    build-options:
-      arch:
-        x86_64: *compat_i386_opts
-    buildsystem: cmake-ninja
-    config-opts: *faudio_config_opts
-    sources: *faudio_sources
 
   # Multilib dependencies for native games and runners
 
@@ -598,8 +522,6 @@ modules:
       - type: archive
         url: https://mirrors.edge.kernel.org/pub/linux/utils/usb/usbutils/usbutils-013.tar.xz
         sha256: 9e23494fcc78b7a80ee29a07dd179c95ae2f71509c35728dbbabc2d1cca41338
-    modules:
-      - shared-modules/libusb/libusb.json
 
   - name: xrandr
     sources:
