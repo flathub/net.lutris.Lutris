@@ -6,7 +6,7 @@ command: lutris
 rename-icon: lutris
 copy-icon: true
 base: org.winehq.Wine
-base-version: branch/stable-21.08
+base-version: stable-21.08
 finish-args:
   - --share=ipc
   - --socket=x11
