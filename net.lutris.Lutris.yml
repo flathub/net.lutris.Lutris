@@ -29,16 +29,8 @@ finish-args:
   - --filesystem=xdg-data/Steam:ro
   - --filesystem=~/.var/app/com.valvesoftware.Steam:ro
   - --env=PATH=/app/bin:/app/runners/bin:/app/utils/bin:/usr/bin:/usr/lib/extensions/vulkan/MangoHud/bin/
-add-extensions:
-  org.gnome.Platform.Compat.i386:
-    directory: lib/i386-linux-gnu
-    version: '41'
 
-  org.gnome.Platform.Compat.i386.Debug:
-    directory: lib/debug/lib/i386-linux-gnu
-    version: '41'
-    no-autodownload: true
-
+inherit-extensions:
   org.freedesktop.Platform.GL32:
     directory: lib/i386-linux-gnu/GL
     version: '1.4'
@@ -50,7 +42,7 @@ add-extensions:
     merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d
     download-if: active-gl-driver
     enable-if: active-gl-driver
-    
+
   com.valvesoftware.Steam.Utility:
     subdirectories: true
     directory: utils
@@ -60,6 +52,37 @@ add-extensions:
     merge-dirs: bin
     no-autodownload: true
     autodelete: true
+
+  org.freedesktop.Platform.ffmpeg-full:
+    directory: lib/ffmpeg
+    add-ld-path: .
+    version: '21.08'
+    autodelete: false
+
+  org.winehq.Wine.gecko:
+    directory: share/wine/gecko
+    bundle: true
+
+  org.winehq.Wine.mono:
+    directory: share/wine/mono
+    bundle: true
+
+  org.winehq.Wine.DLLs:
+    directory: dlls
+    subdirectories: true
+    merge-dirs: lib;lib32;
+    version: stable-21.08
+    versions: stable;stable-21.08;
+
+add-extensions:
+  org.gnome.Platform.Compat.i386:
+    directory: lib/i386-linux-gnu
+    version: '41'
+
+  org.gnome.Platform.Compat.i386.Debug:
+    directory: lib/debug/lib/i386-linux-gnu
+    version: '41'
+    no-autodownload: true
 
 sdk-extensions:
   - org.gnome.Sdk.Compat.i386
