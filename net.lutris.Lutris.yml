@@ -48,7 +48,7 @@ add-extensions:
     merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d
     download-if: active-gl-driver
     enable-if: active-gl-driver
-    
+
   com.valvesoftware.Steam.Utility:
     subdirectories: true
     directory: utils
@@ -428,8 +428,8 @@ modules:
       - -DFFMPEG=ON
     sources: &faudio_sources
       - type: archive
-        url: https://github.com/FNA-XNA/FAudio/archive/refs/tags/22.02.tar.gz
-        sha256: fc6248fd471c59dc9dc1de706a186064511de666c78a7358861d275c084df9ed
+        url: https://github.com/FNA-XNA/FAudio/archive/refs/tags/22.03.tar.gz
+        sha256: 91ea309417f6846fc097e06a0b4fb604bf4bdff67455fabc4820cf1dbe0e301e
         x-checker-data:
           type: anitya
           project-id: 20663
