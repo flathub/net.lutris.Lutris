@@ -213,28 +213,6 @@ modules:
         url: https://github.com/KhronosGroup/Vulkan-Tools/archive/refs/tags/v1.2.162.tar.gz
         sha256: 98a3a00471da65df833b4ffeb1ab29ec1d169d5feab54270cf4cd8f50f82e682
 
-  - name: openldap
-    config-opts: &openldap_config_opts
-      - --disable-slapd
-      - --disable-slurpd
-      - --disable-bdb
-      - --disable-hdb
-    cleanup: &openldap_cleanup
-      - /bin
-    sources: &openldap_sources
-      - type: archive
-        url: https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.5.6.tgz
-        sha256: 3f21423a9d3bd9774a4494e2d4fbc830ac68d63a87d4c2934eff800954cac11f
-
-  - name: openldap-32bit
-    build-options:
-      arch:
-        x86_64: *compat_i386_opts
-    config-opts: *openldap_config_opts
-    cleanup: *openldap_cleanup
-    sources: *openldap_sources
-
-
   - name: glu
     config-opts: &glu_config_opts
       - --disable-static
