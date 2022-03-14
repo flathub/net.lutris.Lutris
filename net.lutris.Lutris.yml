@@ -15,6 +15,7 @@ finish-args:
   - --allow=multiarch
   - --allow=devel
   - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.freedesktop.ScreenSaver
   - --talk-name=org.gnome.Mutter.DisplayConfig
   - --filesystem=~/Games:create
   - --filesystem=xdg-desktop
