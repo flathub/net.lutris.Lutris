@@ -478,6 +478,18 @@ modules:
     config-opts: *libxmu_config_opts
     sources: *libxmu_sources
 
+  - name: libcurl-gnutls-hack
+    buildsystem: simple
+    build-commands:
+      - install -d /app/lib
+      - ln -s /usr/lib/x86_64-linux-gnu/libcurl.so.4 /app/lib/libcurl-gnutls.so.4
+
+  - name: libcurl-gnutls-hack-32bit
+    buildsystem: simple
+    build-commands:
+      - install -d /app/lib32
+      - ln -s /usr/lib/i386-linux-gnu/libcurl.so.4 /app/lib32/libcurl-gnutls.so.4
+
   # Standalone utilities
 
   - name: hwdata
@@ -595,6 +607,26 @@ modules:
       - type: archive
         url: https://download.gnome.org/sources/GConf/3.2/GConf-3.2.6.tar.xz
         sha256: 1912b91803ab09a5eed34d364bf09fe3a2a9c96751fde03a4e0cfa51a04d784c
+
+  # Required by ScummVM
+
+  - name: libspeechd
+    config-opts:
+      - --disable-python
+    sources:
+      - type: archive
+        url: https://github.com/brailcom/speechd/releases/download/0.11.1/speech-dispatcher-0.11.1.tar.gz
+        sha256: d1da12ed3dac84f13799b6a2ec39ba2d3ca21a8493f44dc1855bd0ba96c2ddc6
+    modules:
+      - name: dotconf
+        sources:
+          - type: archive
+            url: https://github.com/williamh/dotconf/archive/refs/tags/v1.3.tar.gz
+            sha256: 7f1ecf40de1ad002a065a321582ed34f8c14242309c3547ad59710ae3c805653
+          - type: script
+            commands:
+              - autoreconf -fiv
+            dest-filename: autogen.sh
 
   # Environment setup
 
