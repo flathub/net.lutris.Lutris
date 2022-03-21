@@ -2,7 +2,7 @@ id: net.lutris.Lutris
 sdk: org.gnome.Sdk
 runtime: org.gnome.Platform
 runtime-version: '41'
-command: lutris
+command: lutris-wrapper
 rename-icon: lutris
 copy-icon: true
 base: org.winehq.Wine
@@ -663,3 +663,11 @@ modules:
     post-install:
       - cp -r . $FLATPAK_DEST/lib/kitty
       - ln -s /app/lib/kitty/kitty/launcher/kitty $FLATPAK_DEST/bin/kitty
+
+  - name: lutris_wrapper
+    buildsystem: simple
+    sources:
+      - type: dir
+        path: lutris_wrapper
+    build-commands:
+      - python3 -mpip install . --prefix=/app --no-index --find-links .
