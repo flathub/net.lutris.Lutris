@@ -17,6 +17,7 @@ finish-args:
   - --allow=multiarch
   - --allow=devel
   - --talk-name=org.gnome.Mutter.DisplayConfig
+  - --system-talk-name=org.freedesktop.UDisks2
   - --filesystem=~/Games:create
   - --filesystem=xdg-desktop
   - --filesystem=xdg-documents
