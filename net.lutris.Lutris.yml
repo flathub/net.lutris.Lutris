@@ -450,18 +450,7 @@ modules:
   - shared-modules/libappindicator/libappindicator-gtk3-introspection-12.10.json
 
   # Required by some 8/16-bit emulators
-
-  - name: fluidsynth
-    buildsystem: cmake-ninja
-    config-opts:
-      - -Denable-pulseaudio:BOOL=ON
-      - -Denable-alsa:BOOL=OFF
-      - -Denable-oss:BOOL=OFF
-      - -DLIB_SUFFIX=
-    sources:
-      - type: archive
-        url: https://github.com/FluidSynth/fluidsynth/archive/v2.1.5.tar.gz
-        sha256: b539b7c65a650b56f01cd60a4e83c6125c217c5a63c0c214ef6274894a677d00
+  - shared-modules/linux-audio/fluidsynth2.json
 
   - name: fluid-soundfont
     buildsystem: simple
