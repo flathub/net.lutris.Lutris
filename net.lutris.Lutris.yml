@@ -30,6 +30,8 @@ finish-args:
   - --filesystem=~/.var/app/com.valvesoftware.Steam:ro
   - --env=PATH=/app/bin:/usr/bin:/app/utils/bin:/usr/lib/extensions/vulkan/MangoHud/bin/:/app/jre/bin/
   - --env=GST_PLUGIN_SYSTEM_PATH=/app/lib32/gstreamer-1.0:/app/lib/gstreamer-1.0:/usr/lib/i386-linux-gnu/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/gstreamer-1.0
+  # System tray icon
+  - --talk-name=org.kde.StatusNotifierWatcher
 
 inherit-extensions:
   - org.freedesktop.Platform.GL32
@@ -444,6 +446,8 @@ modules:
       - type: archive
         url: https://download.gnome.org/sources/zenity/3.41/zenity-3.41.0.tar.xz
         sha256: 19b676c3510e22badfcc3204062d432ba537402f5e0ae26128c0d90c954037e1
+
+  - shared-modules/libappindicator/libappindicator-gtk3-introspection-12.10.json
 
   # Required by some 8/16-bit emulators
 
