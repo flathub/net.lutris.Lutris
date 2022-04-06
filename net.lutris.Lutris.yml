@@ -18,15 +18,10 @@ finish-args:
   - --allow=devel
   - --talk-name=org.gnome.Mutter.DisplayConfig
   - --system-talk-name=org.freedesktop.UDisks2
-  - --filesystem=~/Games:create
-  - --filesystem=xdg-desktop
-  - --filesystem=xdg-documents
-  - --filesystem=xdg-pictures
-  - --filesystem=xdg-music
-  - --filesystem=xdg-videos
-  - --filesystem=xdg-download
-  - --persist=.wine
-  - --filesystem=xdg-data/Steam:ro
+  - --filesystem=home
+  - --filesystem=/run/media
+  # For Debian
+  - --filesystem=/media
   - --filesystem=~/.var/app/com.valvesoftware.Steam:ro
   - --env=PATH=/app/bin:/usr/bin:/app/utils/bin:/usr/lib/extensions/vulkan/MangoHud/bin/:/app/jre/bin/
   - --env=GST_PLUGIN_SYSTEM_PATH=/app/lib32/gstreamer-1.0:/app/lib/gstreamer-1.0:/usr/lib/i386-linux-gnu/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/gstreamer-1.0
