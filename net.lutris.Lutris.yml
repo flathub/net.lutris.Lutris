@@ -65,6 +65,7 @@ sdk-extensions:
   - org.gnome.Sdk.Compat.i386
   - org.freedesktop.Sdk.Extension.toolchain-i386
   - org.freedesktop.Sdk.Extension.openjdk11
+  - org.freedesktop.Sdk.Extension.mono6
 
 x-compat-i386-opts: &compat_i386_opts
   prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
@@ -543,6 +544,12 @@ modules:
     buildsystem: simple
     build-commands:
       - /usr/lib/sdk/openjdk11/install.sh
+
+    # Needed for FreeSO
+  - name: mono
+    buildsystem: simple
+    build-commands:
+      - /usr/lib/sdk/mono6/install.sh
 
   - name: lutris
     buildsystem: simple
