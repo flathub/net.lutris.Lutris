@@ -561,6 +561,29 @@ modules:
     build-commands:
       - /usr/lib/sdk/mono6/install.sh
 
+    # Needed for Origin
+  - name: openldap
+    config-opts: &openldap_config_opts
+      - --disable-static
+      - --disable-slapd
+      - --disable-slurpd
+      - --disable-bdb
+      - --disable-hdb
+    cleanup: &openldap_cleanup
+      - /bin
+    sources: &openldap_sources
+      - type: archive
+        url: https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.50.tgz
+        sha256: 5cb57d958bf5c55a678c6a0f06821e0e5504d5a92e6a33240841fbca1db586b8
+
+  - name: openldap-32bit
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    config-opts: *openldap_config_opts
+    cleanup: *openldap_cleanup
+    sources: *openldap_sources
+
   - name: lutris
     buildsystem: simple
     build-commands:
