@@ -1,0 +1,134 @@
+{
+    "name": "python3-modules",
+    "buildsystem": "simple",
+    "build-commands": [
+        "pip3 install --no-build-isolation --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} astroid certifi chardet charset-normalizer dbus-python distro entrypoints evdev idna mccabe pillow pyflakes python-magic pyyaml requests typed-ast typing-extensions urllib3 wrapt"
+    ],
+    "modules": [
+        {
+            "name": "python3-lxml",
+            "buildsystem": "simple",
+            "build-commands": [
+                "pip3 install --no-build-isolation --no-index --ignore-installed --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} lxml"
+            ],
+            "sources": [
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/3b/94/e2b1b3bad91d15526c7e38918795883cee18b93f6785ea8ecf13f8ffa01e/lxml-4.8.0.tar.gz",
+                    "sha256": "f63f62fc60e6228a4ca9abae28228f35e1bd3ce675013d1dfb828688d50c6e23"
+                }
+            ]
+        },
+        {
+            "name": "python3-lazy-object-proxy",
+            "buildsystem": "simple",
+            "build-commands": [
+                "pip3 install --no-build-isolation --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} lazy_object_proxy"
+            ],
+            "sources": [
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/69/b8/b97b53de2c3f62cecf8f79ae64f209714034cb888a3b76a0c8fc10728161/lazy_object_proxy-1.7.1-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+                    "sha256": "7096a5e0c1115ec82641afbdd70451a144558ea5cf564a896294e346eb611be1"
+                }
+            ]
+        }
+    ],
+    "sources": [
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/45/45/365653e2d7cb89856ca3fc70b9e6ec1a4ab7296a1d1f06293f647a508f26/astroid-2.8.6-py3-none-any.whl",
+            "sha256": "cd8326b424c971e7d87678609cf6275d22028afd37d6ac59c16d47f1245882f6"
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/37/45/946c02767aabb873146011e665728b680884cd8fe70dde973c640e45b775/certifi-2021.10.8-py2.py3-none-any.whl",
+            "sha256": "d62a0163eb4c2344ac042ab2bdf75399a71a2d8c7d47eac2e2ee91b9d6339569"
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/19/c7/fa589626997dd07bd87d9269342ccb74b1720384a4d739a1872bd84fbe68/chardet-4.0.0-py2.py3-none-any.whl",
+            "sha256": "f864054d66fd9118f2e67044ac8981a54775ec5b67aed0441892edb553d21da5"
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/06/b3/24afc8868eba069a7f03650ac750a778862dc34941a4bebeb58706715726/charset_normalizer-2.0.12-py3-none-any.whl",
+            "sha256": "6881edbebdb17b39b4eaaa821b438bf6eddffb4468cf344f09f89def34a8b1df"
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/b1/5c/ccfc167485806c1936f7d3ba97db6c448d0089c5746ba105b6eb22dba60e/dbus-python-1.2.18.tar.gz",
+            "sha256": "92bdd1e68b45596c833307a5ff4b217ee6929a1502f5341bae28fd120acf7260"
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/e1/54/d08d1ad53788515392bec14d2d6e8c410bffdc127780a9a4aa8e6854d502/distro-1.7.0-py3-none-any.whl",
+            "sha256": "d596311d707e692c2160c37807f83e3820c5d539d5a83e87cfb6babd8ba3a06b"
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/35/a8/365059bbcd4572cbc41de17fd5b682be5868b218c3c5479071865cab9078/entrypoints-0.4-py3-none-any.whl",
+            "sha256": "f174b5ff827504fd3cd97cc3f8649f3693f51538c7e4bdf3ef002c8429d42f9f"
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/47/f0/650d83c84386d4a79e91e5c826f4ea10315c0708ea784e79c1b67e18bf26/evdev-1.5.0.tar.gz",
+            "sha256": "5b33b174f7c84576e7dd6071e438bf5ad227da95efd4356a39fe4c8355412fe6"
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/04/a2/d918dcd22354d8958fe113e1a3630137e0fc8b44859ade3063982eacd2a4/idna-3.3-py3-none-any.whl",
+            "sha256": "84d9dd047ffa80596e0f246e2eab0b391788b0503584e8945f2368256d2735ff"
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/87/89/479dc97e18549e21354893e4ee4ef36db1d237534982482c3681ee6e7b57/mccabe-0.6.1-py2.py3-none-any.whl",
+            "sha256": "ab8a6258860da4b6677da4bd2fe5dc2c659cff31b3ee4f7f5d64e79735b80d42"
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/03/a3/f61a9a7ff7969cdef2a6e0383a346eb327495d20d25a2de5a088dbb543a6/Pillow-9.0.1.tar.gz",
+            "sha256": "6c8bc8238a7dfdaf7a75f5ec5a663f4173f8c367e5a39f87e720495e1eed75fa"
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/43/fb/38848eb494af7df9aeb2d7673ace8b213313eb7e391691a79dbaeb6a838f/pyflakes-2.4.0-py2.py3-none-any.whl",
+            "sha256": "3bb3a3f256f4b7968c9c788781e4ff07dce46bdf12339dcda61053375426ee2e"
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/01/7a/82517d77bf39caac4c8d717d2153c67b9794a01255a5ee596e46e750ae02/python_magic-0.4.25-py2.py3-none-any.whl",
+            "sha256": "1a2c81e8f395c744536369790bd75094665e9644110a6623bcc3bbea30f03973"
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/36/2b/61d51a2c4f25ef062ae3f74576b01638bebad5e045f747ff12643df63844/PyYAML-6.0.tar.gz",
+            "sha256": "68fb519c14306fec9720a2a5b45bc9f0c8d1b9c72adf45c37baedfcd949c35a2"
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/2d/61/08076519c80041bc0ffa1a8af0cbd3bf3e2b62af10435d269a9d0f40564d/requests-2.27.1-py2.py3-none-any.whl",
+            "sha256": "f22fa1e554c9ddfd16e6e41ac79759e17be9e492b3587efa038054674760e72d"
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/4a/9c/f35b20518e633f4df40e9e47eb17b92ec122be52153ac0d6f28419489cf1/typed_ast-1.5.2.tar.gz",
+            "sha256": "525a2d4088e70a9f75b08b3f87a51acc9cde640e19cc523c7e41aa355564ae27"
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/45/6b/44f7f8f1e110027cf88956b59f2fad776cca7e1704396d043f89effd3a0e/typing_extensions-4.1.1-py3-none-any.whl",
+            "sha256": "21c85e0fe4b9a155d0799430b0ad741cdce7e359660ccbd8b530613e8df88ce2"
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/ec/03/062e6444ce4baf1eac17a6a0ebfe36bb1ad05e1df0e20b110de59c278498/urllib3-1.26.9-py2.py3-none-any.whl",
+            "sha256": "44ece4d53fb1706f667c9bd1c648f5469a2ec925fcf3a776667042d645472c14"
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/eb/f6/d81ccf43ac2a3c80ddb6647653ac8b53ce2d65796029369923be06b815b8/wrapt-1.13.3.tar.gz",
+            "sha256": "1fea9cd438686e6682271d36f3481a9f3636195578bab9ca3382e2f5f01fc185"
+        }
+    ]
+}
