@@ -80,7 +80,7 @@ cleanup-commands:
   - python3 -m compileall /app/lib
   - mkdir -p /app/utils
 modules:
-
+  - qt5-15.yaml
   - name: vulkan-tools
     buildsystem: cmake-ninja
     config-opts:
