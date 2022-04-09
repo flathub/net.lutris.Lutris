@@ -1,0 +1,26 @@
+From acaabc9108dfe75530960cf8e3ec4f3602cd82e0 Mon Sep 17 00:00:00 2001
+From: Jan Grulich <jgrulich@redhat.com>
+Date: Mon, 08 Mar 2021 12:29:21 +0100
+Subject: [PATCH] FileChooser portal: send window id in hex
+
+We send window id in decimal, however, it is expected to be send in hex.
+This causes a mismatch and makes portal dialog to show in background.
+
+Pick-to: 5.15 6.0 6.1
+Change-Id: Ibd77199bbb4a2ad4782a0457ddc5506c6b5608fe
+Reviewed-by: Thiago Macieira <thiago.macieira@intel.com>
+---
+
+diff --git a/src/plugins/platformthemes/xdgdesktopportal/qxdgdesktopportalfiledialog.cpp b/src/plugins/platformthemes/xdgdesktopportal/qxdgdesktopportalfiledialog.cpp
+index ec153f6..85bdd1a 100644
+--- a/src/plugins/platformthemes/xdgdesktopportal/qxdgdesktopportalfiledialog.cpp
++++ b/src/plugins/platformthemes/xdgdesktopportal/qxdgdesktopportalfiledialog.cpp
+@@ -185,7 +185,7 @@
+                                                           QLatin1String("/org/freedesktop/portal/desktop"),
+                                                           QLatin1String("org.freedesktop.portal.FileChooser"),
+                                                           d->saveFile ? QLatin1String("SaveFile") : QLatin1String("OpenFile"));
+-    QString parentWindowId = QLatin1String("x11:") + QString::number(d->winId);
++    QString parentWindowId = QLatin1String("x11:") + QString::number(d->winId, 16);
+ 
+     QVariantMap options;
+     if (!d->acceptLabel.isEmpty())

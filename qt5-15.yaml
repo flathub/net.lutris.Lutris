@@ -154,14 +154,14 @@ sources:
    # HEAD as of 14/03/2022
    commit: e894b8945c607b4c188a178ae0554139f877a061
  - type: patch
-   path: patch/qtbase-avoid-hardcoding-kernel-version.patch
+   path: patches/qtbase-avoid-hardcoding-kernel-version.patch
  - type: patch
-   path: patch/qtbase-use-wayland-on-gnome.patch
+   path: patches/qtbase-use-wayland-on-gnome.patch
  # TODO: Temporary fix for https://github.com/flatpak/flatpak/issues/3397.
  - type: patch
-   path: patch/qtbase-revert-qstandardpaths-dont-change-permissions-on-xdg-runtime-dir.patch
+   path: patches/qtbase-revert-qstandardpaths-dont-change-permissions-on-xdg-runtime-dir.patch
  - type: patch
-   path: patch/qtbase-filechooser-portal-send-window-id-in-hex.patch
+   path: patches/qtbase-filechooser-portal-send-window-id-in-hex.patch
  - type: shell
    commands:
      - mv configure configure.qt
