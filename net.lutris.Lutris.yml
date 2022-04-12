@@ -18,15 +18,10 @@ finish-args:
   - --allow=devel
   - --talk-name=org.gnome.Mutter.DisplayConfig
   - --system-talk-name=org.freedesktop.UDisks2
-  - --filesystem=~/Games:create
-  - --filesystem=xdg-desktop
-  - --filesystem=xdg-documents
-  - --filesystem=xdg-pictures
-  - --filesystem=xdg-music
-  - --filesystem=xdg-videos
-  - --filesystem=xdg-download
-  - --persist=.wine
-  - --filesystem=xdg-data/Steam:ro
+  - --filesystem=home
+  - --filesystem=/run/media
+  # For Debian
+  - --filesystem=/media
   - --filesystem=~/.var/app/com.valvesoftware.Steam:ro
   - --env=PATH=/app/bin:/usr/bin:/app/utils/bin:/usr/lib/extensions/vulkan/MangoHud/bin/:/app/jre/bin/
   - --env=GST_PLUGIN_SYSTEM_PATH=/app/lib32/gstreamer-1.0:/app/lib/gstreamer-1.0:/usr/lib/i386-linux-gnu/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/gstreamer-1.0
@@ -65,6 +60,7 @@ sdk-extensions:
   - org.gnome.Sdk.Compat.i386
   - org.freedesktop.Sdk.Extension.toolchain-i386
   - org.freedesktop.Sdk.Extension.openjdk11
+  - org.freedesktop.Sdk.Extension.mono6
 
 x-compat-i386-opts: &compat_i386_opts
   prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
@@ -538,6 +534,21 @@ modules:
       - cp -r . $FLATPAK_DEST/lib/kitty
       - ln -s /app/lib/kitty/kitty/launcher/kitty $FLATPAK_DEST/bin/kitty
 
+  # Needed by Quake 3
+  - name: sdl12-compat
+    buildsystem: cmake-ninja
+    sources: &sdl12_compat_sources
+      - type: archive
+        url: https://github.com/libsdl-org/sdl12-compat/archive/refs/tags/release-1.2.52.tar.gz
+        sha256: 5bd7942703575554670a8767ae030f7921a0ac3c5e2fd173a537b7c7a8599014
+
+  - name: sdl12-compat-32bit
+    buildsystem: cmake-ninja
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    sources: *sdl12_compat_sources
+
     # Needed for minecraft
   - name: java11
     buildsystem: simple
@@ -570,6 +581,11 @@ modules:
             url: https://github.com/munt/munt/archive/libmt32emu_2_5_3.tar.gz
             sha256: 062d110bbdd7253d01ef291f57e89efc3ee35fd087587458381f054bac49a8f5
 
+    # Needed for FreeSO
+  - name: mono
+    buildsystem: simple
+    build-commands:
+      - /usr/lib/sdk/mono6/install.sh
 
   - name: lutris
     buildsystem: simple
