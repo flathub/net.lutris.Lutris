@@ -620,7 +620,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/lutris/lutris.git
-        commit: 09371fe553ef809a760506ff60bb543b8e9df803
+        commit: d2e1715839f2334b75817904cdf79593c5e0b722
     modules:
       - name: gnome-desktop
         buildsystem: meson
