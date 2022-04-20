@@ -93,21 +93,11 @@ modules:
     - '*.prl'
     - '*.la'
     - '*.a'
-    build-options:
-    arch:
-      x86_64:
-        config-opts:
-          - -reduce-relocations
-          #- -force-debug-info
-      aarch64:
-        config-opts:
-          - -no-reduce-relocations
-          - -optimize-size
-          - -opengl es2
     post-install:
     - strip ${FLATPAK_DEST}/lib/*.so.5.*
     - strip ${FLATPAK_DEST}/lib/plugins/*/*.so
     config-opts:
+    - -reduce-relocations
     - -confirm-license
     - -opensource
     - -shared
