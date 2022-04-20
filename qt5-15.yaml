@@ -96,15 +96,6 @@ modules:
         url: https://invent.kde.org/qt/qt/qtquickcontrols.git
         # HEAD as of 14/03/2022
         commit: d054de15b3c9ead0f96655ddfb1a6381ed7a0e2b
-  - name: qtdeclarative
-    buildsystem: qmake
-    cleanup:
-      - /app/bin
-    sources:
-      - type: git
-        url: https://invent.kde.org/qt/qt/qtdeclarative.git
-        # HEAD as of 14/03/2022
-        commit: 4bb06cfba94bcc9ddf30d968a227d00479d475b7
   - name: qtx11extras
     buildsystem: qmake
     cleanup:
