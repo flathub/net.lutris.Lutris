@@ -1,82 +1,5 @@
 name: qt5-15
 modules:
-  - name: qtwayland
-    buildsystem: qmake
-    cleanup:
-      - /app/bin
-    sources:
-      - type: git
-        url: https://invent.kde.org/qt/qt/qtwayland.git
-        # HEAD as of 14/03/2022
-        commit: f4dd0560032c101fe9fd140ccc2397f5c0184146
-  - name: qtquickcontrols
-    buildsystem: qmake
-    cleanup:
-      - /app/bin
-    sources:
-      - type: git
-        url: https://invent.kde.org/qt/qt/qtquickcontrols.git
-        # HEAD as of 14/03/2022
-        commit: d054de15b3c9ead0f96655ddfb1a6381ed7a0e2b
-  - name: qtdeclarative
-    buildsystem: qmake
-    cleanup:
-      - /app/bin
-    sources:
-      - type: git
-        url: https://invent.kde.org/qt/qt/qtdeclarative.git
-        # HEAD as of 14/03/2022
-        commit: 4bb06cfba94bcc9ddf30d968a227d00479d475b7
-  - name: qtx11extras
-    buildsystem: qmake
-    cleanup:
-      - /app/bin
-    sources:
-      - type: git
-        url: https://invent.kde.org/qt/qt/qtx11extras.git
-        # HEAD as of 14/03/2022
-        commit: f628d7a60e45d90a439cb0a393a6229ac6892be5
-  - name: qt5-qttools
-    buildsystem: qmake
-    cleanup:
-      - /app/bin
-      - /include
-      - /lib
-      - /phrasebooks
-      - '*.prl'
-      - '*.la'
-      - '*.a'
-    cleanup-platform:
-      - /mkspecs
-      - /app/bin/assistant
-      - /app/bin/qhelpgenerator
-      - /app/bin/qcollectiongenerator
-      - /app/bin/qhelpconverter
-      - /app/bin/pixeltool
-      - /app/bin/designer
-      - /app/bin/lrelease
-      - /app/bin/lupdate
-      - /app/bin/lconvert
-      - /app/bin/linguist
-      - /app/bin/qdoc
-      - /app/bin/qtattributionsscanner
-      - /app/bin/qtplugininfo
-      - /app/bin/qtdiag
-      - /app/bin/qdbusviewer
-    sources:
-      - type: git
-        url: https://invent.kde.org/qt/qt/qttools.git
-        # HEAD as of 14/03/2022
-        commit: 36831ae742619e13db32ee6048d851bddee28a74
-  - name: qt3d
-    buildsystem: qmake
-    cleanup:
-      - /app/bin
-    sources:
-      - type: git
-        url: https://invent.kde.org/qt/qt/qt3d.git
-        # HEAD as of 14/03/2022
-        commit: cd8f66a15ed63ea80ca66ebe30f1a3fe75fb29eb
   - name: qt5-qtbase
     buildsystem: autotools
     cleanup:
@@ -155,3 +78,80 @@ modules:
         - processed=`sed -e 's/--/-/g ; s/=/ /g' <<< $@`
         - ./configure.qt $processed
       dest-filename: configure
+  - name: qtwayland
+    buildsystem: qmake
+    cleanup:
+      - /app/bin
+    sources:
+      - type: git
+        url: https://invent.kde.org/qt/qt/qtwayland.git
+        # HEAD as of 14/03/2022
+        commit: f4dd0560032c101fe9fd140ccc2397f5c0184146
+  - name: qtquickcontrols
+    buildsystem: qmake
+    cleanup:
+      - /app/bin
+    sources:
+      - type: git
+        url: https://invent.kde.org/qt/qt/qtquickcontrols.git
+        # HEAD as of 14/03/2022
+        commit: d054de15b3c9ead0f96655ddfb1a6381ed7a0e2b
+  - name: qtdeclarative
+    buildsystem: qmake
+    cleanup:
+      - /app/bin
+    sources:
+      - type: git
+        url: https://invent.kde.org/qt/qt/qtdeclarative.git
+        # HEAD as of 14/03/2022
+        commit: 4bb06cfba94bcc9ddf30d968a227d00479d475b7
+  - name: qtx11extras
+    buildsystem: qmake
+    cleanup:
+      - /app/bin
+    sources:
+      - type: git
+        url: https://invent.kde.org/qt/qt/qtx11extras.git
+        # HEAD as of 14/03/2022
+        commit: f628d7a60e45d90a439cb0a393a6229ac6892be5
+  - name: qt5-qttools
+    buildsystem: qmake
+    cleanup:
+      - /app/bin
+      - /include
+      - /lib
+      - /phrasebooks
+      - '*.prl'
+      - '*.la'
+      - '*.a'
+    cleanup-platform:
+      - /mkspecs
+      - /app/bin/assistant
+      - /app/bin/qhelpgenerator
+      - /app/bin/qcollectiongenerator
+      - /app/bin/qhelpconverter
+      - /app/bin/pixeltool
+      - /app/bin/designer
+      - /app/bin/lrelease
+      - /app/bin/lupdate
+      - /app/bin/lconvert
+      - /app/bin/linguist
+      - /app/bin/qdoc
+      - /app/bin/qtattributionsscanner
+      - /app/bin/qtplugininfo
+      - /app/bin/qtdiag
+      - /app/bin/qdbusviewer
+    sources:
+      - type: git
+        url: https://invent.kde.org/qt/qt/qttools.git
+        # HEAD as of 14/03/2022
+        commit: 36831ae742619e13db32ee6048d851bddee28a74
+  - name: qt3d
+    buildsystem: qmake
+    cleanup:
+      - /app/bin
+    sources:
+      - type: git
+        url: https://invent.kde.org/qt/qt/qt3d.git
+        # HEAD as of 14/03/2022
+        commit: cd8f66a15ed63ea80ca66ebe30f1a3fe75fb29eb
