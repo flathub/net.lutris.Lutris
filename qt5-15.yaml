@@ -3,7 +3,7 @@ modules:
   - name: qtwayland
     buildsystem: qmake
     cleanup:
-      - /bin
+      - /app/bin
     sources:
       - type: git
         url: https://invent.kde.org/qt/qt/qtwayland.git
@@ -12,7 +12,7 @@ modules:
   - name: qtquickcontrols
     buildsystem: qmake
     cleanup:
-      - /bin
+      - /app/bin
     sources:
       - type: git
         url: https://invent.kde.org/qt/qt/qtquickcontrols.git
@@ -21,7 +21,7 @@ modules:
   - name: qtdeclarative
     buildsystem: qmake
     cleanup:
-      - /bin
+      - /app/bin
     sources:
       - type: git
         url: https://invent.kde.org/qt/qt/qtdeclarative.git
@@ -30,7 +30,7 @@ modules:
   - name: qtx11extras
     buildsystem: qmake
     cleanup:
-      - /bin
+      - /app/bin
     sources:
       - type: git
         url: https://invent.kde.org/qt/qt/qtx11extras.git
@@ -39,7 +39,7 @@ modules:
   - name: qt5-qttools
     buildsystem: qmake
     cleanup:
-      - /bin
+      - /app/bin
       - /include
       - /lib
       - /phrasebooks
@@ -48,21 +48,21 @@ modules:
       - '*.a'
     cleanup-platform:
       - /mkspecs
-      - /bin/assistant
-      - /bin/qhelpgenerator
-      - /bin/qcollectiongenerator
-      - /bin/qhelpconverter
-      - /bin/pixeltool
-      - /bin/designer
-      - /bin/lrelease
-      - /bin/lupdate
-      - /bin/lconvert
-      - /bin/linguist
-      - /bin/qdoc
-      - /bin/qtattributionsscanner
-      - /bin/qtplugininfo
-      - /bin/qtdiag
-      - /bin/qdbusviewer
+      - /app/bin/assistant
+      - /app/bin/qhelpgenerator
+      - /app/bin/qcollectiongenerator
+      - /app/bin/qhelpconverter
+      - /app/bin/pixeltool
+      - /app/bin/designer
+      - /app/bin/lrelease
+      - /app/bin/lupdate
+      - /app/bin/lconvert
+      - /app/bin/linguist
+      - /app/bin/qdoc
+      - /app/bin/qtattributionsscanner
+      - /app/bin/qtplugininfo
+      - /app/bin/qtdiag
+      - /app/bin/qdbusviewer
     sources:
       - type: git
         url: https://invent.kde.org/qt/qt/qttools.git
@@ -71,7 +71,7 @@ modules:
   - name: qt3d
     buildsystem: qmake
     cleanup:
-      - /bin
+      - /app/bin
     sources:
       - type: git
         url: https://invent.kde.org/qt/qt/qt3d.git
@@ -80,7 +80,7 @@ modules:
   - name: qt5-qtbase
     buildsystem: autotools
     cleanup:
-    - /bin
+    - /app/bin
     - /include
     - /doc
     - /lib/cmake
