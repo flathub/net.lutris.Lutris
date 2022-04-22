@@ -81,6 +81,7 @@ cleanup-commands:
   - mkdir -p /app/utils
 modules:
   - modules/qt5-15.yaml
+  - modules/libbz2-1.0.8.json
   - name: vulkan-tools
     buildsystem: cmake-ninja
     config-opts:
