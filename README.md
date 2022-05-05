@@ -58,16 +58,6 @@ To enable MangoHud support simply install
 flatpak install flathub org.freedesktop.Platform.VulkanLayer.MangoHud
 ```
 
-### Clean up
-
-```sh
-flatpak uninstall --user net.lutris.Lutris
-rm -rf ~/.var/app/net.lutris.Lutris .flatpak-builder
-flatpak remote-delete lutris
-```
-
-___________________________________________
-
 ## Known issues
 
 - [32-bit extensions aren't installed automatically](https://github.com/flathub/net.lutris.Lutris/issues/53)
