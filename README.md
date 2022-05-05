@@ -19,7 +19,7 @@ ___________________________________________
    flatpak install --user flathub org.gnome.Platform.Compat.i386 org.freedesktop.Platform.GL32.default org.freedesktop.Platform.GL.default
    ```
    Make sure that you install the same branches as the ones used by net.lutris.Lutris, usually the latest ones.
-   
+
    **DO NOT** confuse `org.gnome.Platform.Compat.i386` with `org.freedesktop.Platform.Compat.i386`.
 
 ## Running
@@ -58,15 +58,6 @@ To enable MangoHud support simply install
 flatpak install flathub org.freedesktop.Platform.VulkanLayer.MangoHud
 ```
 
-### Gamescope
-
-To enable Gamescope, install
-```
-flatpak install flathub com.valvesoftware.Steam.Utility.gamescope
-```
-If Gamescope isn't working disable the Lutris Runtime since wouldn't run with it enabled.
-
-
 ### Clean up
 
 ```sh
@@ -79,7 +70,7 @@ ___________________________________________
 
 ## Known issues
 
-- [32-bit extensions aren't installed automatically](https://github.com/flathub/net.lutris.Lutris/issues/53) 
+- [32-bit extensions aren't installed automatically](https://github.com/flathub/net.lutris.Lutris/issues/53)
 - [Destination Directory in ~/Games Cannot Be Found](https://github.com/flathub/net.lutris.Lutris/issues/89)
 
    Both of these issues are solved by installing the version of
@@ -94,6 +85,3 @@ ___________________________________________
    ``` sh
    flatpak override --user --filesystem=/path/to/your/Folder net.lutris.Lutris
    ```
-- Gamescope isn't working
-
-   Disable Lutris Runtime for now since gamescope wouldn't run with it enabled.
