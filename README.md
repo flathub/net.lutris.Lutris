@@ -1,8 +1,8 @@
 # Lutris on Flatpak
 
-[Lutris](https://lutris.net) is an Open Source gaming platform for Linux. It installs and launches games so you can start playing without the hassle of setting up your games. This repository allows installing Lutris through [Flatpak](https://flatpak.org).
-
-___________________________________________
+[Lutris](https://lutris.net) is a video game preservation project.
+It installs and launches games so you can start playing without the hassle of setting up your games.
+This repository allows installing Lutris through [Flatpak](https://flatpak.org).
 
 ## Installation
 1. Add Flathub Beta remote
@@ -10,11 +10,8 @@ ___________________________________________
    flatpak remote-add --user flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
    flatpak update --appstream
    ```
-2. Install Lutris Beta
-   ```sh
-   flatpak install --user flathub-beta net.lutris.Lutris//beta
-   ```
-3. Install GNOME Compat and GL32 extensions
+
+2. Install GNOME Compat and GL32 extensions
    ```sh
    flatpak install --user flathub org.gnome.Platform.Compat.i386 org.freedesktop.Platform.GL32.default org.freedesktop.Platform.GL.default
    ```
@@ -22,12 +19,16 @@ ___________________________________________
 
    **DO NOT** confuse `org.gnome.Platform.Compat.i386` with `org.freedesktop.Platform.Compat.i386`.
 
+3. Install Lutris
+   ```sh
+   flatpak install --user flathub-beta net.lutris.Lutris
+   ```
+
 ## Running
 Launch Lutris Beta from your desktop menu, or via command line:
 ```
-flatpak run net.lutris.Lutris//beta
+flatpak run net.lutris.Lutris
 ```
-___________________________________________
 
 ## Building
 
@@ -52,7 +53,7 @@ To compile Lutris as a Flatpak, you'll need both [Flatpak](https://flatpak.org/)
 
 ### MangoHud
 
-To enable MangoHud support simply install
+To enable MangoHud support install
 
 ```
 flatpak install flathub org.freedesktop.Platform.VulkanLayer.MangoHud
