@@ -7,13 +7,13 @@ This repository allows installing Lutris through [Flatpak](https://flatpak.org).
 ## Installation
 1. Add Flathub Beta remote
    ```sh
-   flatpak remote-add --user flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
+   flatpak remote-add flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
    flatpak update --appstream
    ```
 
 2. Install GNOME Compat and GL32 extensions
    ```sh
-   flatpak install --user flathub org.gnome.Platform.Compat.i386 org.freedesktop.Platform.GL32.default org.freedesktop.Platform.GL.default
+   flatpak install flathub org.gnome.Platform.Compat.i386 org.freedesktop.Platform.GL32.default org.freedesktop.Platform.GL.default
    ```
    Make sure that you install the same branches as the ones used by net.lutris.Lutris, usually the latest ones.
 
@@ -21,7 +21,7 @@ This repository allows installing Lutris through [Flatpak](https://flatpak.org).
 
 3. Install Lutris
    ```sh
-   flatpak install --user flathub-beta net.lutris.Lutris
+   flatpak install flathub-beta net.lutris.Lutris
    ```
 
 ## Running
@@ -43,12 +43,12 @@ To compile Lutris as a Flatpak, you'll need both [Flatpak](https://flatpak.org/)
 3. Add flathub-beta remote (same as in "Installation" section)
 4. Compile the flatpak
    ```sh
-   flatpak-builder --repo=lutris --force-clean --install-deps-from=flathub-beta  --user build-dir net.lutris.Lutris.yml
+   flatpak-builder --repo=lutris --force-clean --install-deps-from=flathub-beta build-dir net.lutris.Lutris.yml
    ```
 3. Add the local repo and install the flatpak
    ```sh
-   flatpak remote-add --user lutris lutris --no-gpg-verify
-   flatpak install --user lutris net.lutris.Lutris
+   flatpak remote-add lutris lutris --no-gpg-verify
+   flatpak install lutris net.lutris.Lutris
    ```
 
 ### MangoHud
@@ -66,13 +66,13 @@ flatpak install flathub org.freedesktop.Platform.VulkanLayer.MangoHud
 
    Both of these issues are solved by installing the version of
    ```sh
-   flatpak install --user flathub org.gnome.Platform.Compat.i386
+   flatpak install flathub org.gnome.Platform.Compat.i386
    ```
-   which corresponds to the GNOME runtime used by net.lutris.Lutris. If net.lutris.Lutris was installed without the `--user` flag, consider not using it for the extension.
+   which corresponds to the GNOME runtime used by net.lutris.Lutris.
 - Lutris cannot detect my custom Games folder
    Related issue: [#79](https://github.com/flathub/net.lutris.Lutris/issues/79)
 
-   Add the adequate filesystem override, and consider if the `--user` flag should be used
+   Add the adequate filesystem override
    ``` sh
-   flatpak override --user --filesystem=/path/to/your/Folder net.lutris.Lutris
+   flatpak override --filesystem=/path/to/your/Folder net.lutris.Lutris
    ```
