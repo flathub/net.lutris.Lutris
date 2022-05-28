@@ -82,6 +82,7 @@ cleanup-commands:
 modules:
   - modules/qt5-15.yaml
   - modules/libbz2-1.0.8.json
+  - shared-modules/libcanberra/libcanberra.json
   - name: vulkan-tools
     buildsystem: cmake-ninja
     config-opts:
