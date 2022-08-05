@@ -289,8 +289,8 @@ modules:
       - install -Dm0775 -t /app/bin ../data/gamemoderun
     sources: &gamemode_sources
       - type: archive
-        url: https://github.com/FeralInteractive/gamemode/releases/download/1.6.1/gamemode-1.6.1.tar.xz
-        sha256: 10c2a3f142eae472f5a09e42616e38c666c05b25ca3e61e562a543bb3fda66c5
+        url: https://github.com/FeralInteractive/gamemode/releases/download/1.7/gamemode-1.7.tar.xz
+        sha256: c1860f76f1d4c0d6e3965e52de21c824f24791049946da728da50f0c63748389
         x-checker-data:
           type: anitya
           project-id: 17410
@@ -340,7 +340,7 @@ modules:
 
   - name: libjpeg # with libjpeg.so.8
     buildsystem: cmake-ninja
-    config-opts: &libjpeg_config_opts
+    config-opts:
       - -DCMAKE_SKIP_RPATH:BOOL=YES
       - -DENABLE_STATIC:BOOL=NO
       - -DWITH_JPEG8:BOOL=YES
