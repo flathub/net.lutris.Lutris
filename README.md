@@ -5,27 +5,13 @@ It installs and launches games so you can start playing without the hassle of se
 This repository allows installing Lutris through [Flatpak](https://flatpak.org).
 
 ## Installation
-1. Add Flathub Beta remote
-   ```sh
-   flatpak remote-add flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
-   flatpak update --appstream
-   ```
 
-2. Install GNOME Compat and GL32 extensions
    ```sh
-   flatpak install flathub org.gnome.Platform.Compat.i386 org.freedesktop.Platform.GL32.default org.freedesktop.Platform.GL.default
-   ```
-   Make sure that you install the same branches as the ones used by net.lutris.Lutris, usually the latest ones.
-
-   **DO NOT** confuse `org.gnome.Platform.Compat.i386` with `org.freedesktop.Platform.Compat.i386`.
-
-3. Install Lutris
-   ```sh
-   flatpak install flathub-beta net.lutris.Lutris
+   flatpak install flathub net.lutris.Lutris
    ```
 
 ## Running
-Launch Lutris Beta from your desktop menu, or via command line:
+Launch Lutris from your desktop menu, or via command line:
 ```
 flatpak run net.lutris.Lutris
 ```
@@ -43,7 +29,7 @@ To compile Lutris as a Flatpak, you'll need both [Flatpak](https://flatpak.org/)
 3. Add flathub-beta remote (same as in "Installation" section)
 4. Compile the flatpak
    ```sh
-   flatpak-builder --repo=lutris --force-clean --install-deps-from=flathub-beta build-dir net.lutris.Lutris.yml
+   flatpak-builder --repo=lutris --force-clean --install-deps-from=flathub build-dir net.lutris.Lutris.yml
    ```
 3. Add the local repo and install the flatpak
    ```sh
@@ -61,14 +47,6 @@ flatpak install flathub org.freedesktop.Platform.VulkanLayer.MangoHud
 
 ## Known issues
 
-- [32-bit extensions aren't installed automatically](https://github.com/flathub/net.lutris.Lutris/issues/53)
-- [Destination Directory in ~/Games Cannot Be Found](https://github.com/flathub/net.lutris.Lutris/issues/89)
-
-   Both of these issues are solved by installing the version of
-   ```sh
-   flatpak install flathub org.gnome.Platform.Compat.i386
-   ```
-   which corresponds to the GNOME runtime used by net.lutris.Lutris.
 - Lutris cannot detect my custom Games folder
    Related issue: [#79](https://github.com/flathub/net.lutris.Lutris/issues/79)
 
