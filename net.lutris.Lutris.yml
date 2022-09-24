@@ -1,12 +1,12 @@
 id: net.lutris.Lutris
 sdk: org.gnome.Sdk
 runtime: org.gnome.Platform
-runtime-version: '42'
+runtime-version: '43'
 command: lutris-wrapper
 rename-icon: lutris
 copy-icon: true
 base: org.winehq.Wine
-base-version: stable-21.08
+base-version: stable-22.08
 finish-args:
   - --share=ipc
   - --socket=x11
@@ -43,11 +43,11 @@ inherit-extensions:
 add-extensions:
   org.gnome.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: '42'
+    version: '43'
 
   org.gnome.Platform.Compat.i386.Debug:
     directory: lib/debug/lib/i386-linux-gnu
-    version: '42'
+    version: '43'
     no-autodownload: true
 
   com.valvesoftware.Steam.Utility:
@@ -735,8 +735,8 @@ modules:
         buildsystem: meson
         sources:
           - type: archive
-            url: https://download.gnome.org/sources/gnome-desktop/42/gnome-desktop-42.0.tar.xz
-            sha256: f3caa293a5e86f6ccad18f817273db1c67061e680d79d839aa8a7528e5bb26d6
+            url: https://download.gnome.org/sources/gnome-desktop/43/gnome-desktop-43.tar.xz
+            sha256: 3d6e153317486157596aa3802f87676414c570738f450a94a041fe8835420a69
 
       - name: python-evdev
         buildsystem: simple
