@@ -289,8 +289,8 @@ modules:
       - install -Dm0775 -t /app/bin ../data/gamemoderun
     sources: &gamemode_sources
       - type: archive
-        url: https://github.com/FeralInteractive/gamemode/releases/download/1.6.1/gamemode-1.6.1.tar.xz
-        sha256: 10c2a3f142eae472f5a09e42616e38c666c05b25ca3e61e562a543bb3fda66c5
+        url: https://github.com/FeralInteractive/gamemode/releases/download/1.7/gamemode-1.7.tar.xz
+        sha256: c1860f76f1d4c0d6e3965e52de21c824f24791049946da728da50f0c63748389
         x-checker-data:
           type: anitya
           project-id: 17410
@@ -340,7 +340,7 @@ modules:
 
   - name: libjpeg # with libjpeg.so.8
     buildsystem: cmake-ninja
-    config-opts: &libjpeg_config_opts
+    config-opts:
       - -DCMAKE_SKIP_RPATH:BOOL=YES
       - -DENABLE_STATIC:BOOL=NO
       - -DWITH_JPEG8:BOOL=YES
@@ -619,88 +619,95 @@ modules:
   - name: python-flit-core  # needed by idna
     buildsystem: simple
     build-commands:
-     - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
-    cleanup: ["*"]
+      - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+    cleanup: ['*']
     sources:
-     - type: archive
-       url: https://files.pythonhosted.org/packages/15/d1/d8798b83e953fd6f86ca9b50f93eec464a9305b0661469c8234e61095481/flit_core-3.7.1.tar.gz
-       sha256: 14955af340c43035dbfa96b5ee47407e377ee337f69e70f73064940d27d0a44f
+      - type: archive
+        url: https://files.pythonhosted.org/packages/15/d1/d8798b83e953fd6f86ca9b50f93eec464a9305b0661469c8234e61095481/flit_core-3.7.1.tar.gz
+        sha256: 14955af340c43035dbfa96b5ee47407e377ee337f69e70f73064940d27d0a44f
 
   - name: python-ninja  # needed by dbus-python
     buildsystem: simple
     build-commands:
-     - python3 setup.py build -j${FLATPAK_BUILDER_N_JOBS} -DARCHIVE_DOWNLOAD_DIR="${FLATPAK_BUILDER_BUILDDIR}"
-     - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
-    cleanup: ["*"]
+      - python3 setup.py build -j${FLATPAK_BUILDER_N_JOBS} -DARCHIVE_DOWNLOAD_DIR="${FLATPAK_BUILDER_BUILDDIR}"
+      - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+    cleanup: ['*']
     sources:
-     - type: archive
-       url: https://files.pythonhosted.org/packages/00/99/5beedbf09e3ec6b617606df42d04c4251959caddbd98397cce21da4c52d1/ninja-1.10.2.3.tar.gz
-       sha256: e1b86ad50d4e681a7dbdff05fc23bb52cb773edb90bc428efba33fa027738408
-     - type: file
-       url: https://github.com/Kitware/ninja/archive/v1.10.2.g51db2.kitware.jobserver-1.tar.gz
-       sha256: 549c31ee596566b952c600e23eb9b8d39a4112cd5fdeb2e5a83370669176da40
+      - type: archive
+        url: https://files.pythonhosted.org/packages/00/99/5beedbf09e3ec6b617606df42d04c4251959caddbd98397cce21da4c52d1/ninja-1.10.2.3.tar.gz
+        sha256: e1b86ad50d4e681a7dbdff05fc23bb52cb773edb90bc428efba33fa027738408
+      - type: file
+        url: https://github.com/Kitware/ninja/archive/v1.10.2.g51db2.kitware.jobserver-1.tar.gz
+        sha256: 549c31ee596566b952c600e23eb9b8d39a4112cd5fdeb2e5a83370669176da40
     modules:
       - name: python-skbuild
         buildsystem: simple
         build-commands:
-         - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
-        cleanup: ["*"]
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+            .
+        cleanup: ['*']
         sources:
-         - type: archive
-           url: https://files.pythonhosted.org/packages/9e/e2/2e440c30e93fc5b505ee56169a4396b05e797a1daadb721aba429adbfd51/scikit-build-0.15.0.tar.gz
-           sha256: e723cd0f3489a042370b9ea988bbb9cfd7725e8b25b20ca1c7981821fcf65fb9
+          - type: archive
+            url: https://files.pythonhosted.org/packages/9e/e2/2e440c30e93fc5b505ee56169a4396b05e797a1daadb721aba429adbfd51/scikit-build-0.15.0.tar.gz
+            sha256: e723cd0f3489a042370b9ea988bbb9cfd7725e8b25b20ca1c7981821fcf65fb9
         modules:
           - name: python-setuptools-scm
             buildsystem: simple
             build-commands:
-             - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
-            cleanup: ["*"]
+              - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+                .
+            cleanup: ['*']
             sources:
-             - type: archive
-               url: https://files.pythonhosted.org/packages/d0/43/f038b5009f93bcd77b1b8da9e6d424b739ab17aec9726f3a99eba23d53ca/setuptools_scm-7.0.5.tar.gz
-               sha256: 031e13af771d6f892b941adb6ea04545bbf91ebc5ce68c78aaf3fff6e1fb4844
+              - type: archive
+                url: https://files.pythonhosted.org/packages/d0/43/f038b5009f93bcd77b1b8da9e6d424b739ab17aec9726f3a99eba23d53ca/setuptools_scm-7.0.5.tar.gz
+                sha256: 031e13af771d6f892b941adb6ea04545bbf91ebc5ce68c78aaf3fff6e1fb4844
             modules:
               - name: python-packaging
                 buildsystem: simple
                 build-commands:
-                 - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
-                cleanup: ["*"]
+                  - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+                    .
+                cleanup: ['*']
                 sources:
-                 - type: archive
-                   url: https://files.pythonhosted.org/packages/df/9e/d1a7217f69310c1db8fdf8ab396229f55a699ce34a203691794c5d1cad0c/packaging-21.3.tar.gz
-                   sha256: dd47c42927d89ab911e606518907cc2d3a1f38bbd026385970643f9c5b8ecfeb
+                  - type: archive
+                    url: https://files.pythonhosted.org/packages/df/9e/d1a7217f69310c1db8fdf8ab396229f55a699ce34a203691794c5d1cad0c/packaging-21.3.tar.gz
+                    sha256: dd47c42927d89ab911e606518907cc2d3a1f38bbd026385970643f9c5b8ecfeb
                 modules:
                   - name: python-pyparsing
                     buildsystem: simple
                     build-commands:
-                     - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
-                    cleanup: ["*"]
+                      - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+                        .
+                    cleanup: ['*']
                     sources:
-                     - type: archive
-                       url: https://files.pythonhosted.org/packages/71/22/207523d16464c40a0310d2d4d8926daffa00ac1f5b1576170a32db749636/pyparsing-3.0.9.tar.gz
-                       sha256: 2b020ecf7d21b687f219b71ecad3631f644a47f01403fa1d1036b0c6416d70fb
+                      - type: archive
+                        url: https://files.pythonhosted.org/packages/71/22/207523d16464c40a0310d2d4d8926daffa00ac1f5b1576170a32db749636/pyparsing-3.0.9.tar.gz
+                        sha256: 2b020ecf7d21b687f219b71ecad3631f644a47f01403fa1d1036b0c6416d70fb
               - name: python-typing-extensions
                 buildsystem: simple
                 build-commands:
-                 - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
-                cleanup: ["*"]
+                  - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+                    .
+                cleanup: ['*']
                 sources:
-                 - type: archive
-                   url: https://files.pythonhosted.org/packages/9e/1d/d128169ff58c501059330f1ad96ed62b79114a2eb30b8238af63a2e27f70/typing_extensions-4.3.0.tar.gz
-                   sha256: e6d2677a32f47fc7eb2795db1dd15c1f34eff616bcaf2cfb5e997f854fa1c4a6
+                  - type: archive
+                    url: https://files.pythonhosted.org/packages/9e/1d/d128169ff58c501059330f1ad96ed62b79114a2eb30b8238af63a2e27f70/typing_extensions-4.3.0.tar.gz
+                    sha256: e6d2677a32f47fc7eb2795db1dd15c1f34eff616bcaf2cfb5e997f854fa1c4a6
               - name: python-tomli
                 buildsystem: simple
                 build-commands:
-                 - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
-                cleanup: ["*"]
+                  - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+                    .
+                cleanup: ['*']
                 sources:
-                 - type: archive
-                   url: https://files.pythonhosted.org/packages/c0/3f/d7af728f075fb08564c5949a9c95e44352e23dee646869fa104a3b2060a3/tomli-2.0.1.tar.gz
-                   sha256: de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f
+                  - type: archive
+                    url: https://files.pythonhosted.org/packages/c0/3f/d7af728f075fb08564c5949a9c95e44352e23dee646869fa104a3b2060a3/tomli-2.0.1.tar.gz
+                    sha256: de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f
           - name: python-distro  # also needed by Lutris, do not add a cleanup property here!
             buildsystem: simple
             build-commands:
-              - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+              - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+                .
             sources:
               - type: archive
                 url: https://files.pythonhosted.org/packages/b5/7e/ddfbd640ac9a82e60718558a3de7d5988a7d4648385cf00318f60a8b073a/distro-1.7.0.tar.gz
@@ -709,8 +716,9 @@ modules:
   - name: python-meson  # needed by dbus-python, the meson version shipped by the SDK is too old (0.59<0.60)
     buildsystem: simple
     build-commands:
-     - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" --ignore-installed .
-    cleanup: ["*"]
+      - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" --ignore-installed
+        .
+    cleanup: ['*']
     sources:
       - type: archive
         url: https://files.pythonhosted.org/packages/a7/f0/565f731cd138a516c2dba8439e47c5622493c82f41c4845d287617ef6ec9/meson-0.63.2.tar.gz
@@ -741,7 +749,8 @@ modules:
       - name: python-evdev
         buildsystem: simple
         build-commands:
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+            .
         sources:
           - type: archive
             url: https://files.pythonhosted.org/packages/dd/49/d75ac71f54c6c32ac3c63828541740db74d9c764a82496be97b82314d355/evdev-1.6.0.tar.gz
@@ -756,7 +765,8 @@ modules:
           #
           # The next FreeDesktop SDK update should make this (and installing
           # our own version of meson) unnecessary.
-          - PYTHONPATH=/app/lib/python3.9/site-packages python3 ./setup.py install --prefix="${FLATPAK_DEST}" --root=/
+          - PYTHONPATH=/app/lib/python3.9/site-packages python3 ./setup.py install
+            --prefix="${FLATPAK_DEST}" --root=/
         sources:
           - type: archive
             url: https://dbus.freedesktop.org/releases/dbus-python/dbus-python-1.3.2.tar.gz
@@ -765,7 +775,8 @@ modules:
       - name: python-yaml
         buildsystem: simple
         build-commands:
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+            .
         sources:
           - type: archive
             url: https://files.pythonhosted.org/packages/36/2b/61d51a2c4f25ef062ae3f74576b01638bebad5e045f747ff12643df63844/PyYAML-6.0.tar.gz
@@ -774,7 +785,8 @@ modules:
       - name: python-requests
         buildsystem: simple
         build-commands:
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+            .
         sources:
           - type: archive
             url: https://files.pythonhosted.org/packages/a5/61/a867851fd5ab77277495a8709ddda0861b28163c4613b011bc00228cc724/requests-2.28.1.tar.gz
@@ -784,7 +796,8 @@ modules:
           - name: python-urllib3
             buildsystem: simple
             build-commands:
-              - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+              - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+                .
             sources:
               - type: archive
                 url: https://files.pythonhosted.org/packages/b2/56/d87d6d3c4121c0bcec116919350ca05dc3afd2eeb7dc88d07e8083f8ea94/urllib3-1.26.12.tar.gz
@@ -793,7 +806,8 @@ modules:
           - name: python-charset-normalizer
             buildsystem: simple
             build-commands:
-              - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+              - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+                .
             sources:
               - type: archive
                 url: https://files.pythonhosted.org/packages/a1/34/44964211e5410b051e4b8d2869c470ae8a68ae274953b1c7de6d98bbcf94/charset-normalizer-2.1.1.tar.gz
@@ -802,7 +816,8 @@ modules:
           - name: python-certifi
             buildsystem: simple
             build-commands:
-              - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+              - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+                .
             sources:
               - type: archive
                 url: https://files.pythonhosted.org/packages/ca/48/88ec470f8b68319b6782ca3a0570789886ad5ca24c1af2f3771699135baa/certifi-2022.9.14.tar.gz
@@ -811,7 +826,8 @@ modules:
           - name: python-idna
             buildsystem: simple
             build-commands:
-              - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+              - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+                .
             sources:
               - type: archive
                 url: https://files.pythonhosted.org/packages/8b/e1/43beb3d38dba6cb420cefa297822eac205a277ab43e5ba5d5c46faf96438/idna-3.4.tar.gz
@@ -820,7 +836,8 @@ modules:
           - name: python-magic
             buildsystem: simple
             build-commands:
-              - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+              - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+                .
             sources:
               - type: archive
                 url: https://files.pythonhosted.org/packages/da/db/0b3e28ac047452d079d375ec6798bf76a036a08182dbb39ed38116a49130/python-magic-0.4.27.tar.gz
@@ -833,7 +850,8 @@ modules:
               # Using `--ignore-installed` here is necessary, since `lxml` is
               # part of the SDK image only but the end-user version of Lutris
               # uses only the platform image.
-              - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" --ignore-installed .
+              - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+                --ignore-installed .
             sources:
               - type: archive
                 url: https://files.pythonhosted.org/packages/70/bb/7a2c7b4f8f434aa1ee801704bf08f1e53d7b5feba3d5313ab17003477808/lxml-4.9.1.tar.gz
@@ -843,7 +861,8 @@ modules:
         buildsystem: simple
         build-commands:
           - python3 setup.py build -j${FLATPAK_BUILDER_N_JOBS}
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+            .
         sources:
           - type: archive
             url: https://files.pythonhosted.org/packages/8c/92/2975b464d9926dc667020ed1abfa6276e68c3571dcb77e43347e15ee9eed/Pillow-9.2.0.tar.gz
@@ -852,7 +871,8 @@ modules:
       - name: python-pypresence
         buildsystem: simple
         build-commands:
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+            .
         sources:
           - type: archive
             url: https://files.pythonhosted.org/packages/58/df/be2dbd7ed2262791536278295d3c4e56d5c17d4291666f35fd6190a7f2ab/pypresence-4.2.1.tar.gz
@@ -861,7 +881,8 @@ modules:
       - name: python-setproctitle
         buildsystem: simple
         build-commands:
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+            .
         sources:
           - type: archive
             url: https://files.pythonhosted.org/packages/b5/47/ac709629ddb9779fee29b7d10ae9580f60a4b37e49bce72360ddf9a79cdc/setproctitle-1.3.2.tar.gz
