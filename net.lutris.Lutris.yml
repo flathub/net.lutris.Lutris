@@ -29,6 +29,8 @@ finish-args:
   - --talk-name=org.kde.StatusNotifierWatcher
   - --talk-name=org.freedesktop.Flatpak
   - --filesystem=xdg-data/flatpak:ro
+  # Needed for appimages
+  - --env=APPIMAGE_EXTRACT_AND_RUN=1
 
 inherit-extensions:
   - org.freedesktop.Platform.GL32
