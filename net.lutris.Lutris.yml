@@ -728,6 +728,8 @@ modules:
       - type: git
         url: https://github.com/lutris/lutris.git
         commit: aa04aa58e6dde6213de4d1e4aea0f4d81067db6b
+      - type: patch
+        path: webkit-version.patch
     modules:
       - name: gnome-desktop
         buildsystem: meson
