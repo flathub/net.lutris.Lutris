@@ -32,6 +32,7 @@ finish-args:
   # Needed for appimages
   - --env=APPIMAGE_EXTRACT_AND_RUN=1
 
+
 inherit-extensions:
   - org.freedesktop.Platform.GL32
   - org.freedesktop.Platform.ffmpeg-full
@@ -735,7 +736,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/lutris/lutris.git
-        commit: aa04aa58e6dde6213de4d1e4aea0f4d81067db6b
+        commit: f73603dc51697db3729e18ddbdc35ef92a424bb2
       - type: patch
         path: webkit-version.patch
     modules:
