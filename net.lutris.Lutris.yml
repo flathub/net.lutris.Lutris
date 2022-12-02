@@ -736,7 +736,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/lutris/lutris.git
-        commit: 10933ba9203a3f008646010005cdf19a6d97552c
+        commit: f73603dc51697db3729e18ddbdc35ef92a424bb2
       - type: patch
         path: webkit-version.patch
     modules:
