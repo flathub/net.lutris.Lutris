@@ -913,6 +913,16 @@ modules:
           - type: archive
             url: https://files.pythonhosted.org/packages/ae/7d/8d5cf4e2aac9563dc2d6ba6a313aaef89c9f647b7df2e71907971d49e931/moddb-0.8.1.tar.gz
             sha256: cf103b4cb1d43e4fcf2cd9e64ca030767e946fdce2ddb091ab8808ea04781ab8
+        modules:
+        - name: pyrate-limiter
+          buildsystem: simple
+          build-commands:
+            - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+              .
+          sources:
+            - type: archive
+              url: https://files.pythonhosted.org/packages/6f/99/087a7481ccb378acb47d9e4483fae7f0a48ecbabc9ad2f0f57e36f47bd09/pyrate-limiter-2.8.0.tar.gz
+              sha256: 1044895c9c3e37ee50a9b449e5f0d67a7995a8d456361f05c6e8afd44c8dcaec
 
   - name: lutris_wrapper
     buildsystem: simple
