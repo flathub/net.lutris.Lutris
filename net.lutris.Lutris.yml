@@ -560,30 +560,30 @@ modules:
       - /usr/lib/sdk/openjdk11/install.sh
 
   # Modern DOSBox replacement
-  - name: dosbox-staging
-    buildsystem: meson
-    sources:
-      - type: archive
-        url: https://github.com/dosbox-staging/dosbox-staging/archive/v0.78.1.tar.gz
-        sha256: dcd93ce27f5f3f31e7022288f7cbbc1f1f6eb7cc7150c2c085eeff8ba76c3690
-    modules:
-      - name: libslirp
-        buildsystem: meson
-        sources:
-          - type: archive
-            url: https://gitlab.freedesktop.org/slirp/libslirp/-/archive/v4.6.1/libslirp-v4.6.1.tar.gz
-            sha256: 69ad4df0123742a29cc783b35de34771ed74d085482470df6313b6abeb799b11
-      - name: munt
-        buildsystem: cmake
-        config-opts:
-          - -Dmunt_WITH_MT32EMU_SMF2WAV=FALSE
-          - -Dmunt_WITH_MT32EMU_QT=FALSE
-          - -Dlibmt32emu_WITH_VERSION_TAGGING=TRUE
-          - -Dlibmt32emu_WITH_SYMBOL_VERSIONING=TRUE
-        sources:
-          - type: archive
-            url: https://github.com/munt/munt/archive/libmt32emu_2_5_3.tar.gz
-            sha256: 062d110bbdd7253d01ef291f57e89efc3ee35fd087587458381f054bac49a8f5
+  # - name: dosbox-staging
+  #   buildsystem: meson
+  #   sources:
+  #     - type: archive
+  #       url: https://github.com/dosbox-staging/dosbox-staging/archive/v0.78.1.tar.gz
+  #       sha256: dcd93ce27f5f3f31e7022288f7cbbc1f1f6eb7cc7150c2c085eeff8ba76c3690
+  #   modules:
+  #     - name: libslirp
+  #       buildsystem: meson
+  #       sources:
+  #         - type: archive
+  #           url: https://gitlab.freedesktop.org/slirp/libslirp/-/archive/v4.6.1/libslirp-v4.6.1.tar.gz
+  #           sha256: 69ad4df0123742a29cc783b35de34771ed74d085482470df6313b6abeb799b11
+  #     - name: munt
+  #       buildsystem: cmake
+  #       config-opts:
+  #         - -Dmunt_WITH_MT32EMU_SMF2WAV=FALSE
+  #         - -Dmunt_WITH_MT32EMU_QT=FALSE
+  #         - -Dlibmt32emu_WITH_VERSION_TAGGING=TRUE
+  #         - -Dlibmt32emu_WITH_SYMBOL_VERSIONING=TRUE
+  #       sources:
+  #         - type: archive
+  #           url: https://github.com/munt/munt/archive/libmt32emu_2_5_3.tar.gz
+  #           sha256: 062d110bbdd7253d01ef291f57e89efc3ee35fd087587458381f054bac49a8f5
 
   # Needed for FreeSO
   - name: mono
