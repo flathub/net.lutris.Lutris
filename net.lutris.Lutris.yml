@@ -839,29 +839,29 @@ modules:
                 url: https://files.pythonhosted.org/packages/8b/e1/43beb3d38dba6cb420cefa297822eac205a277ab43e5ba5d5c46faf96438/idna-3.4.tar.gz
                 sha256: 814f528e8dead7d329833b91c5faa87d60bf71824cd12a7530b5526063d02cb4
 
-        - name: python-magic
-          buildsystem: simple
-          build-commands:
-            - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
-              .
-          sources:
-            - type: archive
-              url: https://files.pythonhosted.org/packages/da/db/0b3e28ac047452d079d375ec6798bf76a036a08182dbb39ed38116a49130/python-magic-0.4.27.tar.gz
-              sha256: c1ba14b08e4a5f5c31a302b7721239695b2f0f058d125bd5ce1ee36b9d9d3c3b
+      - name: python-magic
+        buildsystem: simple
+        build-commands:
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+            .
+        sources:
+          - type: archive
+            url: https://files.pythonhosted.org/packages/da/db/0b3e28ac047452d079d375ec6798bf76a036a08182dbb39ed38116a49130/python-magic-0.4.27.tar.gz
+            sha256: c1ba14b08e4a5f5c31a302b7721239695b2f0f058d125bd5ce1ee36b9d9d3c3b
 
-        - name: python-lxml
-          buildsystem: simple
-          build-commands:
-            - python3 setup.py build -j${FLATPAK_BUILDER_N_JOBS}
-            # Using `--ignore-installed` here is necessary, since `lxml` is
-            # part of the SDK image only but the end-user version of Lutris
-            # uses only the platform image.
-            - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
-              --ignore-installed .
-          sources:
-            - type: archive
-              url: https://files.pythonhosted.org/packages/70/bb/7a2c7b4f8f434aa1ee801704bf08f1e53d7b5feba3d5313ab17003477808/lxml-4.9.1.tar.gz
-              sha256: fe749b052bb7233fe5d072fcb549221a8cb1a16725c47c37e42b0b9cb3ff2c3f
+      - name: python-lxml
+        buildsystem: simple
+        build-commands:
+          - python3 setup.py build -j${FLATPAK_BUILDER_N_JOBS}
+          # Using `--ignore-installed` here is necessary, since `lxml` is
+          # part of the SDK image only but the end-user version of Lutris
+          # uses only the platform image.
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+            --ignore-installed .
+        sources:
+          - type: archive
+            url: https://files.pythonhosted.org/packages/70/bb/7a2c7b4f8f434aa1ee801704bf08f1e53d7b5feba3d5313ab17003477808/lxml-4.9.1.tar.gz
+            sha256: fe749b052bb7233fe5d072fcb549221a8cb1a16725c47c37e42b0b9cb3ff2c3f
 
       - name: python-pillow
         buildsystem: simple
