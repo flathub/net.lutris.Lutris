@@ -684,8 +684,7 @@ modules:
                   - name: python-pyparsing
                     buildsystem: simple
                     build-commands:
-                      - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
-                        .
+                      - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
                     cleanup: ['*']
                     sources:
                       - type: archive
@@ -694,8 +693,7 @@ modules:
               - name: python-typing-extensions
                 buildsystem: simple
                 build-commands:
-                  - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
-                    .
+                  - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
                 cleanup: ['*']
                 sources:
                   - type: archive
@@ -704,8 +702,7 @@ modules:
               - name: python-tomli
                 buildsystem: simple
                 build-commands:
-                  - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
-                    .
+                  - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
                 cleanup: ['*']
                 sources:
                   - type: archive
@@ -714,8 +711,7 @@ modules:
           - name: python-distro  # also needed by Lutris, do not add a cleanup property here!
             buildsystem: simple
             build-commands:
-              - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
-                .
+              - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
             sources:
               - type: archive
                 url: https://files.pythonhosted.org/packages/b5/7e/ddfbd640ac9a82e60718558a3de7d5988a7d4648385cf00318f60a8b073a/distro-1.7.0.tar.gz
@@ -745,6 +741,7 @@ modules:
         url: https://github.com/lutris/lutris.git
         commit: 91226e89cc16c30aae861419dc3c3f4234fbeea0
     modules:
+      - modules/python3-poetry.yaml
       - name: gnome-desktop
         buildsystem: meson
         sources:
@@ -897,41 +894,52 @@ modules:
       - name: python-protobuf
         buildsystem: simple
         build-commands:
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
-            .
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
         sources:
           - type: archive
             url: https://files.pythonhosted.org/packages/e2/86/44a1e4990a81cb4248a2091a182bb76a6417fddcaff560ceb6b44eb05c55/protobuf-4.22.3.tar.gz
             sha256: 23452f2fdea754a8251d0fc88c0317735ae47217e0d27bf330a30eec2848811a
-
+      - name: soupsieve
+        buildsystem: simple
+        build-commands:
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" --find-links="file://${PWD}" soupsieve
+        sources:
+          - type: file
+            url: https://files.pythonhosted.org/packages/49/37/673d6490efc51ec46d198c75903d99de59baffdd47aea3d071b80a9e4e89/soupsieve-2.4.1-py3-none-any.whl
+            sha256: 1c1bfee6819544a3447586c889157365a27e10d88cde3ad3da0cf0ddf646feb8
+      - name: beautifulsoup4
+        buildsystem: simple
+        build-commands:
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" --find-links="file://${PWD}" beautifulsoup4
+        sources:
+          - type: file
+            url: https://files.pythonhosted.org/packages/21/0a/47fdf541c97fd9b6a610cb5fd518175308a7cc60569962e776ac52420387/beautifulsoup4-4.6.3-py3-none-any.whl
+            sha256: 194ec62a25438adcb3fdb06378b26559eda1ea8a747367d34c33cef9c7f48d57
+      - name: pyrate-limiter
+        buildsystem: simple
+        build-commands:
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+        sources:
+          - type: archive
+            url: https://files.pythonhosted.org/packages/14/8a/2b8251c73589d0ae925a7ef9b9b485791f6e8b3863985be13eb97584282c/pyrate-limiter-2.8.1.tar.gz
+            sha256: 0741b7db4b3facdce60bd836e0fcc43911bc52c443f674f924afba7e02e79c18
+      - name: toolz
+        buildsystem: simple
+        build-commands:
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" --find-links="file://${PWD}" toolz
+        sources:
+          - type: file
+            url: https://files.pythonhosted.org/packages/b5/f1/3df506b493736e3ee11fc1a3c2de8014a55f025d830a71bb499acc049a2c/toolz-0.11.2-py3-none-any.whl
+            sha256: a5700ce83414c64514d82d60bcda8aabfde092d1c1a8663f9200c07fdcc6da8f
       - name: python-moddb
         buildsystem: simple
         build-commands:
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
-            .
+          - pip3 install --exists-action=i --no-index --find-links="file://${PWD}"
+            --prefix=${FLATPAK_DEST} "moddb" --no-build-isolation            
         sources:
-          - type: archive
-            url: https://files.pythonhosted.org/packages/ae/7d/8d5cf4e2aac9563dc2d6ba6a313aaef89c9f647b7df2e71907971d49e931/moddb-0.8.1.tar.gz
-            sha256: cf103b4cb1d43e4fcf2cd9e64ca030767e946fdce2ddb091ab8808ea04781ab8
-        modules:
-        - name: pyrate-limiter
-          buildsystem: simple
-          build-commands:
-            - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
-              .
-          sources:
-            - type: archive
-              url: https://files.pythonhosted.org/packages/6f/99/087a7481ccb378acb47d9e4483fae7f0a48ecbabc9ad2f0f57e36f47bd09/pyrate-limiter-2.8.0.tar.gz
-              sha256: 1044895c9c3e37ee50a9b449e5f0d67a7995a8d456361f05c6e8afd44c8dcaec
-        - name: beautifulsoup4
-          buildsystem: simple
-          build-commands:
-            - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
-              .
-          sources:
-            - type: archive
-              url: https://files.pythonhosted.org/packages/88/df/86bffad6309f74f3ff85ea69344a078fc30003270c8df6894fca7a3c72ff/beautifulsoup4-4.6.3.tar.gz
-              sha256: 90f8e61121d6ae58362ce3bed8cd997efb00c914eae0ff3d363c32f9a9822d10
+          - type: file
+            url: https://files.pythonhosted.org/packages/cb/68/37b7e06a24693d804e2b89692a68e37074252de937d509623d8665274e96/moddb-0.8.1-py3-none-any.whl
+            sha256: 7b76a4a9b0ba79d658d0c10f0c28366e0c49b271e417aa3cbc08e3ad73270f58
 
   - name: lutris_wrapper
     buildsystem: simple
