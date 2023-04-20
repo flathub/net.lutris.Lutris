@@ -923,6 +923,15 @@ modules:
             - type: archive
               url: https://files.pythonhosted.org/packages/6f/99/087a7481ccb378acb47d9e4483fae7f0a48ecbabc9ad2f0f57e36f47bd09/pyrate-limiter-2.8.0.tar.gz
               sha256: 1044895c9c3e37ee50a9b449e5f0d67a7995a8d456361f05c6e8afd44c8dcaec
+        - name: beautifulsoup4
+          buildsystem: simple
+          build-commands:
+            - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+              .
+          sources:
+            - type: archive
+              url: https://files.pythonhosted.org/packages/88/df/86bffad6309f74f3ff85ea69344a078fc30003270c8df6894fca7a3c72ff/beautifulsoup4-4.6.3.tar.gz
+              sha256: 90f8e61121d6ae58362ce3bed8cd997efb00c914eae0ff3d363c32f9a9822d10
 
   - name: lutris_wrapper
     buildsystem: simple
