@@ -739,7 +739,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/lutris/lutris.git
-        commit: 91226e89cc16c30aae861419dc3c3f4234fbeea0
+        commit: 63f648d59edf7d2e9b1469142295f1b519f27294
     modules:
       - modules/python3-poetry.yaml
       - name: gnome-desktop
