@@ -736,9 +736,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/lutris/lutris.git
-        commit: f73603dc51697db3729e18ddbdc35ef92a424bb2
-      - type: patch
-        path: webkit-version.patch
+        commit: 91226e89cc16c30aae861419dc3c3f4234fbeea0
     modules:
       - name: gnome-desktop
         buildsystem: meson
