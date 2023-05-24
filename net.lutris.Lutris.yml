@@ -736,9 +736,7 @@ modules:
 
   # Lutris app with dependencies
   - name: lutris
-    buildsystem: simple
-    build-commands:
-      - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+    buildsystem: meson
     post-install:
       - desktop-file-edit --set-key=X-Flatpak-RenamedFrom --set-value="lutris.desktop;"
         /app/share/applications/${FLATPAK_ID}.desktop
