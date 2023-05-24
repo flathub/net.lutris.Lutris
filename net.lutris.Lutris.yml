@@ -414,6 +414,12 @@ modules:
         url: https://xorg.freedesktop.org/archive/individual/app/xrandr-1.5.1.tar.gz
         sha256: 7b99edb7970a1365eaf5bcaf552144e4dfc3ccf510c4abc08569849929fb366e
 
+  - name: setxkbmap
+    sources:
+      - type: archive
+        url: https://xorg.freedesktop.org/archive/individual/app/setxkbmap-1.3.3.tar.xz
+        sha256: b560c678da6930a0da267304fa3a41cc5df39a96a5e23d06f14984c87b6f587b
+
   - name: mesa-demos
     config-opts:
       - --without-glut
@@ -846,8 +852,8 @@ modules:
           - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
         sources:
           - type: archive
-            url: https://files.pythonhosted.org/packages/e2/86/44a1e4990a81cb4248a2091a182bb76a6417fddcaff560ceb6b44eb05c55/protobuf-4.22.3.tar.gz
-            sha256: 23452f2fdea754a8251d0fc88c0317735ae47217e0d27bf330a30eec2848811a
+            url: https://files.pythonhosted.org/packages/55/5b/e3d951e34f8356e5feecacd12a8e3b258a1da6d9a03ad1770f28925f29bc/protobuf-3.20.3.tar.gz
+            sha256: 2e3427429c9cffebf259491be0af70189607f365c2f41c7c3764af6f337105f2
       - name: soupsieve
         buildsystem: simple
         build-commands:
