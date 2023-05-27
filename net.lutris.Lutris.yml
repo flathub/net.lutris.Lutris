@@ -736,9 +736,7 @@ modules:
 
   # Lutris app with dependencies
   - name: lutris
-    buildsystem: simple
-    build-commands:
-      - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+    buildsystem: meson
     post-install:
       - desktop-file-edit --set-key=X-Flatpak-RenamedFrom --set-value="lutris.desktop;"
         /app/share/applications/${FLATPAK_ID}.desktop
@@ -852,8 +850,8 @@ modules:
           - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
         sources:
           - type: archive
-            url: https://files.pythonhosted.org/packages/e2/86/44a1e4990a81cb4248a2091a182bb76a6417fddcaff560ceb6b44eb05c55/protobuf-4.22.3.tar.gz
-            sha256: 23452f2fdea754a8251d0fc88c0317735ae47217e0d27bf330a30eec2848811a
+            url: https://files.pythonhosted.org/packages/55/5b/e3d951e34f8356e5feecacd12a8e3b258a1da6d9a03ad1770f28925f29bc/protobuf-3.20.3.tar.gz
+            sha256: 2e3427429c9cffebf259491be0af70189607f365c2f41c7c3764af6f337105f2
       - name: soupsieve
         buildsystem: simple
         build-commands:
