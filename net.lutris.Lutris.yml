@@ -57,7 +57,7 @@ add-extensions:
 sdk-extensions:
   - org.gnome.Sdk.Compat.i386
   - org.freedesktop.Sdk.Extension.toolchain-i386
-  - org.freedesktop.Sdk.Extension.openjdk11
+  - org.freedesktop.Sdk.Extension.openjdk17
   - org.freedesktop.Sdk.Extension.mono6
 
 x-compat-i386-opts: &compat_i386_opts
