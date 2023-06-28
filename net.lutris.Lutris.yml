@@ -743,7 +743,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/lutris/lutris.git
-        commit: f64303b8208837b22bf5227a8016ce787c139d4d
+        commit: d908066d97e61b2f33715fe9bdff6c02cc7fbc80
     modules:
       - modules/python3-poetry.yaml
       - modules/python3-requests.yaml
@@ -888,7 +888,7 @@ modules:
         buildsystem: simple
         build-commands:
           - pip3 install --exists-action=i --no-index --find-links="file://${PWD}"
-            --prefix=${FLATPAK_DEST} "moddb" --no-build-isolation            
+            --prefix=${FLATPAK_DEST} "moddb" --no-build-isolation
         sources:
           - type: file
             url: https://files.pythonhosted.org/packages/cb/68/37b7e06a24693d804e2b89692a68e37074252de937d509623d8665274e96/moddb-0.8.1-py3-none-any.whl
