@@ -17,6 +17,7 @@ finish-args:
   - --allow=multiarch
   - --allow=devel
   - --talk-name=org.gnome.Mutter.DisplayConfig
+  - --talk-name=org.freedesktop.ScreenSaver
   - --system-talk-name=org.freedesktop.UDisks2
   - --filesystem=home
   - --filesystem=/run/media
