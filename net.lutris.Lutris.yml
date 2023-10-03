@@ -85,6 +85,10 @@ cleanup-commands:
   - python3 -m compileall /app/lib
   - mkdir -p /app/utils
 modules:
+  - name: remove-wine-libudev
+    buildsystem: simple
+    build-commands:
+      - rm /app/lib{,32}/libudev.so*
   - modules/qt5-15.yaml
   - modules/libbz2-1.0.8.json
   - name: vulkan-tools
