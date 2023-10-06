@@ -487,10 +487,11 @@ modules:
   - name: libspeechd
     config-opts:
       - --disable-python
+      - --with-systemdsystemunitdir=/app/lib/systemd/system/speech-dispatcherd.service
     sources:
       - type: archive
-        url: https://github.com/brailcom/speechd/releases/download/0.11.1/speech-dispatcher-0.11.1.tar.gz
-        sha256: d1da12ed3dac84f13799b6a2ec39ba2d3ca21a8493f44dc1855bd0ba96c2ddc6
+        url: https://github.com/brailcom/speechd/releases/download/0.11.5/speech-dispatcher-0.11.5.tar.gz
+        sha256: 1ce4759ffabbaf1aeb433a5ec0739be0676e9bdfbae9444a7b3be1b2af3ec12b
     modules:
       - name: dotconf
         sources:
