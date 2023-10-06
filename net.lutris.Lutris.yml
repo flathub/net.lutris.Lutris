@@ -527,12 +527,21 @@ modules:
     post-install:
       - find /app/lib/perl5 -type f -exec chmod u+w {} \;
 
+  - name: librsync
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        url: https://github.com/librsync/librsync.git
+        tag: v2.3.4
+
   - name: kitty
     no-autogen: true
     sources:
       - type: git
         url: https://github.com/kovidgoyal/kitty
-        tag: v0.22.2
+        tag: v0.25.2
+      - type: patch
+        path: patches/kitty-wayland-state.patch
     no-make-install: true
     post-install:
       - cp -r . $FLATPAK_DEST/lib/kitty
