@@ -739,7 +739,7 @@ modules:
         url: https://github.com/lutris/lutris.git
         commit: f64303b8208837b22bf5227a8016ce787c139d4d
     modules:
-      - modules/python3-poetry.yaml
+      - modules/python3-poetry.json
       - modules/python3-requests.yaml
       - name: gnome-desktop
         buildsystem: meson
