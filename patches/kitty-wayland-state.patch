@@ -1,0 +1,40 @@
+From ec8defc2e9baf8ad1e14ce7f1f6596b93129bead Mon Sep 17 00:00:00 2001
+From: Maximiliano Sandoval R <msandova@gnome.org>
+Date: Fri, 6 Oct 2023 16:53:44 +0200
+Subject: [PATCH] Fix not building with wayland-protocols 1.32
+
+Fix #6422
+---
+ glfw/wl_platform.h | 1 +
+ glfw/wl_window.c   | 3 +++
+ 2 files changed, 4 insertions(+)
+
+diff --git a/glfw/wl_platform.h b/glfw/wl_platform.h
+index f35b55e94..da10886ea 100644
+--- a/glfw/wl_platform.h
++++ b/glfw/wl_platform.h
+@@ -122,6 +122,7 @@ typedef enum WaylandWindowState {
+ 	TOPLEVEL_STATE_TILED_RIGHT = 32,
+ 	TOPLEVEL_STATE_TILED_TOP = 64,
+ 	TOPLEVEL_STATE_TILED_BOTTOM = 128,
++    TOPLEVEL_STATE_SUSPENDED = 256,
+ } WaylandWindowState;
+ 
+ 
+diff --git a/glfw/wl_window.c b/glfw/wl_window.c
+index f982cc38f..2cc0e243d 100644
+--- a/glfw/wl_window.c
++++ b/glfw/wl_window.c
+@@ -445,6 +445,9 @@ xdgToplevelHandleConfigure(void* data,
+             C(TOPLEVEL_STATE_TILED_RIGHT);
+             C(TOPLEVEL_STATE_TILED_TOP);
+             C(TOPLEVEL_STATE_TILED_BOTTOM);
++#ifdef XDG_TOPLEVEL_STATE_SUSPENDED_SINCE_VERSION
++            C(TOPLEVEL_STATE_SUSPENDED);
++#endif
+ #undef C
+         }
+     }
+-- 
+2.41.0
+
