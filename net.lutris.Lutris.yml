@@ -32,6 +32,8 @@ finish-args:
   - --filesystem=xdg-data/flatpak:ro
   # Needed for appimages
   - --env=APPIMAGE_EXTRACT_AND_RUN=1
+  # See: https://github.com/flathub/net.lutris.Lutris/pull/368#issuecomment-1751381312
+  - --env=WEBKIT_DISABLE_DMABUF_RENDERER=1
 
 
 inherit-extensions:
