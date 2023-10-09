@@ -32,6 +32,8 @@ finish-args:
   - --filesystem=xdg-data/flatpak:ro
   # Needed for appimages
   - --env=APPIMAGE_EXTRACT_AND_RUN=1
+  # See: https://github.com/flathub/net.lutris.Lutris/pull/368#issuecomment-1751381312
+  - --env=WEBKIT_DISABLE_DMABUF_RENDERER=1
 
 
 inherit-extensions:
@@ -891,7 +893,7 @@ modules:
         buildsystem: simple
         build-commands:
           - pip3 install --exists-action=i --no-index --find-links="file://${PWD}"
-            --prefix=${FLATPAK_DEST} "moddb" --no-build-isolation            
+            --prefix=${FLATPAK_DEST} "moddb" --no-build-isolation
         sources:
           - type: file
             url: https://files.pythonhosted.org/packages/cb/68/37b7e06a24693d804e2b89692a68e37074252de937d509623d8665274e96/moddb-0.8.1-py3-none-any.whl
