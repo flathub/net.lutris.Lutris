@@ -45,6 +45,7 @@ inherit-extensions:
   - org.freedesktop.Platform.GL32
   - org.freedesktop.Platform.ffmpeg-full
   - org.freedesktop.Platform.ffmpeg_full.i386
+  - org.freedesktop.Platform.VulkanLayer.gamescope
   - org.winehq.Wine.gecko
   - org.winehq.Wine.mono
   - org.winehq.Wine.DLLs
