@@ -27,6 +27,7 @@ finish-args:
   # For Debian
   - --filesystem=/media
   - --filesystem=~/.var/app/com.valvesoftware.Steam:ro
+  - --filesystem=~/.config/MangoHud:ro
   - --env=PATH=/app/bin:/usr/bin:/app/utils/bin:/usr/lib/extensions/vulkan/MangoHud/bin/:/app/jre/bin/:/usr/lib/extensions/vulkan/gamescope/bin
   - --env=GST_PLUGIN_SYSTEM_PATH=/app/lib32/gstreamer-1.0:/app/lib/gstreamer-1.0:/usr/lib/i386-linux-gnu/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/gstreamer-1.0
   # System tray icon
@@ -753,7 +754,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/lutris/lutris.git
-        commit: 8e0568ee295ee18a50346c9d707d6ac7e4957bb8
+        commit: 8b0b21921e93eb8ad622c8395711169c3bb7b845
     modules:
       - modules/python3-poetry.json
       - modules/python3-requests.yaml
