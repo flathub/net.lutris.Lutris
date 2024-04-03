@@ -754,7 +754,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/lutris/lutris.git
-        commit: 89ea5c7dbc3e944d9c74924238f4fd7fb472b512
+        commit: fa045472438732c98938ee8917be4974894f71ff
     modules:
       - modules/python3-poetry.json
       - modules/python3-requests.yaml
