@@ -730,36 +730,23 @@ modules:
   - name: python-meson # needed by dbus-python, the meson version shipped by the SDK is too old (0.59<0.60)
     buildsystem: simple
     build-commands:
-      - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" --ignore-installed
-        .
+      - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" --ignore-installed .
     cleanup: ["*"]
     sources:
       - type: archive
         url: https://files.pythonhosted.org/packages/a7/f0/565f731cd138a516c2dba8439e47c5622493c82f41c4845d287617ef6ec9/meson-0.63.2.tar.gz
         sha256: 16222f17ef76be0542c91c07994f9676ae879f46fc21c0c786a21ef2cb518bbf
 
-  # --- xprop ---
-  - name: xprop
+  # These are needed for window management inside gamescope
+  # --- python-xlib ---
+  - name: python-xlib
     buildsystem: simple
     build-commands:
-      - ./configure --prefix="${FLATPAK_DEST}"
-      - make
-      - make install
+      - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
     sources:
       - type: archive
-        url: https://www.x.org/archive/individual/app/xprop-1.2.5.tar.bz2
-        sha256: 9b92ed0316bf2486121d8bac88bd1878f16b43bd335f18009b1f941f1eca93a1
-  # --- xwininfo ---
-  - name: xwininfo
-    buildsystem: simple
-    build-commands:
-      - ./configure --prefix="${FLATPAK_DEST}"
-      - make
-      - make install
-    sources:
-      - type: archive
-        url: https://www.x.org/archive/individual/app/xwininfo-1.1.5.tar.bz2
-        sha256: 7a405441dfc476666c744f5fcd1bc8a75abf8b5b1d85db7b88b370982365080e
+        url: https://files.pythonhosted.org/packages/source/p/python-xlib/python-xlib-0.33.tar.gz
+        sha256: 55af7906a2c75ce6cb280a584776080602444f75815a7aff4d287bb2d7018b32
 
   # Lutris app with dependencies
   - name: lutris
