@@ -199,6 +199,7 @@ modules:
       - type: archive
         url: https://www.quut.com/gsm/gsm-1.0.19.tar.gz
         sha256: 4903652f68a8c04d0041f0d19b1eb713ddcd2aa011c5e595b3b8bca2755270f6
+        disable-http-decompression: true
       - type: patch
         path: patches/gsm-makefile.patch
 
