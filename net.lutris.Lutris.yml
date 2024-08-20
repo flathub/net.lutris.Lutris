@@ -102,8 +102,8 @@ modules:
       - --disable-static
     sources: &glu_sources
       - type: archive
-        url: https://mesa.freedesktop.org/archive/glu/glu-9.0.2.tar.xz
-        sha256: 6e7280ff585c6a1d9dfcdf2fca489251634b3377bfc33c29e4002466a38d02d4
+        url: https://mesa.freedesktop.org/archive/glu/glu-9.0.3.tar.xz
+        sha256: bd43fe12f374b1192eb15fe20e45ff456b9bc26ab57f0eee919f96ca0f8a330f
         x-checker-data:
           type: anitya
           project-id: 13518
@@ -289,8 +289,8 @@ modules:
       - install -Dm0775 -t /app/bin ../data/gamemoderun
     sources: &gamemode_sources
       - type: archive
-        url: https://github.com/FeralInteractive/gamemode/releases/download/1.7/gamemode-1.7.tar.xz
-        sha256: c1860f76f1d4c0d6e3965e52de21c824f24791049946da728da50f0c63748389
+        url: https://github.com/FeralInteractive/gamemode/releases/download/1.8.2/gamemode-1.8.2.tar.xz
+        sha256: 1169f294424c566988a0cab8c543f0aecec360ecb8ce2f91abc1460b1c59a439
         x-checker-data:
           type: anitya
           project-id: 17410
@@ -701,7 +701,8 @@ modules:
                   - name: python-pyparsing
                     buildsystem: simple
                     build-commands:
-                      - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+                      - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+                        .
                     cleanup: ['*']
                     sources:
                       - type: archive
@@ -710,7 +711,8 @@ modules:
               - name: python-typing-extensions
                 buildsystem: simple
                 build-commands:
-                  - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+                  - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+                    .
                 cleanup: ['*']
                 sources:
                   - type: archive
@@ -719,7 +721,8 @@ modules:
               - name: python-tomli
                 buildsystem: simple
                 build-commands:
-                  - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+                  - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+                    .
                 cleanup: ['*']
                 sources:
                   - type: archive
@@ -728,7 +731,8 @@ modules:
           - name: python-distro  # also needed by Lutris, do not add a cleanup property here!
             buildsystem: simple
             build-commands:
-              - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+              - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+                .
             sources:
               - type: archive
                 url: https://files.pythonhosted.org/packages/b5/7e/ddfbd640ac9a82e60718558a3de7d5988a7d4648385cf00318f60a8b073a/distro-1.7.0.tar.gz
@@ -858,7 +862,8 @@ modules:
       - name: python-protobuf
         buildsystem: simple
         build-commands:
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+            .
         sources:
           - type: archive
             url: https://files.pythonhosted.org/packages/55/5b/e3d951e34f8356e5feecacd12a8e3b258a1da6d9a03ad1770f28925f29bc/protobuf-3.20.3.tar.gz
@@ -866,7 +871,8 @@ modules:
       - name: soupsieve
         buildsystem: simple
         build-commands:
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" --find-links="file://${PWD}" soupsieve
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+            --find-links="file://${PWD}" soupsieve
         sources:
           - type: file
             url: https://files.pythonhosted.org/packages/49/37/673d6490efc51ec46d198c75903d99de59baffdd47aea3d071b80a9e4e89/soupsieve-2.4.1-py3-none-any.whl
@@ -874,7 +880,8 @@ modules:
       - name: beautifulsoup4
         buildsystem: simple
         build-commands:
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" --find-links="file://${PWD}" beautifulsoup4
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+            --find-links="file://${PWD}" beautifulsoup4
         sources:
           - type: file
             url: https://files.pythonhosted.org/packages/21/0a/47fdf541c97fd9b6a610cb5fd518175308a7cc60569962e776ac52420387/beautifulsoup4-4.6.3-py3-none-any.whl
@@ -882,7 +889,8 @@ modules:
       - name: pyrate-limiter
         buildsystem: simple
         build-commands:
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+            .
         sources:
           - type: archive
             url: https://files.pythonhosted.org/packages/14/8a/2b8251c73589d0ae925a7ef9b9b485791f6e8b3863985be13eb97584282c/pyrate-limiter-2.8.1.tar.gz
@@ -890,7 +898,8 @@ modules:
       - name: toolz
         buildsystem: simple
         build-commands:
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" --find-links="file://${PWD}" toolz
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+            --find-links="file://${PWD}" toolz
         sources:
           - type: file
             url: https://files.pythonhosted.org/packages/b5/f1/3df506b493736e3ee11fc1a3c2de8014a55f025d830a71bb499acc049a2c/toolz-0.11.2-py3-none-any.whl
