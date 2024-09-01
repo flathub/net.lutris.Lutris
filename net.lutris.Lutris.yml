@@ -203,7 +203,7 @@ modules:
       - /bin
     sources: &gsm_sources
       - type: archive
-        url: http://www.quut.com/gsm/gsm-1.0.19.tar.gz
+        url: https://www.quut.com/gsm/gsm-1.0.19.tar.gz
         sha256: 4903652f68a8c04d0041f0d19b1eb713ddcd2aa011c5e595b3b8bca2755270f6
       - type: patch
         path: patches/gsm-makefile.patch
@@ -571,10 +571,10 @@ modules:
     sources: *sdl12_compat_sources
 
   # Needed for minecraft
-  - name: java11
+  - name: java17
     buildsystem: simple
     build-commands:
-      - /usr/lib/sdk/openjdk11/install.sh
+      - /usr/lib/sdk/openjdk17/install.sh
 
   # Modern DOSBox replacement
   - name: dosbox-staging
