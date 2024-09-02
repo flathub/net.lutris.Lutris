@@ -185,34 +185,6 @@ modules:
         x86_64: *compat_i386_opts
     sources: *libcapi20_sources
 
-  - name: gsm
-    build-options:
-      make-install-args:
-        - GSM_INSTALL_LIB=/app/lib
-    make-install-args: &gsm_make_install_args
-      - INSTALL_ROOT=/app
-      - GSM_INSTALL_INC=/app/include
-    no-autogen: true
-    cleanup: &gsm_cleanup
-      - /bin
-    sources: &gsm_sources
-      - type: archive
-        url: https://src.fedoraproject.org/lookaside/pkgs/gsm/gsm-1.0.19.tar.gz
-        sha256: 3a60f6b261868fb18f25683587115a0283304768fced7842c0ff3d01e8c9d5e0
-      - type: patch
-        path: patches/gsm-makefile.patch
-
-  - name: gsm-32bit
-    build-options:
-      arch:
-        x86_64: *compat_i386_opts
-      make-install-args:
-        - GSM_INSTALL_LIB=/app/lib32
-    make-install-args: *gsm_make_install_args
-    no-autogen: true
-    cleanup: *gsm_cleanup
-    sources: *gsm_sources
-
   # Multilib dependencies for native games and runners
 
   - name: libbsd
