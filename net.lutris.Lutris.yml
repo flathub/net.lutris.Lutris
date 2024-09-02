@@ -197,7 +197,7 @@ modules:
       - /bin
     sources: &gsm_sources
       - type: archive
-        url: https://src.fedoraproject.org/lookaside/pkgs/gsm/gsm-1.0.19.tar.gz/
+        url: https://src.fedoraproject.org/lookaside/pkgs/gsm/gsm-1.0.19.tar.gz
         sha256: 3a60f6b261868fb18f25683587115a0283304768fced7842c0ff3d01e8c9d5e0
       - type: patch
         path: patches/gsm-makefile.patch
