@@ -98,12 +98,13 @@ modules:
         sha256: 07543d761b5ae53e380fdf7a3f42bd706f2cf1ad04a310381fcf386fefb814c6
 
   - name: glu
+    buildsystem: meson
     config-opts: &glu_config_opts
       - --disable-static
     sources: &glu_sources
       - type: archive
-        url: https://mesa.freedesktop.org/archive/glu/glu-9.0.2.tar.xz
-        sha256: 6e7280ff585c6a1d9dfcdf2fca489251634b3377bfc33c29e4002466a38d02d4
+        url: https://mesa.freedesktop.org/archive/glu/glu-9.0.3.tar.xz
+        sha256: bd43fe12f374b1192eb15fe20e45ff456b9bc26ab57f0eee919f96ca0f8a330f
         x-checker-data:
           type: anitya
           project-id: 13518
@@ -111,6 +112,7 @@ modules:
           url-template: https://mesa.freedesktop.org/archive/glu/glu-$version.tar.xz
 
   - name: glu-32bit
+    buildsystem: meson
     build-options:
       arch:
         x86_64: *compat_i386_opts
