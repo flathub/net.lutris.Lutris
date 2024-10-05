@@ -99,8 +99,6 @@ modules:
 
   - name: glu
     buildsystem: meson
-    config-opts: &glu_config_opts
-      - --disable-static
     sources: &glu_sources
       - type: archive
         url: https://mesa.freedesktop.org/archive/glu/glu-9.0.3.tar.xz
@@ -116,7 +114,6 @@ modules:
     build-options:
       arch:
         x86_64: *compat_i386_opts
-    config-opts: *glu_config_opts
     sources: *glu_sources
 
   - name: OpenCL
