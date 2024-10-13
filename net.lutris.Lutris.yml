@@ -40,6 +40,9 @@ finish-args:
   - --env=APPIMAGE_EXTRACT_AND_RUN=1
   # See: https://github.com/flathub/net.lutris.Lutris/pull/368#issuecomment-1751381312
   - --env=WEBKIT_DISABLE_DMABUF_RENDERER=1
+  # ?!?
+  - --filesystem=~/.var/app/org.openwinecomponents.umu.umu-launcher:rw
+  - --env=XDG_DATA_DIRS=/app/share:/usr/lib/extensions/vulkan/share:/usr/share:/usr/share/runtime/share:/run/host/user-share:/run/host/share:/usr/lib/pressure-vessel/overrides/share
 
 inherit-extensions:
   - org.freedesktop.Platform.GL32
@@ -738,7 +741,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/lutris/lutris.git
-        commit: 98f53221f3baa6702fdb487e7d5b1a83a891601f
+        commit: 295b7f1e0cd4acc55d1acc5690ba8e1597a8c539
     modules:
       - modules/python3-poetry.json
       - modules/python3-requests.yaml
