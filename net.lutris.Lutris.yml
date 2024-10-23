@@ -1,7 +1,7 @@
 id: net.lutris.Lutris
 sdk: org.gnome.Sdk
 runtime: org.gnome.Platform
-runtime-version: '47'
+runtime-version: "47"
 command: lutris-wrapper
 rename-icon: lutris
 copy-icon: true
@@ -60,11 +60,11 @@ inherit-extensions:
 add-extensions:
   org.gnome.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: '47'
+    version: "47"
 
   org.gnome.Platform.Compat.i386.Debug:
     directory: lib/debug/lib/i386-linux-gnu
-    version: '47'
+    version: "47"
     no-autodownload: true
 
 sdk-extensions:
@@ -83,8 +83,8 @@ x-compat-i386-opts: &compat_i386_opts
   libdir: /app/lib32
 
 cleanup:
-  - '*.a'
-  - '*.la'
+  - "*.a"
+  - "*.la"
   - /share/man
   - /share/help
 cleanup-commands:
@@ -623,7 +623,7 @@ modules:
       - /bin
       - /include
       - /share
-      - '*.a'
+      - "*.a"
     sources: &ncurses_sources
       - type: archive
         url: http://ftp.gnu.org/gnu/ncurses/ncurses-6.3.tar.gz
@@ -644,7 +644,7 @@ modules:
     buildsystem: simple
     build-commands:
       - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
-    cleanup: ['*']
+    cleanup: ["*"]
     sources:
       - type: archive
         url: https://files.pythonhosted.org/packages/15/d1/d8798b83e953fd6f86ca9b50f93eec464a9305b0661469c8234e61095481/flit_core-3.7.1.tar.gz
@@ -655,7 +655,7 @@ modules:
     build-commands:
       - python3 setup.py build -j${FLATPAK_BUILDER_N_JOBS} -DARCHIVE_DOWNLOAD_DIR="${FLATPAK_BUILDER_BUILDDIR}"
       - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
-    cleanup: ['*']
+    cleanup: ["*"]
     sources:
       - type: archive
         url: https://files.pythonhosted.org/packages/37/2c/d717d13a413d6f7579cdaa1e28e6e2c98de95461549b08d311c8a5bf4c51/ninja-1.11.1.1.tar.gz
@@ -669,7 +669,7 @@ modules:
         build-commands:
           - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
             .
-        cleanup: ['*']
+        cleanup: ["*"]
         sources:
           - type: archive
             url: https://files.pythonhosted.org/packages/9e/e2/2e440c30e93fc5b505ee56169a4396b05e797a1daadb721aba429adbfd51/scikit-build-0.15.0.tar.gz
@@ -680,7 +680,7 @@ modules:
             build-commands:
               - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
                 .
-            cleanup: ['*']
+            cleanup: ["*"]
             sources:
               - type: archive
                 url: https://files.pythonhosted.org/packages/d0/43/f038b5009f93bcd77b1b8da9e6d424b739ab17aec9726f3a99eba23d53ca/setuptools_scm-7.0.5.tar.gz
@@ -691,7 +691,7 @@ modules:
                 build-commands:
                   - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
                     .
-                cleanup: ['*']
+                cleanup: ["*"]
                 sources:
                   - type: archive
                     url: https://files.pythonhosted.org/packages/9e/1d/d128169ff58c501059330f1ad96ed62b79114a2eb30b8238af63a2e27f70/typing_extensions-4.3.0.tar.gz
@@ -701,7 +701,7 @@ modules:
                 build-commands:
                   - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
                     .
-                cleanup: ['*']
+                cleanup: ["*"]
                 sources:
                   - type: archive
                     url: https://files.pythonhosted.org/packages/c0/3f/d7af728f075fb08564c5949a9c95e44352e23dee646869fa104a3b2060a3/tomli-2.0.1.tar.gz
@@ -721,7 +721,7 @@ modules:
     build-commands:
       - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" --ignore-installed
         .
-    cleanup: ['*']
+    cleanup: ["*"]
     sources:
       - type: archive
         url: https://files.pythonhosted.org/packages/a7/f0/565f731cd138a516c2dba8439e47c5622493c82f41c4845d287617ef6ec9/meson-0.63.2.tar.gz
@@ -747,7 +747,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/lutris/lutris.git
-        commit: 3993d57d524802e4744e59d26a107a5fbffe1d67
+        commit: 3a45272a35dd61f32bd164660d670f9737c4146a
     modules:
       - modules/python3-poetry.json
       - modules/python3-requests.yaml
