@@ -33,7 +33,7 @@ finish-args:
   # System tray icon
   - --talk-name=org.kde.StatusNotifierWatcher
   - --talk-name=org.freedesktop.Flatpak
-  # Disable access to xdg-data/flatpak as it's causing an finish-args-unnecessary-xdg-data-access error.
+  # Disable access to xdg-data/flatpak as it's causing a finish-args-unnecessary-xdg-data-access error.
   # Flatpak talk API might be enough but this might break features like Steam games detection.
   # - --filesystem=xdg-data/flatpak:ro
   # Needed for appimages
