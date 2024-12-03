@@ -1,12 +1,12 @@
 id: net.lutris.Lutris
 sdk: org.gnome.Sdk
 runtime: org.gnome.Platform
-runtime-version: '45'
+runtime-version: "47"
 command: lutris-wrapper
 rename-icon: lutris
 copy-icon: true
 base: org.winehq.Wine
-base-version: stable-23.08
+base-version: stable-24.08
 finish-args:
   - --share=ipc
   - --socket=x11
@@ -33,14 +33,21 @@ finish-args:
   # System tray icon
   - --talk-name=org.kde.StatusNotifierWatcher
   - --talk-name=org.freedesktop.Flatpak
-  # Disable access to xdg-data/flatpak as it's causing an finish-args-unnecessary-xdg-data-access error.
+  # Disable access to xdg-data/flatpak as it's causing a finish-args-unnecessary-xdg-data-access error.
   # Flatpak talk API might be enough but this might break features like Steam games detection.
   # - --filesystem=xdg-data/flatpak:ro
   # Needed for appimages
   - --env=APPIMAGE_EXTRACT_AND_RUN=1
   # See: https://github.com/flathub/net.lutris.Lutris/pull/368#issuecomment-1751381312
   - --env=WEBKIT_DISABLE_DMABUF_RENDERER=1
-
+  # --- umu ---
+  # Install the umu runtime at $HOST_XDG_DATA_HOME
+  # See: https://github.com/Open-Wine-Components/umu-launcher/pull/229
+  - --filesystem=xdg-data/umu:create
+  # Pressure Vessel
+  # See: https://github.com/flathub/com.valvesoftware.Steam/commit/0538256facdb0837c33232bc65a9195a8a5bc750
+  - --env=XDG_DATA_DIRS=/app/share:/usr/lib/extensions/vulkan/share:/usr/share:/usr/share/runtime/share:/run/host/user-share:/run/host/share:/usr/lib/pressure-vessel/overrides/share
+  - --allow=per-app-dev-shm
 
 inherit-extensions:
   - org.freedesktop.Platform.GL32
@@ -53,11 +60,11 @@ inherit-extensions:
 add-extensions:
   org.gnome.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: '45'
+    version: "47"
 
   org.gnome.Platform.Compat.i386.Debug:
     directory: lib/debug/lib/i386-linux-gnu
-    version: '45'
+    version: "47"
     no-autodownload: true
 
 sdk-extensions:
@@ -76,8 +83,8 @@ x-compat-i386-opts: &compat_i386_opts
   libdir: /app/lib32
 
 cleanup:
-  - '*.a'
-  - '*.la'
+  - "*.a"
+  - "*.la"
   - /share/man
   - /share/help
 cleanup-commands:
@@ -94,27 +101,42 @@ modules:
       - -DCMAKE_BUILD_TYPE=Release
     sources:
       - type: archive
-        url: https://github.com/KhronosGroup/Vulkan-Tools/archive/refs/tags/sdk-1.3.261.1.tar.gz
-        sha256: 07543d761b5ae53e380fdf7a3f42bd706f2cf1ad04a310381fcf386fefb814c6
+        url: https://github.com/KhronosGroup/Vulkan-Tools/archive/v1.3.297/Vulkan-Tools-1.3.297.tar.gz
+        sha256: 95bffa39d90f3ec81d8e3a0fa6c846ac1a10442152cc0b6d0d6567ce48932f89
+    modules:
+      - name: volk
+        buildsystem: cmake-ninja
+        config-opts:
+          - -DVOLK_INSTALL=ON
+        sources:
+          - type: archive
+            url: https://github.com/zeux/volk/archive/vulkan-sdk-1.3.296.0.tar.gz
+            sha256: 8ffd0e81e29688f4abaa39e598937160b098228f37503903b10d481d4862ab85
+        modules:
+          - name: vulkan-headers
+            buildsystem: cmake-ninja
+            sources:
+              - type: archive
+                url: https://github.com/KhronosGroup/Vulkan-Headers/archive/v1.3.297/Vulkan-Headers-v1.3.297.tar.gz
+                sha256: 1d679e2edc43cb7ad818b81dea960e374f1d6dd082325eb9b4c6113e76263c02
 
   - name: glu
-    config-opts: &glu_config_opts
-      - --disable-static
+    buildsystem: meson
     sources: &glu_sources
       - type: archive
-        url: https://mesa.freedesktop.org/archive/glu/glu-9.0.2.tar.xz
-        sha256: 6e7280ff585c6a1d9dfcdf2fca489251634b3377bfc33c29e4002466a38d02d4
+        url: https://archive.mesa3d.org/glu/glu-9.0.3.tar.xz
+        sha256: bd43fe12f374b1192eb15fe20e45ff456b9bc26ab57f0eee919f96ca0f8a330f
         x-checker-data:
           type: anitya
           project-id: 13518
           stable-only: true
-          url-template: https://mesa.freedesktop.org/archive/glu/glu-$version.tar.xz
+          url-template: https://archive.mesa3d.org/glu/glu-$version.tar.xz
 
   - name: glu-32bit
+    buildsystem: meson
     build-options:
       arch:
         x86_64: *compat_i386_opts
-    config-opts: *glu_config_opts
     sources: *glu_sources
 
   - name: OpenCL
@@ -125,7 +147,6 @@ modules:
       - type: archive
         url: https://github.com/KhronosGroup/OpenCL-Headers/archive/v2023.04.17/OpenCL-Headers-v2023.04.17.tar.gz
         sha256: 0ce992f4167f958f68a37918dec6325be18f848dee29a4521c633aae3304915d
-
 
   - name: libpcap
     config-opts: &libpcap_config_opts
@@ -141,7 +162,6 @@ modules:
         x86_64: *compat_i386_opts
     config-opts: *libpcap_config_opts
     sources: *libcap_sources
-
 
   - name: v4l2-utils
     config-opts: &v4l2_config_opts
@@ -160,23 +180,22 @@ modules:
     config-opts: *v4l2_config_opts
     sources: *v4l2_sources
 
-
   - name: libgphoto2
+    config-opts: &libgphoto2_config_opts
+      - --disable-docs
     sources: &libgphoto2_sources
       - type: archive
-        url: https://github.com/gphoto/libgphoto2/releases/download/v2.5.27/libgphoto2-2.5.27.tar.gz
-        sha256: fd48f6f58259ba199e834010aca0af3672ca0223ed0a98ba89ec693a415f242a
-      - type: script
-        dest-filename: autogen.sh
-        commands:
-          - autoreconf -ifv
+        url: https://sourceforge.net/projects/gphoto/files/libgphoto/2.5.31/libgphoto2-2.5.31.tar.xz
+        sha256: 8fc7bf40f979459509b87dd4ff1aae9b6c1c2b4724d37db576081eec15406ace
+      - type: patch
+        path: patches/libgphoto-gcc14.patch
 
   - name: libgphoto2-32bit
+    config-opts: *libgphoto2_config_opts
     build-options:
       arch:
         x86_64: *compat_i386_opts
     sources: *libgphoto2_sources
-
 
   - name: libcapi20
     sources: &libcapi20_sources
@@ -189,35 +208,6 @@ modules:
       arch:
         x86_64: *compat_i386_opts
     sources: *libcapi20_sources
-
-
-  - name: gsm
-    build-options:
-      make-install-args:
-        - GSM_INSTALL_LIB=/app/lib
-    make-install-args: &gsm_make_install_args
-      - INSTALL_ROOT=/app
-      - GSM_INSTALL_INC=/app/include
-    no-autogen: true
-    cleanup: &gsm_cleanup
-      - /bin
-    sources: &gsm_sources
-      - type: archive
-        url: http://www.quut.com/gsm/gsm-1.0.19.tar.gz
-        sha256: 4903652f68a8c04d0041f0d19b1eb713ddcd2aa011c5e595b3b8bca2755270f6
-      - type: patch
-        path: patches/gsm-makefile.patch
-
-  - name: gsm-32bit
-    build-options:
-      arch:
-        x86_64: *compat_i386_opts
-      make-install-args:
-        - GSM_INSTALL_LIB=/app/lib32
-    make-install-args: *gsm_make_install_args
-    no-autogen: true
-    cleanup: *gsm_cleanup
-    sources: *gsm_sources
 
   # Multilib dependencies for native games and runners
 
@@ -233,12 +223,13 @@ modules:
         x86_64: *compat_i386_opts
     sources: *libbsd_sources
 
-
   - name: sndio11
     config-opts: &sndio_config_opts
       - --with-libbsd
     cleanup: &sndio_cleanup
       - /bin
+    build-options:
+      cflags: -Wno-error=implicit-function-declaration
     sources: &sndio11_sources
       - type: archive
         url: http://archive.ubuntu.com/ubuntu/pool/universe/s/sndio/sndio_1.1.0.orig.tar.gz
@@ -252,14 +243,18 @@ modules:
 
   - name: sndio11-32bit
     build-options:
+      cflags: -Wno-error=implicit-function-declaration
       arch:
         x86_64: *compat_i386_opts
     config-opts: *sndio_config_opts
     cleanup: *sndio_cleanup
     sources: *sndio11_sources
+
   - name: sndio15
     config-opts: *sndio_config_opts
     cleanup: *sndio_cleanup
+    build-options:
+      cflags: -Wno-error=implicit-function-declaration
     sources: &sndio15_sources
       - type: archive
         url: http://archive.ubuntu.com/ubuntu/pool/universe/s/sndio/sndio_1.5.0.orig.tar.gz
@@ -273,6 +268,7 @@ modules:
 
   - name: sndio15-32bit
     build-options:
+      cflags: -Wno-error=implicit-function-declaration
       arch:
         x86_64: *compat_i386_opts
     config-opts: *sndio_config_opts
@@ -289,15 +285,13 @@ modules:
       - install -Dm0775 -t /app/bin ../data/gamemoderun
     sources: &gamemode_sources
       - type: archive
-        url: https://github.com/FeralInteractive/gamemode/releases/download/1.7/gamemode-1.7.tar.xz
-        sha256: c1860f76f1d4c0d6e3965e52de21c824f24791049946da728da50f0c63748389
+        url: https://github.com/FeralInteractive/gamemode/releases/download/1.8.2/gamemode-1.8.2.tar.xz
+        sha256: 98cd1bcf6101c92fe87f974c7776af23c7e18f29ce6ecfe572b1c39dcde5c181
         x-checker-data:
           type: anitya
           project-id: 17410
           stable-only: true
           url-template: https://github.com/FeralInteractive/gamemode/releases/download/$version/gamemode-$version.tar.xz
-      - type: patch
-        path: patches/379.patch
 
   - name: gamemode-32bit
     build-options:
@@ -480,6 +474,8 @@ modules:
       - --disable-gtk-doc
       - --disable-orbit
       - --disable-introspection
+    build-options:
+      cflags: -fpermissive
     cleanup:
       - /bin
       - /libexec
@@ -544,12 +540,16 @@ modules:
 
   - name: kitty
     no-autogen: true
+    build-options:
+      cflags: -Wno-error=calloc-transposed-args -Wno-error=missing-braces
     sources:
       - type: git
         url: https://github.com/kovidgoyal/kitty
         tag: v0.25.2
       - type: patch
         path: patches/kitty-wayland-state.patch
+      - type: patch
+        path: patches/0001-Remove-_FOTIFY_SOURCE.patch
     no-make-install: true
     post-install:
       - cp -r . $FLATPAK_DEST/lib/kitty
@@ -571,10 +571,10 @@ modules:
     sources: *sdl12_compat_sources
 
   # Needed for minecraft
-  - name: java11
+  - name: java17
     buildsystem: simple
     build-commands:
-      - /usr/lib/sdk/openjdk11/install.sh
+      - /usr/lib/sdk/openjdk17/install.sh
 
   # Modern DOSBox replacement
   - name: dosbox-staging
@@ -608,7 +608,6 @@ modules:
             url: https://github.com/munt/munt/archive/libmt32emu_2_5_3.tar.gz
             sha256: 062d110bbdd7253d01ef291f57e89efc3ee35fd087587458381f054bac49a8f5
 
-
   # Needed for FreeSO
   - name: mono
     buildsystem: simple
@@ -624,7 +623,7 @@ modules:
       - /bin
       - /include
       - /share
-      - '*.a'
+      - "*.a"
     sources: &ncurses_sources
       - type: archive
         url: http://ftp.gnu.org/gnu/ncurses/ncurses-6.3.tar.gz
@@ -641,36 +640,36 @@ modules:
   # Build backends used by some Python libraries installed below
   #
   # All of these are build-time-only dependencies and removed from the resulting image.
-  - name: python-flit-core  # needed by idna
+  - name: python-flit-core # needed by idna
     buildsystem: simple
     build-commands:
       - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
-    cleanup: ['*']
+    cleanup: ["*"]
     sources:
       - type: archive
         url: https://files.pythonhosted.org/packages/15/d1/d8798b83e953fd6f86ca9b50f93eec464a9305b0661469c8234e61095481/flit_core-3.7.1.tar.gz
         sha256: 14955af340c43035dbfa96b5ee47407e377ee337f69e70f73064940d27d0a44f
 
-  - name: python-ninja  # needed by dbus-python
+  - name: python-ninja # needed by dbus-python
     buildsystem: simple
     build-commands:
       - python3 setup.py build -j${FLATPAK_BUILDER_N_JOBS} -DARCHIVE_DOWNLOAD_DIR="${FLATPAK_BUILDER_BUILDDIR}"
       - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
-    cleanup: ['*']
+    cleanup: ["*"]
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/00/99/5beedbf09e3ec6b617606df42d04c4251959caddbd98397cce21da4c52d1/ninja-1.10.2.3.tar.gz
-        sha256: e1b86ad50d4e681a7dbdff05fc23bb52cb773edb90bc428efba33fa027738408
+        url: https://files.pythonhosted.org/packages/37/2c/d717d13a413d6f7579cdaa1e28e6e2c98de95461549b08d311c8a5bf4c51/ninja-1.11.1.1.tar.gz
+        sha256: 9d793b08dd857e38d0b6ffe9e6b7145d7c485a42dcfea04905ca0cdb6017cc3c
       - type: file
-        url: https://github.com/Kitware/ninja/archive/v1.10.2.g51db2.kitware.jobserver-1.tar.gz
-        sha256: 549c31ee596566b952c600e23eb9b8d39a4112cd5fdeb2e5a83370669176da40
+        url: https://github.com/Kitware/ninja/archive/v1.11.1.g95dee.kitware.jobserver-1.tar.gz
+        sha256: 7ba84551f5b315b4270dc7c51adef5dff83a2154a3665a6c9744245c122dd0db
     modules:
       - name: python-skbuild
         buildsystem: simple
         build-commands:
           - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
             .
-        cleanup: ['*']
+        cleanup: ["*"]
         sources:
           - type: archive
             url: https://files.pythonhosted.org/packages/9e/e2/2e440c30e93fc5b505ee56169a4396b05e797a1daadb721aba429adbfd51/scikit-build-0.15.0.tar.gz
@@ -681,37 +680,18 @@ modules:
             build-commands:
               - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
                 .
-            cleanup: ['*']
+            cleanup: ["*"]
             sources:
               - type: archive
                 url: https://files.pythonhosted.org/packages/d0/43/f038b5009f93bcd77b1b8da9e6d424b739ab17aec9726f3a99eba23d53ca/setuptools_scm-7.0.5.tar.gz
                 sha256: 031e13af771d6f892b941adb6ea04545bbf91ebc5ce68c78aaf3fff6e1fb4844
             modules:
-              - name: python-packaging
+              - name: python-typing-extensions
                 buildsystem: simple
                 build-commands:
                   - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
                     .
-                cleanup: ['*']
-                sources:
-                  - type: archive
-                    url: https://files.pythonhosted.org/packages/df/9e/d1a7217f69310c1db8fdf8ab396229f55a699ce34a203691794c5d1cad0c/packaging-21.3.tar.gz
-                    sha256: dd47c42927d89ab911e606518907cc2d3a1f38bbd026385970643f9c5b8ecfeb
-                modules:
-                  - name: python-pyparsing
-                    buildsystem: simple
-                    build-commands:
-                      - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
-                    cleanup: ['*']
-                    sources:
-                      - type: archive
-                        url: https://files.pythonhosted.org/packages/71/22/207523d16464c40a0310d2d4d8926daffa00ac1f5b1576170a32db749636/pyparsing-3.0.9.tar.gz
-                        sha256: 2b020ecf7d21b687f219b71ecad3631f644a47f01403fa1d1036b0c6416d70fb
-              - name: python-typing-extensions
-                buildsystem: simple
-                build-commands:
-                  - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
-                cleanup: ['*']
+                cleanup: ["*"]
                 sources:
                   - type: archive
                     url: https://files.pythonhosted.org/packages/9e/1d/d128169ff58c501059330f1ad96ed62b79114a2eb30b8238af63a2e27f70/typing_extensions-4.3.0.tar.gz
@@ -719,31 +699,44 @@ modules:
               - name: python-tomli
                 buildsystem: simple
                 build-commands:
-                  - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
-                cleanup: ['*']
+                  - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+                    .
+                cleanup: ["*"]
                 sources:
                   - type: archive
                     url: https://files.pythonhosted.org/packages/c0/3f/d7af728f075fb08564c5949a9c95e44352e23dee646869fa104a3b2060a3/tomli-2.0.1.tar.gz
                     sha256: de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f
-          - name: python-distro  # also needed by Lutris, do not add a cleanup property here!
+          - name: python-distro # also needed by Lutris, do not add a cleanup property here!
             buildsystem: simple
             build-commands:
-              - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+              - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+                .
             sources:
               - type: archive
                 url: https://files.pythonhosted.org/packages/b5/7e/ddfbd640ac9a82e60718558a3de7d5988a7d4648385cf00318f60a8b073a/distro-1.7.0.tar.gz
                 sha256: 151aeccf60c216402932b52e40ee477a939f8d58898927378a02abbe852c1c39
 
-  - name: python-meson  # needed by dbus-python, the meson version shipped by the SDK is too old (0.59<0.60)
+  - name: python-meson # needed by dbus-python, the meson version shipped by the SDK is too old (0.59<0.60)
     buildsystem: simple
     build-commands:
       - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" --ignore-installed
         .
-    cleanup: ['*']
+    cleanup: ["*"]
     sources:
       - type: archive
         url: https://files.pythonhosted.org/packages/a7/f0/565f731cd138a516c2dba8439e47c5622493c82f41c4845d287617ef6ec9/meson-0.63.2.tar.gz
         sha256: 16222f17ef76be0542c91c07994f9676ae879f46fc21c0c786a21ef2cb518bbf
+
+  # These are needed for window management inside gamescope
+  # --- python-xlib ---
+  - name: python-xlib
+    buildsystem: simple
+    build-commands:
+      - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+    sources:
+      - type: archive
+        url: https://files.pythonhosted.org/packages/source/p/python-xlib/python-xlib-0.33.tar.gz
+        sha256: 55af7906a2c75ce6cb280a584776080602444f75815a7aff4d287bb2d7018b32
 
   # Lutris app with dependencies
   - name: lutris
@@ -754,7 +747,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/lutris/lutris.git
-        commit: d3fd93dfe6d4017592c3296ae04d4d23e4dba98d
+        commit: 70adad87231e57b73c838bcd20f084f242d6ae4c
     modules:
       - modules/python3-poetry.json
       - modules/python3-requests.yaml
@@ -762,8 +755,8 @@ modules:
         buildsystem: meson
         sources:
           - type: archive
-            url: https://download.gnome.org/sources/gnome-desktop/44/gnome-desktop-44.0.tar.xz
-            sha256: 42c773745d84ba14bc1cf1c4c6f4606148803a5cd337941c63964795f3c59d42
+            url: https://download.gnome.org/sources/gnome-desktop/44/gnome-desktop-44.1.tar.xz
+            sha256: ae7ca55dc9e08914999741523a17d29ce223915626bd2462a120bf96f47a79ab
 
       - name: python-evdev
         buildsystem: simple
@@ -798,8 +791,8 @@ modules:
             .
         sources:
           - type: archive
-            url: https://files.pythonhosted.org/packages/36/2b/61d51a2c4f25ef062ae3f74576b01638bebad5e045f747ff12643df63844/PyYAML-6.0.tar.gz
-            sha256: 68fb519c14306fec9720a2a5b45bc9f0c8d1b9c72adf45c37baedfcd949c35a2
+            url: https://files.pythonhosted.org/packages/54/ed/79a089b6be93607fa5cdaedf301d7dfb23af5f25c398d5ead2525b063e17/pyyaml-6.0.2.tar.gz
+            sha256: d584d9ec91ad65861cc08d42e834324ef890a082e591037abe114850ff7bbc3e
       - name: python-magic
         buildsystem: simple
         build-commands:
@@ -812,6 +805,8 @@ modules:
 
       - name: python-lxml
         buildsystem: simple
+        build-options:
+          cflags: -fpermissive
         build-commands:
           - python3 setup.py build -j${FLATPAK_BUILDER_N_JOBS}
           # Using `--ignore-installed` here is necessary, since `lxml` is
@@ -821,8 +816,8 @@ modules:
             --ignore-installed .
         sources:
           - type: archive
-            url: https://files.pythonhosted.org/packages/70/bb/7a2c7b4f8f434aa1ee801704bf08f1e53d7b5feba3d5313ab17003477808/lxml-4.9.1.tar.gz
-            sha256: fe749b052bb7233fe5d072fcb549221a8cb1a16725c47c37e42b0b9cb3ff2c3f
+            url: https://files.pythonhosted.org/packages/84/14/c2070b5e37c650198de8328467dd3d1681e80986f81ba0fea04fc4ec9883/lxml-4.9.4.tar.gz
+            sha256: b1541e50b78e15fa06a2670157a1962ef06591d4c998b998047fff5e3236880e
 
       - name: python-pillow
         buildsystem: simple
@@ -858,7 +853,8 @@ modules:
       - name: python-protobuf
         buildsystem: simple
         build-commands:
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+            .
         sources:
           - type: archive
             url: https://files.pythonhosted.org/packages/55/5b/e3d951e34f8356e5feecacd12a8e3b258a1da6d9a03ad1770f28925f29bc/protobuf-3.20.3.tar.gz
@@ -866,7 +862,8 @@ modules:
       - name: soupsieve
         buildsystem: simple
         build-commands:
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" --find-links="file://${PWD}" soupsieve
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+            --find-links="file://${PWD}" soupsieve
         sources:
           - type: file
             url: https://files.pythonhosted.org/packages/49/37/673d6490efc51ec46d198c75903d99de59baffdd47aea3d071b80a9e4e89/soupsieve-2.4.1-py3-none-any.whl
@@ -874,7 +871,8 @@ modules:
       - name: beautifulsoup4
         buildsystem: simple
         build-commands:
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" --find-links="file://${PWD}" beautifulsoup4
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+            --find-links="file://${PWD}" beautifulsoup4
         sources:
           - type: file
             url: https://files.pythonhosted.org/packages/21/0a/47fdf541c97fd9b6a610cb5fd518175308a7cc60569962e776ac52420387/beautifulsoup4-4.6.3-py3-none-any.whl
@@ -882,7 +880,8 @@ modules:
       - name: pyrate-limiter
         buildsystem: simple
         build-commands:
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+            .
         sources:
           - type: archive
             url: https://files.pythonhosted.org/packages/14/8a/2b8251c73589d0ae925a7ef9b9b485791f6e8b3863985be13eb97584282c/pyrate-limiter-2.8.1.tar.gz
@@ -890,7 +889,8 @@ modules:
       - name: toolz
         buildsystem: simple
         build-commands:
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" --find-links="file://${PWD}" toolz
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+            --find-links="file://${PWD}" toolz
         sources:
           - type: file
             url: https://files.pythonhosted.org/packages/b5/f1/3df506b493736e3ee11fc1a3c2de8014a55f025d830a71bb499acc049a2c/toolz-0.11.2-py3-none-any.whl
