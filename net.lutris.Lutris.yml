@@ -9,8 +9,8 @@ base: org.winehq.Wine
 base-version: stable-24.08
 finish-args:
   - --share=ipc
-  - --socket=x11
   - --socket=wayland
+  - --socket=fallback-x11
   - --socket=pulseaudio
   - --device=all
   - --share=network
@@ -597,7 +597,7 @@ modules:
             url: https://gitlab.freedesktop.org/slirp/libslirp/-/archive/v4.6.1/libslirp-v4.6.1.tar.gz
             sha256: 69ad4df0123742a29cc783b35de34771ed74d085482470df6313b6abeb799b11
       - name: munt
-        buildsystem: cmake
+        buildsystem: cmake-ninja
         config-opts:
           - -Dmunt_WITH_MT32EMU_SMF2WAV=FALSE
           - -Dmunt_WITH_MT32EMU_QT=FALSE
