@@ -1,12 +1,12 @@
 id: net.lutris.Lutris
 sdk: org.gnome.Sdk
 runtime: org.gnome.Platform
-runtime-version: "47"
+runtime-version: "46"
 command: lutris-wrapper
 rename-icon: lutris
 copy-icon: true
 base: org.winehq.Wine
-base-version: stable-24.08
+base-version: stable-23.08
 finish-args:
   - --share=ipc
   - --socket=x11
@@ -60,11 +60,11 @@ inherit-extensions:
 add-extensions:
   org.gnome.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: "47"
+    version: "46"
 
   org.gnome.Platform.Compat.i386.Debug:
     directory: lib/debug/lib/i386-linux-gnu
-    version: "47"
+    version: "46"
     no-autodownload: true
 
 sdk-extensions:
@@ -540,8 +540,6 @@ modules:
 
   - name: kitty
     no-autogen: true
-    build-options:
-      cflags: -Wno-error=calloc-transposed-args -Wno-error=missing-braces
     sources:
       - type: git
         url: https://github.com/kovidgoyal/kitty
