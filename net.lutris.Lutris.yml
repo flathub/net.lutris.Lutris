@@ -3,7 +3,7 @@ sdk: org.gnome.Sdk
 runtime: org.gnome.Platform
 runtime-version: "46"
 command: lutris-wrapper
-rename-icon: lutris
+rename-icon: net.lutris.Lutris
 copy-icon: true
 base: org.winehq.Wine
 base-version: stable-23.08
@@ -739,9 +739,6 @@ modules:
   # Lutris app with dependencies
   - name: lutris
     buildsystem: meson
-    post-install:
-      - desktop-file-edit --set-key=X-Flatpak-RenamedFrom --set-value="lutris.desktop;"
-        /app/share/applications/${FLATPAK_ID}.desktop
     sources:
       - type: git
         url: https://github.com/lutris/lutris.git
