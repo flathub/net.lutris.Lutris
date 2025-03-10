@@ -162,10 +162,11 @@ modules:
     sources: *libcap_sources
 
   - name: v4l2-utils
+    buildsystem: meson
     config-opts: &v4l2_config_opts
-      - --disable-v4l-utils
-      - --disable-qv4l2
-      - --disable-qvidcap
+      - -Dv4l-utils=false
+      - -Dqv4l2=disabled
+      - -Dqvidcap=disabled
     sources: &v4l2_sources
       - type: archive
         url: https://linuxtv.org/downloads/v4l-utils/v4l-utils-1.28.1.tar.xz
