@@ -3,8 +3,6 @@ sdk: org.gnome.Sdk
 runtime: org.gnome.Platform
 runtime-version: "46"
 command: lutris-wrapper
-rename-icon: net.lutris.Lutris
-copy-icon: true
 base: org.winehq.Wine
 base-version: stable-23.08
 finish-args:
@@ -448,7 +446,7 @@ modules:
         url: https://download.gnome.org/sources/zenity/3.41/zenity-3.41.0.tar.xz
         sha256: 19b676c3510e22badfcc3204062d432ba537402f5e0ae26128c0d90c954037e1
 
-  - shared-modules/libappindicator/libappindicator-gtk3-introspection-12.10.json
+  - shared-modules/libayatana-appindicator/libayatana-appindicator-gtk3.json
 
   # Required by some 8/16-bit emulators
   - shared-modules/linux-audio/fluidsynth2.json
