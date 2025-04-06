@@ -72,7 +72,8 @@ sdk-extensions:
 
 x-compat-i386-opts: &compat_i386_opts
   prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
-  ldflags: -L/app/lib32
+  ldflags: -L/app/lib32 -Wl,-rpath-link=/app/lib32 -Wl,-z,relro,-z,now -Wl,--as-needed
+  ldflags-override: true
   append-path: /usr/lib/sdk/toolchain-i386/bin
   env:
     CC: i686-unknown-linux-gnu-gcc
