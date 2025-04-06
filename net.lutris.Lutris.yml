@@ -1,10 +1,10 @@
 id: net.lutris.Lutris
 sdk: org.gnome.Sdk
 runtime: org.gnome.Platform
-runtime-version: "46"
+runtime-version: "48"
 command: lutris-wrapper
 base: org.winehq.Wine
-base-version: stable-23.08
+base-version: stable-24.08
 finish-args:
   - --share=ipc
   - --socket=x11
@@ -58,11 +58,11 @@ inherit-extensions:
 add-extensions:
   org.gnome.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: "46"
+    version: "48"
 
   org.gnome.Platform.Compat.i386.Debug:
     directory: lib/debug/lib/i386-linux-gnu
-    version: "46"
+    version: "48"
     no-autodownload: true
 
 sdk-extensions:
@@ -536,20 +536,16 @@ modules:
         url: https://github.com/librsync/librsync.git
         tag: v2.3.4
 
-  # - name: kitty
-  #   no-autogen: true
-  #   sources:
-  #     - type: git
-  #       url: https://github.com/kovidgoyal/kitty
-  #       tag: v0.25.2
-  #     - type: patch
-  #       path: patches/kitty-wayland-state.patch
-  #     - type: patch
-  #       path: patches/0001-Remove-_FOTIFY_SOURCE.patch
-  #   no-make-install: true
-  #   post-install:
-  #     - cp -r . $FLATPAK_DEST/lib/kitty
-  #     - ln -s /app/lib/kitty/kitty/launcher/kitty $FLATPAK_DEST/bin/kitty
+  - name: kitty
+    buildsystem: simple
+    build-commands:
+      - install -Dm0775 -t /app/bin bin/kitty
+      - cp -rn lib/kitty-extensions /app/lib
+    sources:
+      - type: archive
+        url: https://github.com/kovidgoyal/kitty/releases/download/v0.35.2/kitty-0.35.2-x86_64.txz
+        sha256: a49bb1ecd05495178a50958960a6377db6bbbfbe647b5c5ecae9bd14ded93acc
+        strip-components: 0
 
   # Needed by Quake 3 and others
   - name: sdl12-compat
