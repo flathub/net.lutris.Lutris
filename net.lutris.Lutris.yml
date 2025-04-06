@@ -177,8 +177,6 @@ modules:
     config-opts: *v4l2_config_opts
     sources: *v4l2_sources
 
-  - shared-modules/libusb/libusb.json
-
   - name: libgphoto2
     config-opts: &libgphoto2_config_opts
       - --disable-docs
@@ -189,12 +187,12 @@ modules:
       - type: patch
         path: patches/libgphoto-gcc14.patch
 
-  # - name: libgphoto2-32bit
-  #   config-opts: *libgphoto2_config_opts
-  #   build-options:
-  #     arch:
-  #       x86_64: *compat_i386_opts
-  #   sources: *libgphoto2_sources
+  - name: libgphoto2-32bit
+    config-opts: *libgphoto2_config_opts
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    sources: *libgphoto2_sources
 
   - name: libcapi20
     sources: &libcapi20_sources
