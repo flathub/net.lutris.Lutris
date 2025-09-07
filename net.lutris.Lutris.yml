@@ -535,8 +535,8 @@ modules:
   - name: perl
     sources:
       - type: archive
-        url: https://www.cpan.org/src/5.0/perl-5.34.0.tar.gz
-        sha256: 551efc818b968b05216024fb0b727ef2ad4c100f8cb6b43fab615fa78ae5be9a
+        url: https://www.cpan.org/src/5.0/perl-5.42.0.tar.gz
+        sha256: e093ef184d7f9a1b9797e2465296f55510adb6dab8842b0c3ed53329663096dc
       - type: script
         dest-filename: configure
         commands:
