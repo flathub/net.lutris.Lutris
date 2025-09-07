@@ -616,8 +616,8 @@ modules:
           - -Dlibmt32emu_WITH_SYMBOL_VERSIONING=TRUE
         sources:
           - type: archive
-            url: https://github.com/munt/munt/archive/libmt32emu_2_5_3.tar.gz
-            sha256: 062d110bbdd7253d01ef291f57e89efc3ee35fd087587458381f054bac49a8f5
+            url: https://github.com/munt/munt/archive/libmt32emu_2_7_2.tar.gz
+            sha256: 3b0beff64e83d2b4879baba2326eed1300edc9663b3dc52621fc74d196ca9a80
 
   # Needed for FreeSO
   - name: mono
