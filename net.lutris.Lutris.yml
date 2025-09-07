@@ -183,21 +183,6 @@ modules:
     config-opts: *v4l2_config_opts
     sources: *v4l2_sources
 
-  - name: libusb
-    config-opts: &libusb_config_opts
-      - --disable-static
-    sources: &libusb_sources
-      - type: archive
-        url: https://github.com/libusb/libusb/releases/download/v1.0.27/libusb-1.0.27.tar.bz2
-        sha256: ffaa41d741a8a3bee244ac8e54a72ea05bf2879663c098c82fc5757853441575
-
-  - name: libusb-32bit
-    config-opts: *libusb_config_opts
-    build-options:
-      arch:
-        x86_64: *compat_i386_opts
-    sources: *libusb_sources
-
   - name: libgphoto2
     config-opts: &libgphoto2_config_opts
       - --disable-docs
