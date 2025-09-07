@@ -626,6 +626,8 @@ modules:
       - /usr/lib/sdk/mono6/install.sh
 
   - name: ncurses
+    build-options:
+      cflags: "-std=gnu17"
     config-opts: &ncurses_config_opts
       - --with-shared
       - --without-manpageus
@@ -637,13 +639,14 @@ modules:
       - "*.a"
     sources: &ncurses_sources
       - type: archive
-        url: http://ftp.gnu.org/gnu/ncurses/ncurses-6.3.tar.gz
-        sha256: 97fc51ac2b085d4cde31ef4d2c3122c21abc217e9090a43a30fc5ec21684e059
+        url: http://ftp.gnu.org/gnu/ncurses/ncurses-6.5.tar.gz
+        sha256: 136d91bc269a9a5785e5f9e980bc76ab57428f604ce3e5a5a90cebc767971cc6
 
   - name: ncurses-32bits
     build-options:
       arch:
         x86_64: *compat_i386_opts
+      cflags: "-std=gnu17"
     config-opts: *ncurses_config_opts
     cleanup: *ncurses_cleanup
     sources: *ncurses_sources
