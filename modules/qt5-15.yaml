@@ -59,8 +59,8 @@ modules:
     sources:
     - type: git
       url: https://invent.kde.org/qt/qt/qtbase.git
-      # HEAD as of 14/03/2022
-      commit: e894b8945c607b4c188a178ae0554139f877a061
+      # HEAD of 5.15 branch as of 2025-09-07
+      commit: 5e8b3ee0ae8cabf3c1a84d4568ff5f9f2bb09544
     - type: patch
       path: patches/qtbase-avoid-hardcoding-kernel-version.patch
     - type: patch
@@ -68,8 +68,6 @@ modules:
     # TODO: Temporary fix for https://github.com/flatpak/flatpak/issues/3397.
     - type: patch
       path: patches/qtbase-revert-qstandardpaths-dont-change-permissions-on-xdg-runtime-dir.patch
-    - type: patch
-      path: patches/qtbase-filechooser-portal-send-window-id-in-hex.patch
     - type: shell
       commands:
         - mv configure configure.qt
@@ -85,8 +83,8 @@ modules:
     sources:
       - type: git
         url: https://invent.kde.org/qt/qt/qtwayland.git
-        # HEAD as of 14/03/2022
-        commit: f4dd0560032c101fe9fd140ccc2397f5c0184146
+        # HEAD of 5.15 branch as of 2025-09-07
+        commit: 26d0b4202b9d81527138ce614573e0bc3b528b9d
   - name: qtquickcontrols
     buildsystem: qmake
     cleanup:
@@ -94,8 +92,8 @@ modules:
     sources:
       - type: git
         url: https://invent.kde.org/qt/qt/qtquickcontrols.git
-        # HEAD as of 14/03/2022
-        commit: d054de15b3c9ead0f96655ddfb1a6381ed7a0e2b
+        # HEAD of 5.15 branch as of 2025-09-07
+        commit: 37ee5e07e82296e24cc02c8bf6f31cb6bd8846b1
   - name: qtx11extras
     buildsystem: qmake
     cleanup:
@@ -103,8 +101,8 @@ modules:
     sources:
       - type: git
         url: https://invent.kde.org/qt/qt/qtx11extras.git
-        # HEAD as of 14/03/2022
-        commit: f628d7a60e45d90a439cb0a393a6229ac6892be5
+        # HEAD of 5.15 branch as of 2025-09-07
+        commit: e6e7633bbd0efcc56035fef77f3f45efccf03a64
   - name: qt5-qttools
     buildsystem: qmake
     cleanup:
@@ -135,8 +133,8 @@ modules:
     sources:
       - type: git
         url: https://invent.kde.org/qt/qt/qttools.git
-        # HEAD as of 14/03/2022
-        commit: 36831ae742619e13db32ee6048d851bddee28a74
+        # HEAD of 5.15 branch as of 2025-09-07
+        commit: 1db38dc7d01e2b0567fc6d92c7aa58bfe69ce9c3
   - name: qt3d
     buildsystem: qmake
     cleanup:
@@ -144,5 +142,5 @@ modules:
     sources:
       - type: git
         url: https://invent.kde.org/qt/qt/qt3d.git
-        # HEAD as of 14/03/2022
-        commit: cd8f66a15ed63ea80ca66ebe30f1a3fe75fb29eb
+        # HEAD of 5.15 branch as of 2025-09-07
+        commit: 73c1dda553f338c5a3b9ebbfd0e7de114f0c93dc
