@@ -595,8 +595,8 @@ modules:
         buildsystem: cmake-ninja
         sources:
           - type: archive
-            url: https://github.com/berndporr/iir1/archive/refs/tags/1.9.3.tar.gz
-            sha256: de241ef7a3e5ae8e1309846fe820a2e18978aa3df3922bd83c2d75a0fcf4e78f
+            url: https://github.com/berndporr/iir1/archive/refs/tags/1.10.0.tar.gz
+            sha256: 13b53f14d276adf6cafd3564fcda1d4b3e72342108d1c40ec4b4f0c7fc3ac95a
       - name: libslirp
         buildsystem: meson
         sources:
