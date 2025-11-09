@@ -1,7 +1,7 @@
 id: net.lutris.Lutris
 sdk: org.gnome.Sdk
 runtime: org.gnome.Platform
-runtime-version: "46"
+runtime-version: "48"
 command: lutris-wrapper
 base: org.winehq.Wine
 base-version: stable-23.08
@@ -740,7 +740,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/lutris/lutris.git
-        commit: f027fa4356ac0f4e5dd22a27b75aa0f79c714b96
+        commit: e1745ec0418229415a27eb4634c6bcb9ccc68ce6
     modules:
       - modules/python3-poetry.json
       - modules/python3-requests.yaml
