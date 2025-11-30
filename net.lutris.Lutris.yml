@@ -22,33 +22,6 @@ finish-args:
   # For Steam Deck HDR support
   - --env=LD_LIBRARY_PATH=/usr/lib/extensions/vulkan/gamescope/lib
   - --filesystem=xdg-run/gamescope-0:ro
-  # For Debian
-
-  - name: gamemode
-    buildsystem: meson
-    config-opts: &gamemode_config_opts
-      - -Dwith-examples=false
-      - -Dwith-util=false
-      - -Dwith-sd-bus-provider=no-daemon
-    post-install:
-      - install -Dm0775 -t /app/bin ../data/gamemoderun
-    sources: &gamemode_sources
-      - type: archive
-        url: https://github.com/FeralInteractive/gamemode/releases/download/1.8.2/gamemode-1.8.2.tar.xz
-        sha256: 98cd1bcf6101c92fe87f974c7776af23c7e18f29ce6ecfe572b1c39dcde5c181
-        x-checker-data:
-          type: anitya
-          project-id: 17410
-          stable-only: true
-          url-template: https://github.com/FeralInteractive/gamemode/releases/download/$version/gamemode-$version.tar.xz
-
-  - name: gamemode-32bit
-    build-options:
-      arch:
-        x86_64: *compat_i386_opts
-    buildsystem: meson
-    config-opts: *gamemode_config_opts
-    sources: *gamemode_sources
 
   - name: libcaca
     config-opts: &libcaca_config_opts
