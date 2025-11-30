@@ -93,6 +93,18 @@ modules:
 
   # Standalone utilities
 
+  - name: glu
+    buildsystem: meson
+    sources:
+      - type: archive
+        url: https://archive.mesa3d.org/glu/glu-9.0.3.tar.xz
+        sha256: bd43fe12f374b1192eb15fe20e45ff456b9bc26ab57f0eee919f96ca0f8a330f
+        x-checker-data:
+          type: anitya
+          project-id: 13518
+          stable-only: true
+          url-template: https://archive.mesa3d.org/glu/glu-$version.tar.xz
+
   - name: hwdata
     config-opts:
       - --datarootdir=/app/share
