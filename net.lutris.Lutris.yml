@@ -540,20 +540,20 @@ modules:
         url: https://github.com/librsync/librsync.git
         tag: v2.3.4
 
-  - name: kitty
-    no-autogen: true
-    sources:
-      - type: git
-        url: https://github.com/kovidgoyal/kitty
-        tag: v0.25.2
-      - type: patch
-        path: patches/kitty-wayland-state.patch
-      - type: patch
-        path: patches/0001-Remove-_FOTIFY_SOURCE.patch
-    no-make-install: true
-    post-install:
-      - cp -r . $FLATPAK_DEST/lib/kitty
-      - ln -s /app/lib/kitty/kitty/launcher/kitty $FLATPAK_DEST/bin/kitty
+  # - name: kitty
+  #   no-autogen: true
+  #   sources:
+  #     - type: git
+  #       url: https://github.com/kovidgoyal/kitty
+  #       tag: v0.25.2
+  #     - type: patch
+  #       path: patches/kitty-wayland-state.patch
+  #     - type: patch
+  #       path: patches/0001-Remove-_FOTIFY_SOURCE.patch
+  #   no-make-install: true
+  #   post-install:
+  #     - cp -r . $FLATPAK_DEST/lib/kitty
+  #     - ln -s /app/lib/kitty/kitty/launcher/kitty $FLATPAK_DEST/bin/kitty
 
   # Needed by Quake 3 and others
   - name: sdl12-compat
