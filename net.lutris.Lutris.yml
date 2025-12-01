@@ -1,10 +1,10 @@
 id: net.lutris.Lutris
 sdk: org.gnome.Sdk
 runtime: org.gnome.Platform
-runtime-version: "46"
+runtime-version: "48"
 command: lutris-wrapper
 base: org.winehq.Wine
-base-version: stable-23.08
+base-version: stable-24.08
 finish-args:
   - --share=ipc
   - --socket=x11
@@ -53,16 +53,15 @@ inherit-extensions:
   - org.freedesktop.Platform.ffmpeg_full.i386
   - org.winehq.Wine.gecko
   - org.winehq.Wine.mono
-  - org.winehq.Wine.DLLs
 
 add-extensions:
   org.gnome.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: "46"
+    version: "48"
 
   org.gnome.Platform.Compat.i386.Debug:
     directory: lib/debug/lib/i386-linux-gnu
-    version: "46"
+    version: "48"
     no-autodownload: true
 
 sdk-extensions:
@@ -73,7 +72,8 @@ sdk-extensions:
 
 x-compat-i386-opts: &compat_i386_opts
   prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
-  ldflags: -L/app/lib32
+  ldflags: -L/app/lib32 -Wl,-rpath-link=/app/lib32 -Wl,-z,relro,-z,now -Wl,--as-needed
+  ldflags-override: true
   append-path: /usr/lib/sdk/toolchain-i386/bin
   env:
     CC: i686-unknown-linux-gnu-gcc
@@ -177,6 +177,21 @@ modules:
         x86_64: *compat_i386_opts
     config-opts: *v4l2_config_opts
     sources: *v4l2_sources
+
+  - name: libusb
+    config-opts: &libusb_config_opts
+      - --disable-static
+    sources: &libusb_sources
+      - type: archive
+        url: https://github.com/libusb/libusb/releases/download/v1.0.27/libusb-1.0.27.tar.bz2
+        sha256: ffaa41d741a8a3bee244ac8e54a72ea05bf2879663c098c82fc5757853441575
+
+  - name: libusb-32bit
+    config-opts: *libusb_config_opts
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    sources: *libusb_sources
 
   - name: libgphoto2
     config-opts: &libgphoto2_config_opts
@@ -536,20 +551,16 @@ modules:
         url: https://github.com/librsync/librsync.git
         tag: v2.3.4
 
-  # - name: kitty
-  #   no-autogen: true
-  #   sources:
-  #     - type: git
-  #       url: https://github.com/kovidgoyal/kitty
-  #       tag: v0.25.2
-  #     - type: patch
-  #       path: patches/kitty-wayland-state.patch
-  #     - type: patch
-  #       path: patches/0001-Remove-_FOTIFY_SOURCE.patch
-  #   no-make-install: true
-  #   post-install:
-  #     - cp -r . $FLATPAK_DEST/lib/kitty
-  #     - ln -s /app/lib/kitty/kitty/launcher/kitty $FLATPAK_DEST/bin/kitty
+  - name: kitty
+    buildsystem: simple
+    build-commands:
+      - install -Dm0775 -t /app/bin bin/kitty
+      - cp -rn lib/kitty-extensions /app/lib
+    sources:
+      - type: archive
+        url: https://github.com/kovidgoyal/kitty/releases/download/v0.35.2/kitty-0.35.2-x86_64.txz
+        sha256: a49bb1ecd05495178a50958960a6377db6bbbfbe647b5c5ecae9bd14ded93acc
+        strip-components: 0
 
   # Needed by Quake 3 and others
   - name: sdl12-compat
