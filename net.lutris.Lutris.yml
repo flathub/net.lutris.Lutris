@@ -4,7 +4,7 @@ runtime: org.gnome.Platform
 runtime-version: "49"
 command: lutris-wrapper
 base: org.winehq.Wine
-base-version: stable-23.08
+base-version: stable-25.08
 finish-args:
   - --share=ipc
   - --socket=x11
@@ -45,14 +45,6 @@ finish-args:
   # See: https://github.com/flathub/com.valvesoftware.Steam/commit/0538256facdb0837c33232bc65a9195a8a5bc750
   - --env=XDG_DATA_DIRS=/app/share:/usr/lib/extensions/vulkan/share:/usr/share:/usr/share/runtime/share:/run/host/user-share:/run/host/share:/usr/lib/pressure-vessel/overrides/share
   - --allow=per-app-dev-shm
-
-inherit-extensions:
-  - org.freedesktop.Platform.GL32
-  - org.freedesktop.Platform.ffmpeg-full
-  - org.freedesktop.Platform.ffmpeg_full.i386
-  - org.winehq.Wine.gecko
-  - org.winehq.Wine.mono
-  - org.winehq.Wine.DLLs
 
 cleanup:
   - "*.a"
@@ -199,7 +191,9 @@ modules:
   # Build backends used by some Python libraries installed below
   #
   # All of these are build-time-only dependencies and removed from the resulting image.
-  - name: python-flit-core # needed by idna
+
+  # flit-core must be first as it's needed by other build backends
+  - name: python-flit-core # needed by some packages using pyproject.toml
     buildsystem: simple
     build-commands:
       - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
@@ -208,6 +202,35 @@ modules:
       - type: archive
         url: https://files.pythonhosted.org/packages/15/d1/d8798b83e953fd6f86ca9b50f93eec464a9305b0661469c8234e61095481/flit_core-3.7.1.tar.gz
         sha256: 14955af340c43035dbfa96b5ee47407e377ee337f69e70f73064940d27d0a44f
+
+  - name: python-hatchling # needed by some packages using pyproject.toml
+    buildsystem: simple
+    build-commands:
+      - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+        --find-links="file://${PWD}" hatchling hatch-vcs setuptools-scm pathspec pluggy trove-classifiers packaging
+    cleanup: ["*"]
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/08/e7/ae38d7a6dfba0533684e0b2136817d667588ae3ec984c1a4e5df5eb88482/hatchling-1.27.0-py3-none-any.whl
+        sha256: d3a2f3567c4f926ea39849cdf924c7e99e6686c9c8e288ae1037c8fa2a5d937b
+      - type: file
+        url: https://files.pythonhosted.org/packages/5f/48/1f85cee4b7b4f40b9b814b1febbc661bda6ced9649e410a0b74f6e415dd0/hatch_vcs-0.5.0-py3-none-any.whl
+        sha256: b49677dbdc597460cc22d01b27ab3696f5e16a21ecf2700fb01bc28e1f2a04a7
+      - type: file
+        url: https://files.pythonhosted.org/packages/3d/ea/ac2bf868899d0d2e82ef72d350d97a846110c709bacf2d968431576ca915/setuptools_scm-9.2.2-py3-none-any.whl
+        sha256: 30e8f84d2ab1ba7cb0e653429b179395d0c33775d54807fc5f1dd6671801aef7
+      - type: file
+        url: https://files.pythonhosted.org/packages/cc/20/ff623b09d963f88bfde16306a54e12ee5ea43e9b597108672ff3a408aad6/pathspec-0.12.1-py3-none-any.whl
+        sha256: a0d503e138a4c123b27490a4f7beda6a01c6f288df0e4a8b79c7eb0dc7b4cc08
+      - type: file
+        url: https://files.pythonhosted.org/packages/88/5f/e351af9a41f866ac3f1fac4ca0613908d9a41741cfcf2228f4ad853b697d/pluggy-1.5.0-py3-none-any.whl
+        sha256: 44e1ad92c8ca002de6377e165f3e0f1be63266ab4d554740532335b9d75ea669
+      - type: file
+        url: https://files.pythonhosted.org/packages/35/35/5055ab8d215af853d07bbff1a74edf48f91ed308f037380a5ca52dd73348/trove_classifiers-2024.10.21.16-py3-none-any.whl
+        sha256: 0fb11f1e995a757807a8ef1c03829fbd4998d817319abcef1f33165750f103be
+      - type: file
+        url: https://files.pythonhosted.org/packages/20/12/38679034af332785aac8774540895e234f4d07f7545804097de4b666afd8/packaging-25.0-py3-none-any.whl
+        sha256: 29572ef2b1f17581046b3a2227d5c611fb25ec70ca1ba8554b24b0e69331a484
 
   - name: python-ninja # needed by dbus-python
     buildsystem: simple
@@ -227,12 +250,12 @@ modules:
         buildsystem: simple
         build-commands:
           - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
-            .
+            --find-links="file://${PWD}" scikit-build
         cleanup: ["*"]
         sources:
-          - type: archive
-            url: https://files.pythonhosted.org/packages/9e/e2/2e440c30e93fc5b505ee56169a4396b05e797a1daadb721aba429adbfd51/scikit-build-0.15.0.tar.gz
-            sha256: e723cd0f3489a042370b9ea988bbb9cfd7725e8b25b20ca1c7981821fcf65fb9
+          - type: file
+            url: https://files.pythonhosted.org/packages/c3/a3/21b519f58de90d684056c52ec4e45f744cfda7483f082dcc4dd18cc74a93/scikit_build-0.18.1-py3-none-any.whl
+            sha256: a6860e300f6807e76f21854163bdb9db16afc74eadf34bd6a9947d3fdfcd725a
         modules:
           - name: python-setuptools-scm
             buildsystem: simple
@@ -242,29 +265,8 @@ modules:
             cleanup: ["*"]
             sources:
               - type: archive
-                url: https://files.pythonhosted.org/packages/d0/43/f038b5009f93bcd77b1b8da9e6d424b739ab17aec9726f3a99eba23d53ca/setuptools_scm-7.0.5.tar.gz
-                sha256: 031e13af771d6f892b941adb6ea04545bbf91ebc5ce68c78aaf3fff6e1fb4844
-            modules:
-              - name: python-typing-extensions
-                buildsystem: simple
-                build-commands:
-                  - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
-                    .
-                cleanup: ["*"]
-                sources:
-                  - type: archive
-                    url: https://files.pythonhosted.org/packages/9e/1d/d128169ff58c501059330f1ad96ed62b79114a2eb30b8238af63a2e27f70/typing_extensions-4.3.0.tar.gz
-                    sha256: e6d2677a32f47fc7eb2795db1dd15c1f34eff616bcaf2cfb5e997f854fa1c4a6
-              - name: python-tomli
-                buildsystem: simple
-                build-commands:
-                  - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
-                    .
-                cleanup: ["*"]
-                sources:
-                  - type: archive
-                    url: https://files.pythonhosted.org/packages/c0/3f/d7af728f075fb08564c5949a9c95e44352e23dee646869fa104a3b2060a3/tomli-2.0.1.tar.gz
-                    sha256: de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f
+                url: https://files.pythonhosted.org/packages/7b/b1/19587742aad604f1988a8a362e660e8c3ac03adccdb71c96d86526e5eb62/setuptools_scm-9.2.2.tar.gz
+                sha256: 1c674ab4665686a0887d7e24c03ab25f24201c213e82ea689d2f3e169ef7ef57
           - name: python-distro # also needed by Lutris, do not add a cleanup property here!
             buildsystem: simple
             build-commands:
@@ -288,6 +290,14 @@ modules:
 
   # These are needed for window management inside gamescope
   # --- python-xlib ---
+  - name: python-six
+    buildsystem: simple
+    build-commands:
+      - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+    sources:
+      - type: archive
+        url: https://files.pythonhosted.org/packages/94/e7/b2c673351809dca68a0e064b6af791aa332cf192da575fd474ed7d6f16a2/six-1.17.0.tar.gz
+        sha256: ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81
   - name: python-xlib
     buildsystem: simple
     build-commands:
@@ -372,8 +382,8 @@ modules:
             --ignore-installed .
         sources:
           - type: archive
-            url: https://files.pythonhosted.org/packages/84/14/c2070b5e37c650198de8328467dd3d1681e80986f81ba0fea04fc4ec9883/lxml-4.9.4.tar.gz
-            sha256: b1541e50b78e15fa06a2670157a1962ef06591d4c998b998047fff5e3236880e
+            url: https://files.pythonhosted.org/packages/aa/88/262177de60548e5a2bfc46ad28232c9e9cbde697bd94132aeb80364675cb/lxml-6.0.2.tar.gz
+            sha256: cd79f3367bd74b317dda655dc8fcfa304d9eb6e4fb06b7168c5cf27f96e0cd62
 
       - name: python-pillow
         buildsystem: simple
@@ -383,9 +393,18 @@ modules:
             .
         sources:
           - type: archive
-            url: https://files.pythonhosted.org/packages/8c/92/2975b464d9926dc667020ed1abfa6276e68c3571dcb77e43347e15ee9eed/Pillow-9.2.0.tar.gz
-            sha256: 75e636fd3e0fb872693f23ccb8a5ff2cd578801251f3a4f6854c6a5d437d3c04
-
+            url: https://files.pythonhosted.org/packages/5a/b0/cace85a1b0c9775a9f8f5d5423c8261c858760e2466c79b2dd184638b056/pillow-12.0.0.tar.gz
+            sha256: 87d4f8125c9988bfbed67af47dd7a953e2fc7b0cc1e7800ec6d2080d490bb353
+        modules:
+          - name: pybind11
+            buildsystem: simple
+            build-commands:
+              - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+                --find-links="file://${PWD}" pybind11
+            sources:
+              - type: file
+                url: https://files.pythonhosted.org/packages/cd/8a/37362fc2b949d5f733a8b0f2ff51ba423914cabefe69f1d1b6aab710f5fe/pybind11-3.0.1-py3-none-any.whl
+                sha256: aa8f0aa6e0a94d3b64adfc38f560f33f15e589be2175e103c0a33c6bce55ee89
       - name: python-pypresence
         buildsystem: simple
         build-commands:
