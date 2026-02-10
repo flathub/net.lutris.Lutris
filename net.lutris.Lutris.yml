@@ -2,7 +2,7 @@ id: net.lutris.Lutris
 sdk: org.gnome.Sdk
 runtime: org.gnome.Platform
 runtime-version: "49"
-command: lutris-wrapper
+command: lutris
 base: org.winehq.Wine
 base-version: stable-25.08
 finish-args:
@@ -560,6 +560,7 @@ modules:
       - type: git
         url: https://github.com/librsync/librsync.git
         tag: v2.3.4
+        commit: e364852674780e43d578e4239128ff7014190ed3
 
   - name: kitty
     buildsystem: simple
@@ -776,7 +777,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/lutris/lutris.git
-        commit: f027fa4356ac0f4e5dd22a27b75aa0f79c714b96
+        commit: 3964326af3a39ceb6fcbe58f00ffc4168ac052b7
     modules:
       - modules/maturin.json
       - modules/python3-requests.yaml
@@ -913,11 +914,3 @@ modules:
           - type: file
             url: https://files.pythonhosted.org/packages/a0/04/6158888baf7666db1fdba230ffbd3a66883fed9fea4bc0ab75ec1aac5ece/moddb-0.13.0-py3-none-any.whl
             sha256: 21cf1e154959c4cdf292d7ce44d8fdb1c36b94a7ad16b614577cb9ab2fac103a
-
-  - name: lutris_wrapper
-    buildsystem: simple
-    sources:
-      - type: dir
-        path: lutris_wrapper
-    build-commands:
-      - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
