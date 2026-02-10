@@ -9,9 +9,17 @@ import gi
 gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk
 
-COMPAT_EXT = "org.gnome.Platform.Compat.i386"
+COMPAT_EXT = "org.freedesktop.Platform.Compat.i386"
 FLATPAK_INFO = "/.flatpak-info"
 LUTRIS_PATH = "/app/bin/lutris"
+
+# Map GNOME runtime versions to freedesktop SDK versions
+GNOME_TO_FREEDESKTOP = {
+    "49": "25.08",
+    "48": "24.08",
+    "47": "24.08",
+    "46": "23.08",
+}
 
 # COMPAT_EXT = "org.gnome.Platform.FakeCompat.i386"  # testing
 # FLATPAK_INFO = "flatpak-info"  # testing
@@ -68,8 +76,10 @@ def on_activate(app):
 
 def get_command():
     flatpak_info = read_flatpak_info()
-    _, _, _, version = flatpak_info["runtime"].split("/")
-    command = "flatpak install --user flathub {}//{}".format(COMPAT_EXT, version)
+    _, _, _, gnome_version = flatpak_info["runtime"].split("/")
+    # Map GNOME version to freedesktop SDK version
+    fd_version = GNOME_TO_FREEDESKTOP.get(gnome_version, "25.08")
+    command = "flatpak install --user flathub {}//{}".format(COMPAT_EXT, fd_version)
     return command
 
 

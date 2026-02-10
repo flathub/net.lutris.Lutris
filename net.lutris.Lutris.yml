@@ -454,7 +454,23 @@ modules:
   - shared-modules/libayatana-appindicator/libayatana-appindicator-gtk3.json
 
   # Required by some 8/16-bit emulators
-  - shared-modules/linux-audio/fluidsynth2.json
+  - name: fluidsynth
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+    cleanup:
+      - /bin
+      - /include
+      - /lib/cmake
+      - /lib/pkgconfig
+      - /share/man
+      - "*.so"
+    sources:
+      - type: archive
+        url: https://github.com/FluidSynth/fluidsynth/archive/v2.3.5.tar.gz
+        sha256: f89e8e983ecfb4a5b4f5d8c2b9157ed18d15ed2e36246fa782f18abaea550e0d
+      - type: patch
+        path: patches/fluidsynth-cmake-policy.patch
 
   - name: fluid-soundfont
     buildsystem: simple
@@ -759,7 +775,6 @@ modules:
         commit: f027fa4356ac0f4e5dd22a27b75aa0f79c714b96
     modules:
       - modules/maturin.json
-      - modules/python3-poetry.json
       - modules/python3-requests.yaml
       - name: gnome-desktop
         buildsystem: meson
@@ -826,19 +841,17 @@ modules:
             --ignore-installed .
         sources:
           - type: archive
-            url: https://files.pythonhosted.org/packages/84/14/c2070b5e37c650198de8328467dd3d1681e80986f81ba0fea04fc4ec9883/lxml-4.9.4.tar.gz
-            sha256: b1541e50b78e15fa06a2670157a1962ef06591d4c998b998047fff5e3236880e
+            url: https://files.pythonhosted.org/packages/80/61/d3dc048cd6c7be6fe45b80cedcbdd4326ba4d550375f266d9f4246d0f4bc/lxml-5.3.2.tar.gz
+            sha256: 773947d0ed809ddad824b7b14467e1a481b8976e87278ac4a730c2f7c7fcddc1
 
       - name: python-pillow
         buildsystem: simple
         build-commands:
-          - python3 setup.py build -j${FLATPAK_BUILDER_N_JOBS}
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
-            .
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
         sources:
           - type: archive
-            url: https://files.pythonhosted.org/packages/8c/92/2975b464d9926dc667020ed1abfa6276e68c3571dcb77e43347e15ee9eed/Pillow-9.2.0.tar.gz
-            sha256: 75e636fd3e0fb872693f23ccb8a5ff2cd578801251f3a4f6854c6a5d437d3c04
+            url: https://files.pythonhosted.org/packages/af/cb/bb5c01fcd2a69335b86c22142b2bccfc3464087efb7fd382eee5ffc7fdf7/pillow-11.2.1.tar.gz
+            sha256: a64dd61998416367b7ef979b73d3a85853ba9bec4c2925f74e588879a58716b6
 
       - name: python-pypresence
         buildsystem: simple
@@ -887,24 +900,6 @@ modules:
           - type: file
             url: https://files.pythonhosted.org/packages/21/0a/47fdf541c97fd9b6a610cb5fd518175308a7cc60569962e776ac52420387/beautifulsoup4-4.6.3-py3-none-any.whl
             sha256: 194ec62a25438adcb3fdb06378b26559eda1ea8a747367d34c33cef9c7f48d57
-      - name: pyrate-limiter
-        buildsystem: simple
-        build-commands:
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
-            .
-        sources:
-          - type: archive
-            url: https://files.pythonhosted.org/packages/14/8a/2b8251c73589d0ae925a7ef9b9b485791f6e8b3863985be13eb97584282c/pyrate-limiter-2.8.1.tar.gz
-            sha256: 0741b7db4b3facdce60bd836e0fcc43911bc52c443f674f924afba7e02e79c18
-      - name: toolz
-        buildsystem: simple
-        build-commands:
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
-            --find-links="file://${PWD}" toolz
-        sources:
-          - type: file
-            url: https://files.pythonhosted.org/packages/b5/f1/3df506b493736e3ee11fc1a3c2de8014a55f025d830a71bb499acc049a2c/toolz-0.11.2-py3-none-any.whl
-            sha256: a5700ce83414c64514d82d60bcda8aabfde092d1c1a8663f9200c07fdcc6da8f
       - name: python-moddb
         buildsystem: simple
         build-commands:
@@ -912,8 +907,8 @@ modules:
             --prefix=${FLATPAK_DEST} "moddb" --no-build-isolation
         sources:
           - type: file
-            url: https://files.pythonhosted.org/packages/cb/68/37b7e06a24693d804e2b89692a68e37074252de937d509623d8665274e96/moddb-0.8.1-py3-none-any.whl
-            sha256: 7b76a4a9b0ba79d658d0c10f0c28366e0c49b271e417aa3cbc08e3ad73270f58
+            url: https://files.pythonhosted.org/packages/a0/04/6158888baf7666db1fdba230ffbd3a66883fed9fea4bc0ab75ec1aac5ece/moddb-0.13.0-py3-none-any.whl
+            sha256: 21cf1e154959c4cdf292d7ce44d8fdb1c36b94a7ad16b614577cb9ab2fac103a
 
   - name: lutris_wrapper
     buildsystem: simple
