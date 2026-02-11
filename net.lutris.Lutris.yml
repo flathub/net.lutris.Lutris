@@ -216,6 +216,19 @@ modules:
         x86_64: *compat_i386_opts
     sources: *libcapi20_sources
 
+  - name: libvlc
+    config-opts:
+       - BUILDCC=gcc
+       - --disable-lua
+       - --disable-a52
+       - --disable-qt
+       - --disable-ncurses
+       - --disable-udev
+    sources:
+      - type: archive
+        url: https://get.videolan.org/vlc/3.0.22/vlc-3.0.22.tar.xz
+        sha256: e2cc1cf0ae0902a09da5a37c249a8a4e4b5ec4dc095443b8e1493c6a7cc138ea
+
   # Multilib dependencies for native games and runners
 
   - name: libbsd
