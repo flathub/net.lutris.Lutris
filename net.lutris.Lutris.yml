@@ -1,10 +1,10 @@
 id: net.lutris.Lutris
 sdk: org.gnome.Sdk
 runtime: org.gnome.Platform
-runtime-version: "46"
-command: lutris-wrapper
+runtime-version: "49"
+command: lutris
 base: org.winehq.Wine
-base-version: stable-23.08
+base-version: stable-25.08
 finish-args:
   - --share=ipc
   - --socket=x11
@@ -49,31 +49,35 @@ finish-args:
 
 inherit-extensions:
   - org.freedesktop.Platform.GL32
-  - org.freedesktop.Platform.ffmpeg-full
-  - org.freedesktop.Platform.ffmpeg_full.i386
   - org.winehq.Wine.gecko
   - org.winehq.Wine.mono
-  - org.winehq.Wine.DLLs
 
 add-extensions:
-  org.gnome.Platform.Compat.i386:
+  org.freedesktop.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: "46"
+    version: "25.08"
 
-  org.gnome.Platform.Compat.i386.Debug:
+  org.freedesktop.Platform.Compat.i386.Debug:
     directory: lib/debug/lib/i386-linux-gnu
-    version: "46"
+    version: "25.08"
     no-autodownload: true
 
+  org.freedesktop.Platform.codecs_extra.i386:
+    directory: lib/i386-linux-gnu/codecs-extra
+    version: '25.08-extra'
+    autodelete: false
+    add-ld-path: lib
+
 sdk-extensions:
-  - org.gnome.Sdk.Compat.i386
+  - org.freedesktop.Sdk.Compat.i386
   - org.freedesktop.Sdk.Extension.toolchain-i386
   - org.freedesktop.Sdk.Extension.openjdk17
   - org.freedesktop.Sdk.Extension.mono6
 
 x-compat-i386-opts: &compat_i386_opts
   prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
-  ldflags: -L/app/lib32
+  ldflags: -L/app/lib32 -Wl,-rpath-link=/app/lib32 -Wl,-z,relro,-z,now -Wl,--as-needed
+  ldflags-override: true
   append-path: /usr/lib/sdk/toolchain-i386/bin
   env:
     CC: i686-unknown-linux-gnu-gcc
@@ -88,6 +92,7 @@ cleanup:
 cleanup-commands:
   - python3 -m compileall /app/lib
   - mkdir -p /app/utils
+  - mkdir -p /app/lib/i386-linux-gnu/codecs-extra
 modules:
   - modules/qt5-15.yaml
   - modules/libbz2-1.0.8.json
@@ -327,8 +332,8 @@ modules:
       - --disable-static
     sources: &libxmu_sources
       - type: archive
-        url: https://xorg.freedesktop.org/releases/individual/lib/libXmu-1.1.3.tar.bz2
-        sha512: 8c6cc65b22aa031ad870dd92736681a068a0878a425a53dbed909943da1136c4a24034d467cfd3785c3a8d78f66850b69f1ebe1eb24aaf9bc176b1d171a5c762
+        url: https://xorg.freedesktop.org/releases/individual/lib/libXmu-1.2.1.tar.xz
+        sha512: 05a30e5961e00e940ad7ec4eb94ec482b5cbe808585972bf70c849333af3fddf4ae4bd87895d706507fb3a94ed0fb73ea161e0e27dc2840323a1a1af49c0e8a3
 
   - name: libxmu-32bit
     build-options:
@@ -346,8 +351,8 @@ modules:
       - -DCMAKE_INSTALL_LIBDIR=/app/lib # uses lib64 by default
     sources: &libjpeg_sources
       - type: archive
-        url: https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/tags/2.1.3.tar.gz
-        sha256: dbda0c685942aa3ea908496592491e5ec8160d2cf1ec9d5fd5470e50768e7859
+        url: https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/tags/3.1.2.tar.gz
+        sha256: 560f6338b547544c4f9721b18d8b87685d433ec78b3c644c70d77adad22c55e6
 
   - name: libjpeg-32bit # with libjpeg.so.8
     buildsystem: cmake-ninja
@@ -454,7 +459,23 @@ modules:
   - shared-modules/libayatana-appindicator/libayatana-appindicator-gtk3.json
 
   # Required by some 8/16-bit emulators
-  - shared-modules/linux-audio/fluidsynth2.json
+  - name: fluidsynth
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+    cleanup:
+      - /bin
+      - /include
+      - /lib/cmake
+      - /lib/pkgconfig
+      - /share/man
+      - "*.so"
+    sources:
+      - type: archive
+        url: https://github.com/FluidSynth/fluidsynth/archive/v2.3.5.tar.gz
+        sha256: f89e8e983ecfb4a5b4f5d8c2b9157ed18d15ed2e36246fa782f18abaea550e0d
+      - type: patch
+        path: patches/fluidsynth-cmake-policy.patch
 
   - name: fluid-soundfont
     buildsystem: simple
@@ -497,8 +518,8 @@ modules:
       - --with-systemdsystemunitdir=/app/lib/systemd/system/speech-dispatcherd.service
     sources:
       - type: archive
-        url: https://github.com/brailcom/speechd/releases/download/0.11.5/speech-dispatcher-0.11.5.tar.gz
-        sha256: 1ce4759ffabbaf1aeb433a5ec0739be0676e9bdfbae9444a7b3be1b2af3ec12b
+        url: https://github.com/brailcom/speechd/releases/download/0.12.1/speech-dispatcher-0.12.1.tar.gz
+        sha256: b14a5238d287d2dcce4dd42bbd66ca65fa228e7e683708267f7b34036f7ba4b4
     modules:
       - name: dotconf
         sources:
@@ -525,8 +546,8 @@ modules:
   - name: perl
     sources:
       - type: archive
-        url: https://www.cpan.org/src/5.0/perl-5.34.0.tar.gz
-        sha256: 551efc818b968b05216024fb0b727ef2ad4c100f8cb6b43fab615fa78ae5be9a
+        url: https://www.cpan.org/src/5.0/perl-5.42.0.tar.gz
+        sha256: e093ef184d7f9a1b9797e2465296f55510adb6dab8842b0c3ed53329663096dc
       - type: script
         dest-filename: configure
         commands:
@@ -540,29 +561,26 @@ modules:
       - type: git
         url: https://github.com/librsync/librsync.git
         tag: v2.3.4
+        commit: e364852674780e43d578e4239128ff7014190ed3
 
   - name: kitty
-    no-autogen: true
+    buildsystem: simple
+    build-commands:
+      - install -Dm0775 -t /app/bin bin/kitty
+      - cp -rn lib/kitty-extensions /app/lib
     sources:
-      - type: git
-        url: https://github.com/kovidgoyal/kitty
-        tag: v0.25.2
-      - type: patch
-        path: patches/kitty-wayland-state.patch
-      - type: patch
-        path: patches/0001-Remove-_FOTIFY_SOURCE.patch
-    no-make-install: true
-    post-install:
-      - cp -r . $FLATPAK_DEST/lib/kitty
-      - ln -s /app/lib/kitty/kitty/launcher/kitty $FLATPAK_DEST/bin/kitty
+      - type: archive
+        url: https://github.com/kovidgoyal/kitty/releases/download/v0.35.2/kitty-0.35.2-x86_64.txz
+        sha256: a49bb1ecd05495178a50958960a6377db6bbbfbe647b5c5ecae9bd14ded93acc
+        strip-components: 0
 
-  # Needed by Quake 3
+  # Needed by Quake 3 and others
   - name: sdl12-compat
     buildsystem: cmake-ninja
     sources: &sdl12_compat_sources
       - type: archive
-        url: https://github.com/libsdl-org/sdl12-compat/archive/refs/tags/release-1.2.52.tar.gz
-        sha256: 5bd7942703575554670a8767ae030f7921a0ac3c5e2fd173a537b7c7a8599014
+        url: https://github.com/libsdl-org/sdl12-compat/archive/refs/tags/release-1.2.68.tar.gz
+        sha256: 63c6e4dcc1154299e6f363c872900be7f3dcb3e42b9f8f57e05442ec3d89d02d
 
   - name: sdl12-compat-32bit
     buildsystem: cmake-ninja
@@ -589,16 +607,16 @@ modules:
         buildsystem: cmake-ninja
         sources:
           - type: archive
-            url: https://github.com/berndporr/iir1/archive/refs/tags/1.9.3.tar.gz
-            sha256: de241ef7a3e5ae8e1309846fe820a2e18978aa3df3922bd83c2d75a0fcf4e78f
+            url: https://github.com/berndporr/iir1/archive/refs/tags/1.10.0.tar.gz
+            sha256: 13b53f14d276adf6cafd3564fcda1d4b3e72342108d1c40ec4b4f0c7fc3ac95a
       - name: libslirp
         buildsystem: meson
         sources:
           - type: archive
-            url: https://gitlab.freedesktop.org/slirp/libslirp/-/archive/v4.6.1/libslirp-v4.6.1.tar.gz
-            sha256: 69ad4df0123742a29cc783b35de34771ed74d085482470df6313b6abeb799b11
+            url: https://gitlab.freedesktop.org/slirp/libslirp/-/archive/v4.9.1/libslirp-v4.9.1.tar.gz
+            sha256: 3970542143b7c11e6a09a4d2b50f30a133473c41f15ed0bdcc3b7a1c450d9a5c
       - name: munt
-        buildsystem: cmake
+        buildsystem: cmake-ninja
         config-opts:
           - -Dmunt_WITH_MT32EMU_SMF2WAV=FALSE
           - -Dmunt_WITH_MT32EMU_QT=FALSE
@@ -606,8 +624,8 @@ modules:
           - -Dlibmt32emu_WITH_SYMBOL_VERSIONING=TRUE
         sources:
           - type: archive
-            url: https://github.com/munt/munt/archive/libmt32emu_2_5_3.tar.gz
-            sha256: 062d110bbdd7253d01ef291f57e89efc3ee35fd087587458381f054bac49a8f5
+            url: https://github.com/munt/munt/archive/libmt32emu_2_7_2.tar.gz
+            sha256: 3b0beff64e83d2b4879baba2326eed1300edc9663b3dc52621fc74d196ca9a80
 
   # Needed for FreeSO
   - name: mono
@@ -616,6 +634,8 @@ modules:
       - /usr/lib/sdk/mono6/install.sh
 
   - name: ncurses
+    build-options:
+      cflags: "-std=gnu17"
     config-opts: &ncurses_config_opts
       - --with-shared
       - --without-manpageus
@@ -627,13 +647,14 @@ modules:
       - "*.a"
     sources: &ncurses_sources
       - type: archive
-        url: http://ftp.gnu.org/gnu/ncurses/ncurses-6.3.tar.gz
-        sha256: 97fc51ac2b085d4cde31ef4d2c3122c21abc217e9090a43a30fc5ec21684e059
+        url: http://ftp.gnu.org/gnu/ncurses/ncurses-6.5.tar.gz
+        sha256: 136d91bc269a9a5785e5f9e980bc76ab57428f604ce3e5a5a90cebc767971cc6
 
   - name: ncurses-32bits
     build-options:
       arch:
         x86_64: *compat_i386_opts
+      cflags: "-std=gnu17"
     config-opts: *ncurses_config_opts
     cleanup: *ncurses_cleanup
     sources: *ncurses_sources
@@ -657,6 +678,9 @@ modules:
       - python3 setup.py build -j${FLATPAK_BUILDER_N_JOBS} -DARCHIVE_DOWNLOAD_DIR="${FLATPAK_BUILDER_BUILDDIR}"
       - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
     cleanup: ["*"]
+    build-options:
+      env:
+        CMAKE_POLICY_VERSION_MINIMUM: "3.5"
     sources:
       - type: archive
         url: https://files.pythonhosted.org/packages/37/2c/d717d13a413d6f7579cdaa1e28e6e2c98de95461549b08d311c8a5bf4c51/ninja-1.11.1.1.tar.gz
@@ -730,6 +754,15 @@ modules:
 
   # These are needed for window management inside gamescope
   # --- python-xlib ---
+  - name: python-six
+    buildsystem: simple
+    build-commands:
+      - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+    sources:
+      - type: archive
+        url: https://files.pythonhosted.org/packages/94/e7/b2c673351809dca68a0e064b6af791aa332cf192da575fd474ed7d6f16a2/six-1.17.0.tar.gz
+        sha256: ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81
+
   - name: python-xlib
     buildsystem: simple
     build-commands:
@@ -745,9 +778,9 @@ modules:
     sources:
       - type: git
         url: https://github.com/lutris/lutris.git
-        commit: f935de038dfbfd549927cd3a0fc90c243ef3d764
+        commit: 3964326af3a39ceb6fcbe58f00ffc4168ac052b7
     modules:
-      - modules/python3-poetry.json
+      - modules/maturin.json
       - modules/python3-requests.yaml
       - name: gnome-desktop
         buildsystem: meson
@@ -814,19 +847,17 @@ modules:
             --ignore-installed .
         sources:
           - type: archive
-            url: https://files.pythonhosted.org/packages/84/14/c2070b5e37c650198de8328467dd3d1681e80986f81ba0fea04fc4ec9883/lxml-4.9.4.tar.gz
-            sha256: b1541e50b78e15fa06a2670157a1962ef06591d4c998b998047fff5e3236880e
+            url: https://files.pythonhosted.org/packages/80/61/d3dc048cd6c7be6fe45b80cedcbdd4326ba4d550375f266d9f4246d0f4bc/lxml-5.3.2.tar.gz
+            sha256: 773947d0ed809ddad824b7b14467e1a481b8976e87278ac4a730c2f7c7fcddc1
 
       - name: python-pillow
         buildsystem: simple
         build-commands:
-          - python3 setup.py build -j${FLATPAK_BUILDER_N_JOBS}
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
-            .
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
         sources:
           - type: archive
-            url: https://files.pythonhosted.org/packages/8c/92/2975b464d9926dc667020ed1abfa6276e68c3571dcb77e43347e15ee9eed/Pillow-9.2.0.tar.gz
-            sha256: 75e636fd3e0fb872693f23ccb8a5ff2cd578801251f3a4f6854c6a5d437d3c04
+            url: https://files.pythonhosted.org/packages/af/cb/bb5c01fcd2a69335b86c22142b2bccfc3464087efb7fd382eee5ffc7fdf7/pillow-11.2.1.tar.gz
+            sha256: a64dd61998416367b7ef979b73d3a85853ba9bec4c2925f74e588879a58716b6
 
       - name: python-pypresence
         buildsystem: simple
@@ -875,24 +906,6 @@ modules:
           - type: file
             url: https://files.pythonhosted.org/packages/21/0a/47fdf541c97fd9b6a610cb5fd518175308a7cc60569962e776ac52420387/beautifulsoup4-4.6.3-py3-none-any.whl
             sha256: 194ec62a25438adcb3fdb06378b26559eda1ea8a747367d34c33cef9c7f48d57
-      - name: pyrate-limiter
-        buildsystem: simple
-        build-commands:
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
-            .
-        sources:
-          - type: archive
-            url: https://files.pythonhosted.org/packages/14/8a/2b8251c73589d0ae925a7ef9b9b485791f6e8b3863985be13eb97584282c/pyrate-limiter-2.8.1.tar.gz
-            sha256: 0741b7db4b3facdce60bd836e0fcc43911bc52c443f674f924afba7e02e79c18
-      - name: toolz
-        buildsystem: simple
-        build-commands:
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
-            --find-links="file://${PWD}" toolz
-        sources:
-          - type: file
-            url: https://files.pythonhosted.org/packages/b5/f1/3df506b493736e3ee11fc1a3c2de8014a55f025d830a71bb499acc049a2c/toolz-0.11.2-py3-none-any.whl
-            sha256: a5700ce83414c64514d82d60bcda8aabfde092d1c1a8663f9200c07fdcc6da8f
       - name: python-moddb
         buildsystem: simple
         build-commands:
@@ -900,13 +913,5 @@ modules:
             --prefix=${FLATPAK_DEST} "moddb" --no-build-isolation
         sources:
           - type: file
-            url: https://files.pythonhosted.org/packages/cb/68/37b7e06a24693d804e2b89692a68e37074252de937d509623d8665274e96/moddb-0.8.1-py3-none-any.whl
-            sha256: 7b76a4a9b0ba79d658d0c10f0c28366e0c49b271e417aa3cbc08e3ad73270f58
-
-  - name: lutris_wrapper
-    buildsystem: simple
-    sources:
-      - type: dir
-        path: lutris_wrapper
-    build-commands:
-      - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+            url: https://files.pythonhosted.org/packages/a0/04/6158888baf7666db1fdba230ffbd3a66883fed9fea4bc0ab75ec1aac5ece/moddb-0.13.0-py3-none-any.whl
+            sha256: 21cf1e154959c4cdf292d7ce44d8fdb1c36b94a7ad16b614577cb9ab2fac103a
