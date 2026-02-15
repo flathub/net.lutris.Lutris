@@ -1,7 +1,7 @@
 id: net.lutris.Lutris
 sdk: org.gnome.Sdk
 runtime: org.gnome.Platform
-runtime-version: "49"
+runtime-version: '49'
 command: lutris
 base: org.winehq.Wine
 base-version: stable-25.08
@@ -55,16 +55,16 @@ inherit-extensions:
 add-extensions:
   org.freedesktop.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: "25.08"
+    version: '25.08'
 
   org.freedesktop.Platform.Compat.i386.Debug:
     directory: lib/debug/lib/i386-linux-gnu
-    version: "25.08"
+    version: '25.08'
     no-autodownload: true
 
   org.freedesktop.Platform.codecs_extra.i386:
     directory: lib/i386-linux-gnu/codecs-extra
-    version: '25.08-extra'
+    version: 25.08-extra
     autodelete: false
     add-ld-path: lib
 
@@ -85,8 +85,8 @@ x-compat-i386-opts: &compat_i386_opts
   libdir: /app/lib32
 
 cleanup:
-  - "*.a"
-  - "*.la"
+  - '*.a'
+  - '*.la'
   - /share/man
   - /share/help
 cleanup-commands:
@@ -156,8 +156,8 @@ modules:
       - --enable-ipv6
     sources: &libcap_sources
       - type: archive
-        url: https://www.tcpdump.org/release/libpcap-1.10.1.tar.gz
-        sha256: ed285f4accaf05344f90975757b3dbfe772ba41d1c401c2648b7fa45b711bdd4
+        url: http://www.tcpdump.org/release/libpcap-1.10.6.tar.gz
+        sha256: 872dd11337fe1ab02ad9d4fee047c9da244d695c6ddf34e2ebb733efd4ed8aa9
         x-checker-data:
           type: anitya
           project-id: 1702
@@ -218,12 +218,12 @@ modules:
 
   - name: libvlc
     config-opts:
-       - BUILDCC=gcc
-       - --disable-lua
-       - --disable-a52
-       - --disable-qt
-       - --disable-ncurses
-       - --disable-udev
+      - BUILDCC=gcc
+      - --disable-lua
+      - --disable-a52
+      - --disable-qt
+      - --disable-ncurses
+      - --disable-udev
     sources:
       - type: archive
         url: https://get.videolan.org/vlc/3.0.22/vlc-3.0.22.tar.xz
@@ -481,7 +481,7 @@ modules:
       - /lib/cmake
       - /lib/pkgconfig
       - /share/man
-      - "*.so"
+      - '*.so'
     sources:
       - type: archive
         url: https://github.com/FluidSynth/fluidsynth/archive/v2.3.5.tar.gz
@@ -647,7 +647,7 @@ modules:
 
   - name: ncurses
     build-options:
-      cflags: "-std=gnu17"
+      cflags: -std=gnu17
     config-opts: &ncurses_config_opts
       - --with-shared
       - --without-manpageus
@@ -656,7 +656,7 @@ modules:
       - /bin
       - /include
       - /share
-      - "*.a"
+      - '*.a'
     sources: &ncurses_sources
       - type: archive
         url: http://ftp.gnu.org/gnu/ncurses/ncurses-6.5.tar.gz
@@ -666,7 +666,7 @@ modules:
     build-options:
       arch:
         x86_64: *compat_i386_opts
-      cflags: "-std=gnu17"
+      cflags: -std=gnu17
     config-opts: *ncurses_config_opts
     cleanup: *ncurses_cleanup
     sources: *ncurses_sources
@@ -678,7 +678,7 @@ modules:
     buildsystem: simple
     build-commands:
       - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
-    cleanup: ["*"]
+    cleanup: ['*']
     sources:
       - type: archive
         url: https://files.pythonhosted.org/packages/15/d1/d8798b83e953fd6f86ca9b50f93eec464a9305b0661469c8234e61095481/flit_core-3.7.1.tar.gz
@@ -689,10 +689,10 @@ modules:
     build-commands:
       - python3 setup.py build -j${FLATPAK_BUILDER_N_JOBS} -DARCHIVE_DOWNLOAD_DIR="${FLATPAK_BUILDER_BUILDDIR}"
       - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
-    cleanup: ["*"]
+    cleanup: ['*']
     build-options:
       env:
-        CMAKE_POLICY_VERSION_MINIMUM: "3.5"
+        CMAKE_POLICY_VERSION_MINIMUM: '3.5'
     sources:
       - type: archive
         url: https://files.pythonhosted.org/packages/37/2c/d717d13a413d6f7579cdaa1e28e6e2c98de95461549b08d311c8a5bf4c51/ninja-1.11.1.1.tar.gz
@@ -706,7 +706,7 @@ modules:
         build-commands:
           - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
             .
-        cleanup: ["*"]
+        cleanup: ['*']
         sources:
           - type: archive
             url: https://files.pythonhosted.org/packages/9e/e2/2e440c30e93fc5b505ee56169a4396b05e797a1daadb721aba429adbfd51/scikit-build-0.15.0.tar.gz
@@ -717,7 +717,7 @@ modules:
             build-commands:
               - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
                 .
-            cleanup: ["*"]
+            cleanup: ['*']
             sources:
               - type: archive
                 url: https://files.pythonhosted.org/packages/d0/43/f038b5009f93bcd77b1b8da9e6d424b739ab17aec9726f3a99eba23d53ca/setuptools_scm-7.0.5.tar.gz
@@ -728,7 +728,7 @@ modules:
                 build-commands:
                   - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
                     .
-                cleanup: ["*"]
+                cleanup: ['*']
                 sources:
                   - type: archive
                     url: https://files.pythonhosted.org/packages/9e/1d/d128169ff58c501059330f1ad96ed62b79114a2eb30b8238af63a2e27f70/typing_extensions-4.3.0.tar.gz
@@ -738,7 +738,7 @@ modules:
                 build-commands:
                   - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
                     .
-                cleanup: ["*"]
+                cleanup: ['*']
                 sources:
                   - type: archive
                     url: https://files.pythonhosted.org/packages/c0/3f/d7af728f075fb08564c5949a9c95e44352e23dee646869fa104a3b2060a3/tomli-2.0.1.tar.gz
@@ -758,7 +758,7 @@ modules:
     build-commands:
       - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" --ignore-installed
         .
-    cleanup: ["*"]
+    cleanup: ['*']
     sources:
       - type: archive
         url: https://files.pythonhosted.org/packages/a7/f0/565f731cd138a516c2dba8439e47c5622493c82f41c4845d287617ef6ec9/meson-0.63.2.tar.gz
@@ -865,7 +865,8 @@ modules:
       - name: python-pillow
         buildsystem: simple
         build-commands:
-          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+          - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
+            .
         sources:
           - type: archive
             url: https://files.pythonhosted.org/packages/af/cb/bb5c01fcd2a69335b86c22142b2bccfc3464087efb7fd382eee5ffc7fdf7/pillow-11.2.1.tar.gz
