@@ -25,7 +25,7 @@ finish-args:
   # For Debian
   - --filesystem=/media
   - --filesystem=~/.var/app/com.valvesoftware.Steam:ro
-  - --filesystem=~/.config/MangoHud:ro
+  - --filesystem=xdg-config/MangoHud:ro
   - --env=PATH=/app/bin:/usr/bin:/app/utils/bin:/usr/lib/extensions/vulkan/MangoHud/bin/:/app/jre/bin/:/usr/lib/extensions/vulkan/gamescope/bin
   - --env=GST_PLUGIN_SYSTEM_PATH=/app/lib32/gstreamer-1.0:/app/lib/gstreamer-1.0:/usr/lib/i386-linux-gnu/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/gstreamer-1.0
   # System tray icon
