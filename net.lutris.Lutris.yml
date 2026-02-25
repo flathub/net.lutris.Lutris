@@ -791,7 +791,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/lutris/lutris.git
-        commit: 9781657d4eb2c3965c2ee27ae9d662a1d220a279
+        commit: 159d7a21e5f171b815328e7e85aa40cfc3125ac8
     modules:
       - modules/maturin.json
       - modules/python3-requests.yaml
