@@ -104,8 +104,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=Release
     sources:
       - type: archive
-        url: https://github.com/KhronosGroup/Vulkan-Tools/archive/v1.3.297/Vulkan-Tools-1.3.297.tar.gz
-        sha256: 95bffa39d90f3ec81d8e3a0fa6c846ac1a10442152cc0b6d0d6567ce48932f89
+        url: https://github.com/KhronosGroup/Vulkan-Tools/archive/v1.4.310/Vulkan-Tools-1.4.310.tar.gz
+        sha256: 304c3f6c3395186a6559078f3b174de58b467a5b5a3254bf2f1a6fecd833bcfb
     modules:
       - name: volk
         buildsystem: cmake-ninja
@@ -113,15 +113,15 @@ modules:
           - -DVOLK_INSTALL=ON
         sources:
           - type: archive
-            url: https://github.com/zeux/volk/archive/vulkan-sdk-1.3.296.0.tar.gz
-            sha256: 8ffd0e81e29688f4abaa39e598937160b098228f37503903b10d481d4862ab85
+            url: https://github.com/zeux/volk/archive/vulkan-sdk-1.4.304.tar.gz
+            sha256: 05b04f693618409788c86ae730579602f6681b7edbda4c08abc60a7aa8c0bc79
         modules:
           - name: vulkan-headers
             buildsystem: cmake-ninja
             sources:
               - type: archive
-                url: https://github.com/KhronosGroup/Vulkan-Headers/archive/v1.3.297/Vulkan-Headers-v1.3.297.tar.gz
-                sha256: 1d679e2edc43cb7ad818b81dea960e374f1d6dd082325eb9b4c6113e76263c02
+                url: https://github.com/KhronosGroup/Vulkan-Headers/archive/v1.4.310/Vulkan-Headers-v1.4.310.tar.gz
+                sha256: bfb970e74db66dc644c4f33ccef61cd69e057cda2950efc2f111c82c7ba98a6c
 
   - name: glu
     buildsystem: meson
@@ -148,8 +148,8 @@ modules:
       - cp -av CL $FLATPAK_DEST/include/
     sources:
       - type: archive
-        url: https://github.com/KhronosGroup/OpenCL-Headers/archive/v2023.04.17/OpenCL-Headers-v2023.04.17.tar.gz
-        sha256: 0ce992f4167f958f68a37918dec6325be18f848dee29a4521c633aae3304915d
+        url: https://github.com/KhronosGroup/OpenCL-Headers/archive/v2024.10.24/OpenCL-Headers-v2024.10.24.tar.gz
+        sha256: 159f2a550592bae49859fee83d372acd152328fdf95c0dcd8b9409f8fad5db93
 
   - name: libpcap
     config-opts: &libpcap_config_opts
@@ -171,14 +171,15 @@ modules:
     sources: *libcap_sources
 
   - name: v4l2-utils
+    buildsystem: meson
     config-opts: &v4l2_config_opts
-      - --disable-v4l-utils
-      - --disable-qv4l2
-      - --disable-qvidcap
+      - -Dv4l-utils=false
+      - -Dqv4l2=disabled
+      - -Dqvidcap=disabled
     sources: &v4l2_sources
       - type: archive
-        url: https://linuxtv.org/downloads/v4l-utils/v4l-utils-1.20.0.tar.bz2
-        sha256: 956118713f7ccb405c55c7088a6a2490c32d54300dd9a30d8d5008c28d3726f7
+        url: https://linuxtv.org/downloads/v4l-utils/v4l-utils-1.28.1.tar.xz
+        sha256: 0fa075ce59b6618847af6ea191b6155565ccaa44de0504581ddfed795a328a82
 
   - name: v4l2-utils-32bit
     build-options:
@@ -234,8 +235,8 @@ modules:
   - name: libbsd
     sources: &libbsd_sources
       - type: archive
-        url: https://libbsd.freedesktop.org/releases/libbsd-0.10.0.tar.xz
-        sha256: 34b8adc726883d0e85b3118fa13605e179a62b31ba51f676136ecb2d0bc1a887
+        url: https://libbsd.freedesktop.org/releases/libbsd-0.12.2.tar.xz
+        sha256: b88cc9163d0c652aaf39a99991d974ddba1c3a9711db8f1b5838af2a14731014
 
   - name: libbsd-32bit
     build-options:
