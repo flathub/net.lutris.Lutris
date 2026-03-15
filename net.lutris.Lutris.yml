@@ -18,6 +18,7 @@ finish-args:
   - --talk-name=org.freedesktop.ScreenSaver
   - --system-talk-name=org.freedesktop.UDisks2
   - --filesystem=home
+  - --filesystem=xdg-cache/lutris:create
   - --filesystem=/run/media
   # For Steam Deck HDR support
   - --env=LD_LIBRARY_PATH=/usr/lib/extensions/vulkan/gamescope/lib
