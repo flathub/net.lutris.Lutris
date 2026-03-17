@@ -19,6 +19,13 @@ finish-args:
   - --system-talk-name=org.freedesktop.UDisks2
   - --filesystem=home
   - --filesystem=/run/media
+  # Allow reading host dconf settings for theme/color-scheme propagation.
+  # Needed as a fallback on desktop environments where xdg-desktop-portal
+  # does not provide org.freedesktop.appearance.color-scheme.
+  # See: https://github.com/lutris/lutris/issues/6499
+  - --talk-name=ca.desrt.dconf
+  - --filesystem=xdg-run/dconf:ro
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   # For Steam Deck HDR support
   - --env=LD_LIBRARY_PATH=/usr/lib/extensions/vulkan/gamescope/lib
   - --filesystem=xdg-run/gamescope-0:ro
