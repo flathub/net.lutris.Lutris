@@ -69,6 +69,22 @@ add-extensions:
     autodelete: false
     add-ld-path: lib
 
+  org.gtk.Gtk3theme.Adwaita-dark:
+    directory: share/themes/Adwaita-dark
+    version: '3.22'
+    autodownload: true
+
+  org.freedesktop.Platform.VulkanLayer.gamescope:
+    directory: lib/extensions/vulkan/gamescope
+    version: '25.08'
+    autodownload: true
+    autodelete: false
+
+  org.freedesktop.Platform.VulkanLayer.MangoHud:
+    directory: lib/extensions/vulkan/MangoHud
+    version: '25.08'
+    autodownload: true
+    autodelete: false
 sdk-extensions:
   - org.freedesktop.Sdk.Compat.i386
   - org.freedesktop.Sdk.Extension.toolchain-i386
@@ -93,7 +109,10 @@ cleanup:
 cleanup-commands:
   - python3 -m compileall /app/lib
   - mkdir -p /app/utils
+  - mkdir -p /app/lib/extensions/vulkan/gamescope
+  - mkdir -p /app/lib/extensions/vulkan/MangoHud
   - mkdir -p /app/lib/i386-linux-gnu/codecs-extra
+  - mkdir -p /app/share/themes/Adwaita-dark
 modules:
   - modules/qt5-15.yaml
   - modules/libbz2-1.0.8.json
@@ -792,7 +811,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/lutris/lutris.git
-        commit: 159d7a21e5f171b815328e7e85aa40cfc3125ac8
+        commit: a198ff6b68e762a247ce6c23c5213f2c420e25f4
     modules:
       - modules/maturin.json
       - modules/python3-requests.yaml
