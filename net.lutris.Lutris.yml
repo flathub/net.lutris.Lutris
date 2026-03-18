@@ -73,6 +73,17 @@ add-extensions:
     version: '3.22'
     autodownload: true
 
+  org.freedesktop.Platform.VulkanLayer.gamescope:
+    directory: lib/extensions/vulkan/gamescope
+    version: '25.08'
+    autodownload: true
+    autodelete: false
+
+  org.freedesktop.Platform.VulkanLayer.MangoHud:
+    directory: lib/extensions/vulkan/MangoHud
+    version: '25.08'
+    autodownload: true
+    autodelete: false
 sdk-extensions:
   - org.freedesktop.Sdk.Compat.i386
   - org.freedesktop.Sdk.Extension.toolchain-i386
@@ -97,6 +108,8 @@ cleanup:
 cleanup-commands:
   - python3 -m compileall /app/lib
   - mkdir -p /app/utils
+  - mkdir -p /app/lib/extensions/vulkan/gamescope
+  - mkdir -p /app/lib/extensions/vulkan/MangoHud
   - mkdir -p /app/lib/i386-linux-gnu/codecs-extra
   - mkdir -p /app/share/themes/Adwaita-dark
 modules:
