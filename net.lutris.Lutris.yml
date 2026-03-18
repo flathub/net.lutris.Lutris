@@ -68,6 +68,11 @@ add-extensions:
     autodelete: false
     add-ld-path: lib
 
+  org.gtk.Gtk3theme.Adwaita-dark:
+    directory: share/themes/Adwaita-dark
+    version: '3.22'
+    autodownload: true
+
   org.freedesktop.Platform.VulkanLayer.gamescope:
     directory: lib/extensions/vulkan/gamescope
     version: '25.08'
@@ -106,6 +111,7 @@ cleanup-commands:
   - mkdir -p /app/lib/extensions/vulkan/gamescope
   - mkdir -p /app/lib/extensions/vulkan/MangoHud
   - mkdir -p /app/lib/i386-linux-gnu/codecs-extra
+  - mkdir -p /app/share/themes/Adwaita-dark
 modules:
   - modules/qt5-15.yaml
   - modules/libbz2-1.0.8.json
