@@ -22,6 +22,9 @@ finish-args:
   # For Steam Deck HDR support
   - --env=LD_LIBRARY_PATH=/usr/lib/extensions/vulkan/gamescope/lib
   - --filesystem=xdg-run/gamescope-0:ro
+  # For Discord Rich Presence (Flatpak Discord)
+  - --filesystem=xdg-run/app/com.discordapp.Discord:create
+  - --filesystem=xdg-run/app/com.discordapp.DiscordCanary:create
   # For Debian
   - --filesystem=/media
   - --filesystem=~/.var/app/com.valvesoftware.Steam:ro
