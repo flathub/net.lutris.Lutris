@@ -598,7 +598,7 @@ modules:
   - name: kitty
     buildsystem: simple
     build-commands:
-      - install -Dm0775 -t /app/bin bin/kitty
+      - install -Dm0775 -t /app/bin bin/kitty bin/kitten
       - cp -rn lib/kitty-extensions /app/lib
       - install -Dm0755 lib/libpython3.12.so.1.0 /app/lib/libpython3.12.so.1.0
     sources:
