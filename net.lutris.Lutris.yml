@@ -598,7 +598,7 @@ modules:
   - name: kitty
     buildsystem: simple
     build-commands:
-      - install -Dm0775 -t /app/bin bin/kitty
+      - install -Dm0775 -t /app/bin bin/kitty bin/kitten
       - cp -rn lib/kitty-extensions /app/lib
       - install -Dm0755 lib/libpython3.12.so.1.0 /app/lib/libpython3.12.so.1.0
     sources:
@@ -811,7 +811,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/lutris/lutris.git
-        commit: a198ff6b68e762a247ce6c23c5213f2c420e25f4
+        commit: 8789d2bbba9bec70335c02d9f35f94d92d91b7d8
     modules:
       - modules/maturin.json
       - modules/python3-requests.yaml
