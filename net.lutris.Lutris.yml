@@ -176,8 +176,8 @@ modules:
       - --enable-ipv6
     sources: &libcap_sources
       - type: archive
-        url: http://www.tcpdump.org/release/libpcap-1.10.6.tar.gz
-        sha256: 872dd11337fe1ab02ad9d4fee047c9da244d695c6ddf34e2ebb733efd4ed8aa9
+        url: http://www.tcpdump.org/release/libpcap-1.10.7.tar.gz
+        sha256: 0b394ac90dbc0a9838ff97468e05c9c9a3e873dec2514cd58db65d859d296e31
         x-checker-data:
           type: anitya
           project-id: 1702
