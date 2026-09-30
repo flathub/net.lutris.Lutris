@@ -15,11 +15,15 @@ LUTRIS_PATH = "/app/bin/lutris"
 
 # Map GNOME runtime versions to freedesktop SDK versions
 GNOME_TO_FREEDESKTOP = {
+    "51": "26.08",
+    "50": "25.08",
     "49": "25.08",
     "48": "24.08",
     "47": "24.08",
     "46": "23.08",
 }
+# Unknown GNOME versions are assumed to be newer than anything in the table
+DEFAULT_FREEDESKTOP_VERSION = max(GNOME_TO_FREEDESKTOP.values())
 
 # COMPAT_EXT = "org.gnome.Platform.FakeCompat.i386"  # testing
 # FLATPAK_INFO = "flatpak-info"  # testing
@@ -78,7 +82,7 @@ def get_command():
     flatpak_info = read_flatpak_info()
     _, _, _, gnome_version = flatpak_info["runtime"].split("/")
     # Map GNOME version to freedesktop SDK version
-    fd_version = GNOME_TO_FREEDESKTOP.get(gnome_version, "25.08")
+    fd_version = GNOME_TO_FREEDESKTOP.get(gnome_version, DEFAULT_FREEDESKTOP_VERSION)
     command = "flatpak install --user flathub {}//{}".format(COMPAT_EXT, fd_version)
     return command
 
