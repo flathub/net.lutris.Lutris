@@ -61,6 +61,8 @@ modules:
       url: https://invent.kde.org/qt/qt/qtbase.git
       # HEAD of 5.15 branch as of 2025-09-07
       commit: 5e8b3ee0ae8cabf3c1a84d4568ff5f9f2bb09544
+      # Some LFS objects 404 on invent.kde.org and none are needed to build
+      disable-lfs: true
     - type: patch
       path: patches/qtbase-avoid-hardcoding-kernel-version.patch
     - type: patch

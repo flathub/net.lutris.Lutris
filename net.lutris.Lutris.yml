@@ -1,10 +1,14 @@
 id: net.lutris.Lutris
 sdk: org.gnome.Sdk
 runtime: org.gnome.Platform
-runtime-version: '49'
+runtime-version: "51"
 command: lutris
 base: org.winehq.Wine
-base-version: stable-25.08
+base-version: stable-26.08
+x-compat-version: &compat-version "26.08"
+x-gl-version: &gl-version "1.4"
+x-gl-versions: &gl-versions 26.08;26.08-extra;1.4
+x-gl-merge-dirs: &gl-merge-dirs vulkan/icd.d;glvnd/egl_vendor.d;egl/egl_external_platform.d;OpenCL/vendors;lib/dri;lib/d3d;lib/gbm;vulkan/explicit_layer.d;vulkan/implicit_layer.d;vdpau
 finish-args:
   - --share=ipc
   - --socket=x11
@@ -18,6 +22,7 @@ finish-args:
   - --talk-name=org.freedesktop.ScreenSaver
   - --system-talk-name=org.freedesktop.UDisks2
   - --filesystem=home
+  - --filesystem=~/Games
   - --filesystem=/run/media
   # For Steam Deck HDR support
   - --env=LD_LIBRARY_PATH=/usr/lib/extensions/vulkan/gamescope/lib
@@ -27,7 +32,7 @@ finish-args:
   - --filesystem=~/.var/app/com.valvesoftware.Steam:ro
   - --filesystem=~/.config/MangoHud:ro
   - --env=PATH=/app/bin:/usr/bin:/app/utils/bin:/usr/lib/extensions/vulkan/MangoHud/bin/:/app/jre/bin/:/usr/lib/extensions/vulkan/gamescope/bin
-  - --env=GST_PLUGIN_SYSTEM_PATH=/app/lib32/gstreamer-1.0:/app/lib/gstreamer-1.0:/usr/lib/i386-linux-gnu/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/gstreamer-1.0
+  - --env=GST_PLUGIN_SYSTEM_PATH=/app/lib/gstreamer-1.0:/app/lib32/gstreamer-1.0:/app/lib/i386-linux-gnu/codecs-extra/lib/gstreamer-1.0:/app/lib/i386-linux-gnu/gstreamer-1.0:/usr/lib/extensions/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/codecs-extra/lib/gstreamer-1.0:/usr/lib/i386-linux-gnu/codecs-extra/lib/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/gstreamer-1.0:/usr/lib/i386-linux-gnu/gstreamer-1.0
   # System tray icon
   - --talk-name=org.kde.StatusNotifierWatcher
   - --talk-name=org.freedesktop.Flatpak
@@ -48,26 +53,84 @@ finish-args:
   - --allow=per-app-dev-shm
 
 inherit-extensions:
-  - org.freedesktop.Platform.GL32
   - org.winehq.Wine.gecko
   - org.winehq.Wine.mono
 
 add-extensions:
   org.freedesktop.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: '25.08'
+    version: *compat-version
 
   org.freedesktop.Platform.Compat.i386.Debug:
     directory: lib/debug/lib/i386-linux-gnu
-    version: '25.08'
+    version: *compat-version
     no-autodownload: true
+
+  org.freedesktop.Platform.GL32:
+    directory: lib/i386-linux-gnu/GL
+    version: *gl-version
+    versions: *gl-versions
+    subdirectories: true
+    no-autodownload: true
+    autodelete: false
+    add-ld-path: lib
+    merge-dirs: *gl-merge-dirs
+    download-if: active-gl-driver
+    enable-if: active-gl-driver
+    autoprune-unless: active-gl-driver
+
+  org.freedesktop.Platform.GL32.Debug:
+    directory: lib/debug/lib/i386-linux-gnu/GL
+    version: *gl-version
+    versions: *gl-versions
+    subdirectories: true
+    no-autodownload: true
+    merge-dirs: *gl-merge-dirs
+    enable-if: active-gl-driver
+    autoprune-unless: active-gl-driver
+
+  org.freedesktop.Platform.VAAPI.Intel.i386:
+    directory: lib/i386-linux-gnu/dri/intel-vaapi-driver
+    version: *compat-version
+    versions: *compat-version
+    autodelete: false
+    no-autodownload: true
+    add-ld-path: lib
+    download-if: have-intel-gpu
+    autoprune-unless: have-intel-gpu
+
+  org.freedesktop.Platform.VAAPI.nvidia.i386:
+    directory: i386/nvidia-vaapi-driver
+    version: *compat-version
+    versions: *compat-version
+    autodelete: false
+    no-autodownload: true
+    add-ld-path: lib
+    download-if: have-kernel-module-nvidia
+    autoprune-unless: have-kernel-module-nvidia
 
   org.freedesktop.Platform.codecs_extra.i386:
     directory: lib/i386-linux-gnu/codecs-extra
-    version: 25.08-extra
+    version: 26.08-extra
     autodelete: false
     add-ld-path: lib
 
+  org.gtk.Gtk3theme.Adwaita-dark:
+    directory: share/themes/Adwaita-dark
+    version: "3.22"
+    autodownload: true
+
+  org.freedesktop.Platform.VulkanLayer.gamescope:
+    directory: lib/extensions/vulkan/gamescope
+    version: *compat-version
+    autodownload: true
+    autodelete: false
+
+  org.freedesktop.Platform.VulkanLayer.MangoHud:
+    directory: lib/extensions/vulkan/MangoHud
+    version: *compat-version
+    autodownload: true
+    autodelete: false
 sdk-extensions:
   - org.freedesktop.Sdk.Compat.i386
   - org.freedesktop.Sdk.Extension.toolchain-i386
@@ -85,14 +148,17 @@ x-compat-i386-opts: &compat_i386_opts
   libdir: /app/lib32
 
 cleanup:
-  - '*.a'
-  - '*.la'
+  - "*.a"
+  - "*.la"
   - /share/man
   - /share/help
 cleanup-commands:
   - python3 -m compileall /app/lib
   - mkdir -p /app/utils
+  - mkdir -p /app/lib/extensions/vulkan/gamescope
+  - mkdir -p /app/lib/extensions/vulkan/MangoHud
   - mkdir -p /app/lib/i386-linux-gnu/codecs-extra
+  - mkdir -p /app/share/themes/Adwaita-dark
 modules:
   - modules/qt5-15.yaml
   - modules/libbz2-1.0.8.json
@@ -156,8 +222,8 @@ modules:
       - --enable-ipv6
     sources: &libcap_sources
       - type: archive
-        url: http://www.tcpdump.org/release/libpcap-1.10.6.tar.gz
-        sha256: 872dd11337fe1ab02ad9d4fee047c9da244d695c6ddf34e2ebb733efd4ed8aa9
+        url: http://www.tcpdump.org/release/libpcap-1.11.0.tar.gz
+        sha256: 596389bc8560ea027dff9db8aaf6c173d992366d9aef4baf5d7c6d180b4d49ad
         x-checker-data:
           type: anitya
           project-id: 1702
@@ -226,8 +292,8 @@ modules:
       - --disable-udev
     sources:
       - type: archive
-        url: https://get.videolan.org/vlc/3.0.22/vlc-3.0.22.tar.xz
-        sha256: e2cc1cf0ae0902a09da5a37c249a8a4e4b5ec4dc095443b8e1493c6a7cc138ea
+        url: https://get.videolan.org/vlc/3.0.24/vlc-3.0.24.tar.xz
+        sha256: e7cab503d1d7d5849b89d2cf0e1ee60d0ef6d012407791b644b9cfc0cc225fdf
 
   # Multilib dependencies for native games and runners
 
@@ -481,7 +547,7 @@ modules:
       - /lib/cmake
       - /lib/pkgconfig
       - /share/man
-      - '*.so'
+      - "*.so"
     sources:
       - type: archive
         url: https://github.com/FluidSynth/fluidsynth/archive/v2.3.5.tar.gz
@@ -548,8 +614,14 @@ modules:
   - name: lutris-app-environment
     buildsystem: simple
     build-commands:
-      - mkdir -p /app/lib/i386-linux-gnu
       - install -Dm644 ld.so.conf -t /app/etc/
+      # Mount points for the 32-bit extensions declared in add-extensions
+      - mkdir -p /app/lib/i386-linux-gnu
+      - mkdir -p /app/lib/debug/lib/i386-linux-gnu
+      - mkdir -p /app/lib/i386-linux-gnu/GL
+      - mkdir -p /app/lib/debug/lib/i386-linux-gnu/GL
+      - mkdir -p /app/lib/i386-linux-gnu/dri/intel-vaapi-driver
+      - mkdir -p /app/i386/nvidia-vaapi-driver
       - mkdir -p /app/runners
     sources:
       - type: file
@@ -615,7 +687,12 @@ modules:
       - type: archive
         url: https://github.com/dosbox-staging/dosbox-staging/archive/v0.79.1.tar.gz
         sha256: 43f23fd0a5cff55e06a3ba2be8403f872ae47423f3bb4f823301eaae8a39ac2f
+      # SDL2_net headers are no longer next to SDL2's, libdos needs the dep for SDL_net.h
+      - type: patch
+        path: patches/dosbox-staging-libdos-sdl2-net.patch
     modules:
+      # SDL2_net was dropped from the 26.08 runtime
+      - modules/SDL2_net.json
       - name: iir1
         buildsystem: cmake-ninja
         sources:
@@ -657,7 +734,7 @@ modules:
       - /bin
       - /include
       - /share
-      - '*.a'
+      - "*.a"
     sources: &ncurses_sources
       - type: archive
         url: http://ftp.gnu.org/gnu/ncurses/ncurses-6.5.tar.gz
@@ -679,21 +756,21 @@ modules:
     buildsystem: simple
     build-commands:
       - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
-    cleanup: ['*']
+    cleanup: ["*"]
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/15/d1/d8798b83e953fd6f86ca9b50f93eec464a9305b0661469c8234e61095481/flit_core-3.7.1.tar.gz
-        sha256: 14955af340c43035dbfa96b5ee47407e377ee337f69e70f73064940d27d0a44f
+        url: https://files.pythonhosted.org/packages/e7/91/add211b38c357bf1b94900b4f79c34661a92be65c0243d2b0a3393c5092d/flit_core-4.1.0.tar.gz
+        sha256: 62e12b63ead8335b37f59fabb977c7167fe476dafb5e41785dfa8c9aff843bc6
 
   - name: python-ninja # needed by dbus-python
     buildsystem: simple
     build-commands:
       - python3 setup.py build -j${FLATPAK_BUILDER_N_JOBS} -DARCHIVE_DOWNLOAD_DIR="${FLATPAK_BUILDER_BUILDDIR}"
       - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
-    cleanup: ['*']
+    cleanup: ["*"]
     build-options:
       env:
-        CMAKE_POLICY_VERSION_MINIMUM: '3.5'
+        CMAKE_POLICY_VERSION_MINIMUM: "3.5"
     sources:
       - type: archive
         url: https://files.pythonhosted.org/packages/37/2c/d717d13a413d6f7579cdaa1e28e6e2c98de95461549b08d311c8a5bf4c51/ninja-1.11.1.1.tar.gz
@@ -707,7 +784,7 @@ modules:
         build-commands:
           - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
             .
-        cleanup: ['*']
+        cleanup: ["*"]
         sources:
           - type: archive
             url: https://files.pythonhosted.org/packages/9e/e2/2e440c30e93fc5b505ee56169a4396b05e797a1daadb721aba429adbfd51/scikit-build-0.15.0.tar.gz
@@ -718,7 +795,7 @@ modules:
             build-commands:
               - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
                 .
-            cleanup: ['*']
+            cleanup: ["*"]
             sources:
               - type: archive
                 url: https://files.pythonhosted.org/packages/d0/43/f038b5009f93bcd77b1b8da9e6d424b739ab17aec9726f3a99eba23d53ca/setuptools_scm-7.0.5.tar.gz
@@ -729,7 +806,7 @@ modules:
                 build-commands:
                   - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
                     .
-                cleanup: ['*']
+                cleanup: ["*"]
                 sources:
                   - type: archive
                     url: https://files.pythonhosted.org/packages/9e/1d/d128169ff58c501059330f1ad96ed62b79114a2eb30b8238af63a2e27f70/typing_extensions-4.3.0.tar.gz
@@ -739,7 +816,7 @@ modules:
                 build-commands:
                   - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
                     .
-                cleanup: ['*']
+                cleanup: ["*"]
                 sources:
                   - type: archive
                     url: https://files.pythonhosted.org/packages/c0/3f/d7af728f075fb08564c5949a9c95e44352e23dee646869fa104a3b2060a3/tomli-2.0.1.tar.gz
@@ -759,7 +836,7 @@ modules:
     build-commands:
       - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" --ignore-installed
         .
-    cleanup: ['*']
+    cleanup: ["*"]
     sources:
       - type: archive
         url: https://files.pythonhosted.org/packages/a7/f0/565f731cd138a516c2dba8439e47c5622493c82f41c4845d287617ef6ec9/meson-0.63.2.tar.gz
@@ -779,11 +856,12 @@ modules:
   - name: python-xlib
     buildsystem: simple
     build-commands:
-      - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" .
+      - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}" python_xlib-*.whl
     sources:
-      - type: archive
-        url: https://files.pythonhosted.org/packages/source/p/python-xlib/python-xlib-0.33.tar.gz
-        sha256: 55af7906a2c75ce6cb280a584776080602444f75815a7aff4d287bb2d7018b32
+      # The sdist's setup.py imports pkg_resources, which setuptools no longer ships
+      - type: file
+        url: https://files.pythonhosted.org/packages/fc/b8/ff33610932e0ee81ae7f1269c890f697d56ff74b9f5b2ee5d9b7fa2c5355/python_xlib-0.33-py2.py3-none-any.whl
+        sha256: c3534038d42e0df2f1392a1b30a15a4ff5fdc2b86cfa94f072bf11b10a164398
 
   # Lutris app with dependencies
   - name: lutris
@@ -791,7 +869,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/lutris/lutris.git
-        commit: 159d7a21e5f171b815328e7e85aa40cfc3125ac8
+        commit: 4d3e4150da51727b12dce15c22776d3271ee701a
     modules:
       - modules/maturin.json
       - modules/python3-requests.yaml
@@ -897,11 +975,12 @@ modules:
         buildsystem: simple
         build-commands:
           - pip3 install --no-index --no-build-isolation --prefix="${FLATPAK_DEST}"
-            .
+            protobuf-*.whl
         sources:
-          - type: archive
-            url: https://files.pythonhosted.org/packages/55/5b/e3d951e34f8356e5feecacd12a8e3b258a1da6d9a03ad1770f28925f29bc/protobuf-3.20.3.tar.gz
-            sha256: 2e3427429c9cffebf259491be0af70189607f365c2f41c7c3764af6f337105f2
+          # The sdist's setup.py imports pkg_resources, which setuptools no longer ships
+          - type: file
+            url: https://files.pythonhosted.org/packages/8d/14/619e24a4c70df2901e1f4dbc50a6291eb63a759172558df326347dce1f0d/protobuf-3.20.3-py2.py3-none-any.whl
+            sha256: a7ca6d488aa8ff7f329d4c545b2dbad8ac31464f1d8b1c87ad1346717731e4db
       - name: soupsieve
         buildsystem: simple
         build-commands:
