@@ -27,6 +27,9 @@ finish-args:
   # For Steam Deck HDR support
   - --env=LD_LIBRARY_PATH=/usr/lib/extensions/vulkan/gamescope/lib
   - --filesystem=xdg-run/gamescope-0:ro
+  # For Discord Rich Presence (Flatpak Discord)
+  - --filesystem=xdg-run/app/com.discordapp.Discord:create
+  - --filesystem=xdg-run/app/com.discordapp.DiscordCanary:create
   # For Debian
   - --filesystem=/media
   - --filesystem=~/.var/app/com.valvesoftware.Steam:ro
@@ -222,8 +225,8 @@ modules:
       - --enable-ipv6
     sources: &libcap_sources
       - type: archive
-        url: http://www.tcpdump.org/release/libpcap-1.11.0.tar.gz
-        sha256: 596389bc8560ea027dff9db8aaf6c173d992366d9aef4baf5d7c6d180b4d49ad
+        url: http://www.tcpdump.org/release/libpcap-1.11.1.tar.gz
+        sha256: 7985b1d20ff82c1e384115038046e0b15034648c6f45c92e08601d4ee1b369ed
         x-checker-data:
           type: anitya
           project-id: 1702
@@ -650,7 +653,7 @@ modules:
   - name: kitty
     buildsystem: simple
     build-commands:
-      - install -Dm0775 -t /app/bin bin/kitty
+      - install -Dm0775 -t /app/bin bin/kitty bin/kitten
       - cp -rn lib/kitty-extensions /app/lib
       - install -Dm0755 lib/libpython3.12.so.1.0 /app/lib/libpython3.12.so.1.0
     sources:
@@ -869,7 +872,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/lutris/lutris.git
-        commit: 4d3e4150da51727b12dce15c22776d3271ee701a
+        commit: b9320331c15b1ca43c13aea8932a99483c8b34a9
     modules:
       - modules/maturin.json
       - modules/python3-requests.yaml
